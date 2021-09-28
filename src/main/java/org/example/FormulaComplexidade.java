@@ -4,10 +4,7 @@ import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FormulaComplexidade {
 
@@ -99,13 +96,21 @@ public class FormulaComplexidade {
 
 
     /*f(n) = indegree(n) + 1 */
-    private static int frequenciaN(int n) {
-        return n + 1;//indegree - realizar um loop na entidade e pegar os links
+    private static int frequenciaN(Entidade entidade) {
+        int fn = 0;
+        for (Entidade link : entidade.getLinks()) {
+            fn = Integer.parseInt(link.getNome()) + 1;
+        }
+        return fn;//indegree - realizar um loop na entidade e pegar os links
     }
 
     /*f(m) = indegree(m) + 1 */
-    private static int frequenciaM(int m) {
-        return m + 1;
+    private static int frequenciaM(Entidade entidade) {
+        int fm = 0;
+        for (Entidade link : entidade.getLinks()) {
+            fm = Integer.parseInt(link.getNome()) + 1;
+        }
+        return fm;
     }
 
 }
