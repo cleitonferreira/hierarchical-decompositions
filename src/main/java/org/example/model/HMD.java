@@ -6,11 +6,13 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.example.model.Modulo;
 
+import java.util.List;
+
 @Data @AllArgsConstructor @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class HMD {
 
-    private Modulo modulo;
-
+    private List<Modulo> modulos;
+    //private Modulo modulo;
 
 }

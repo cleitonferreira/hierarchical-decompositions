@@ -1,64 +1,12 @@
 package org.example;
 
-
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-public class Main {
-
-    public static void main(String[] args) {
-
-/*
-A0 A2
-A0 A3
-A2 2
-A2 3
-A2 0
-A2 1
-A3 6
-A3 7
-A3 5
-A3 4
-
-Links
-
-0 1 2
-2 3
-3 1
-4 3 7
-5 7
-6 5
-
-
-*/
-
-        List<Entidade> listaEntidadesA2 = new ArrayList<>();
-        listaEntidadesA2.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"))));
-        listaEntidadesA2.add(new Entidade("1", null));
-        listaEntidadesA2.add(new Entidade("2", Arrays.asList(new Entidade("3"))));
-        listaEntidadesA2.add(new Entidade("3", Arrays.asList(new Entidade("1"))));
-
-        List<Entidade> listaEntidadesA3 = new ArrayList<>();
-        listaEntidadesA3.add(new Entidade("4", Arrays.asList(new Entidade("3"), new Entidade("7"))));
-        listaEntidadesA3.add(new Entidade("5", Arrays.asList(new Entidade("7"))));
-        listaEntidadesA3.add(new Entidade("6", Arrays.asList(new Entidade("5"))));
-        listaEntidadesA3.add(new Entidade("7", null));
-
-
-        Modulo moduloA2 = new Modulo(listaEntidadesA2, "A0", "A2");
-        Modulo moduloA3 = new Modulo(listaEntidadesA2, "A0", "A3");
-
-        HMD hmdFigura4 = new HMD();
-        hmdFigura4.setModulo(moduloA2);
-        hmdFigura4.setModulo(moduloA3);
-
-
 
 /*
 
@@ -85,6 +33,11 @@ B2 10
     4 5 9
     5 10
 */
+public class Figura5 {
+
+    public static void main(String[] args) {
+
+
         /*Figura 5*/
         List<Entidade> listaEntidadesB1 = new ArrayList<>();
         listaEntidadesB1.add(new Entidade("0", Arrays.asList(new Entidade("3"))));
@@ -103,11 +56,15 @@ B2 10
         Modulo moduloB1 = new Modulo(listaEntidadesB1, "B0", "B1");
         Modulo moduloB2 = new Modulo(listaEntidadesB2, "B0", "B2");
 
-        HMD hmdFigura5 = new HMD();
-        hmdFigura5.setModulo(moduloB1);
-        hmdFigura5.setModulo(moduloB2);
+        List<Modulo> modulos = new ArrayList<Modulo>();
+        modulos.add(new Modulo(listaEntidadesB1, "B0", "B1"));
+        modulos.add(new Modulo(listaEntidadesB2, "B0", "B2"));
+
+        HMD hmdFigura5 = new HMD(modulos);
+
+        FormulaComplexidade.executa(hmdFigura5);
 
 
-     }
+    }
 
 }
