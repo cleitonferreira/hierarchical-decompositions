@@ -37,9 +37,7 @@ public class FormulaComplexidade {
 
             }
 
-            somarmPertenceM(modulo, hmd.getModulos());
-
-            int formula = formula(somarmPertenceM(modulo, hmd.getModulos()), 0, calculaCm(modulo.getListaEntidades()), calculaMm(modulo.getNome(), hmd.getModulos()), n);
+            int formula = formula(somarmPertenceM(hmd.getModulos()), 0, calculaCm(modulo.getListaEntidades()), calculaMm(modulo.getNome(), hmd.getModulos()), n);
             System.out.println("Fórmula: " + formula);
             System.out.println();
         }
@@ -75,8 +73,8 @@ public class FormulaComplexidade {
 
     /*  m é o módulo
         M é o conjunto de todos os módulos no HMD x */
-    private static int somarmPertenceM(Modulo modulo, List<Modulo> modulos) {
-        return modulo.getNome().length() + modulos.size();
+    private static int somarmPertenceM(List<Modulo> modulos) {
+        return modulos.size();
     }
 
     /* A.4.1 Code lengths for integers
@@ -99,16 +97,22 @@ public class FormulaComplexidade {
     private static int frequenciaN(Entidade entidade) {
         int fn = 0;
         for (Entidade link : entidade.getLinks()) {
-            fn = Integer.parseInt(link.getNome()) + 1;
+            fn = fn + Integer.parseInt(link.getNome()) + 1;
         }
         return fn;//indegree - realizar um loop na entidade e pegar os links
     }
 
-    /*f(m) = indegree(m) + 1 */
-    private static int frequenciaM(Entidade entidade) {
+    /*f(m) = indegree(m) + 1
+    * m † ( m a módulo ) é definido informalmente como o número de arestas cujo destinoção é algum nó interno de m , e cuja fonte é um nó fora de m .
+    * */
+    private static int frequenciaM(Modulo modulo) {
         int fm = 0;
-        for (Entidade link : entidade.getLinks()) {
-            fm = Integer.parseInt(link.getNome()) + 1;
+        for (Entidade entidade : modulo.getListaEntidades()) {
+            if(!modulo.getNome().equals(modulo.getSubmodulo())) {
+                for (Entidade link : entidade.getLinks()) {
+                    fm = fm + Integer.parseInt(link.getNome()) + 1;
+                }
+            }
         }
         return fm;
     }
