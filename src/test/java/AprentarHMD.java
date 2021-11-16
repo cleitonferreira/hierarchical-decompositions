@@ -1,5 +1,3 @@
-package org.example;
-
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
@@ -8,46 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/*
-A0 A1
-A0 A3
-A1 A2
-A3 A4
-A1 0
-A2 2
-A2 3
-A2 4
-A0 1
-A0 5
-A0 12
-A0 13
-A3 8
-A3 9
-A3 10
-A3 11
-A4 6
-A4 7
+public class AprentarHMD {
 
-Links
+    private static HMD hmdSolucao;
 
-0 1 3 4 2
-1 3 2 4 5
-3 7 4
-2 4 6
-4 7
-5 6 7 8
-6 7 8
-7 8 9 10
-8 10 12
-9 10 11 12 13
-10 11 13 12
-11 12 13
-12 13
-
-*/
-public class Figura1 {
-
-    public static HMD hmd() {
+    public static void main(String[] args) {
 
         List<Entidade> listaEntidadesA0 = new ArrayList<>();
         listaEntidadesA0.add(new Entidade("1", Arrays.asList(new Entidade("3"), new Entidade("2"), new Entidade("4"), new Entidade("5"))));
@@ -83,10 +46,36 @@ public class Figura1 {
                         new Modulo(listaEntidadesA3,"A3",
                                 Arrays.asList(new Modulo(listaEntidadesA4,"A4", null))))));
 
-        HMD hmdFigura1 = new HMD(modulos);
+        hmdSolucao = new HMD(modulos);
 
-        return hmdFigura1;
+        System.out.println("ListaModulos: " + hmdSolucao.getModulos().size());
+        System.out.println("ListaSubmodulos: " + hmdSolucao.getModulos().get(0).getSubmodulos().size());
+        System.out.println("ListaEntidades: " + hmdSolucao.getModulos().get(0).getListaEntidades().size());
 
+        for (Modulo modulo : hmdSolucao.getModulos()){
+            System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
+            entidades(modulo.getListaEntidades());
+            for (Modulo submodulo : modulo.getSubmodulos()){
+                System.out.println("SubmoduloI: " + submodulo.getNome() + " - submódulosI: " + submodulo.getSubmodulos());
+                entidades(submodulo.getListaEntidades());
+                for (Modulo submoduloII : submodulo.getSubmodulos()) {
+                    System.out.println("SubmoduloII: " + submoduloII.getNome() + " - submoduloII: " + submoduloII.getSubmodulos());
+                    entidades(submoduloII.getListaEntidades());
+                }
+            }
+        }
+
+    }
+
+    private static void entidades(List<Entidade> listaEntidades){
+        for (Entidade entidade : listaEntidades) {
+            System.out.println("Entidade: " + entidade.getNome());
+            if(entidade.getLinks() != null){
+                for(Entidade links : entidade.getLinks()) {
+                    System.out.println("Links: " + links.getNome());
+                }
+            }
+        }
     }
 
 }

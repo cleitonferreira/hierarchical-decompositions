@@ -35,13 +35,15 @@ B2 10
 */
 public class Figura5 {
 
-    public static void main(String[] args) {
+    public static HMD hmd() {
 
 
         /*Figura 5*/
+        List<Entidade> listaEntidadesA0 = new ArrayList<>();
+        listaEntidadesA0.add(new Entidade("0", Arrays.asList(new Entidade("3"))));
+        listaEntidadesA0.add(new Entidade("2", Arrays.asList(new Entidade("1"))));
+
         List<Entidade> listaEntidadesB1 = new ArrayList<>();
-        listaEntidadesB1.add(new Entidade("0", Arrays.asList(new Entidade("3"))));
-        listaEntidadesB1.add(new Entidade("2", Arrays.asList(new Entidade("1"))));
         listaEntidadesB1.add(new Entidade("1", Arrays.asList(new Entidade("4"), new Entidade("9"))));
         listaEntidadesB1.add(new Entidade("3", Arrays.asList(new Entidade("8"))));
         listaEntidadesB1.add(new Entidade("8", Arrays.asList(new Entidade("1"), new Entidade("2"))));
@@ -52,17 +54,17 @@ public class Figura5 {
         listaEntidadesB2.add(new Entidade("5", Arrays.asList(new Entidade("10"))));
         listaEntidadesB2.add(new Entidade("10", Arrays.asList(new Entidade("4"))));
 
-
-        Modulo moduloB1 = new Modulo(listaEntidadesB1, "B0", "B1");
-        Modulo moduloB2 = new Modulo(listaEntidadesB2, "B0", "B2");
-
         List<Modulo> modulos = new ArrayList<Modulo>();
-        modulos.add(new Modulo(listaEntidadesB1, "B0", "B1"));
-        modulos.add(new Modulo(listaEntidadesB2, "B0", "B2"));
+        modulos.add(new Modulo(listaEntidadesA0, "A0",
+                Arrays.asList(
+                        new Modulo(listaEntidadesB1,"B1",
+                                null),
+                        new Modulo(listaEntidadesB2,"B2",
+                                null))));
 
         HMD hmdFigura5 = new HMD(modulos);
 
-        FormulaComplexidade.executa(hmdFigura5);
+        return hmdFigura5;
 
 
     }

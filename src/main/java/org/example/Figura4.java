@@ -10,8 +10,7 @@ import java.util.List;
 
 public class Figura4 {
 
-    public static void main(String[] args) {
-
+    public static HMD hmd() {
 
         List<Entidade> listaEntidadesA2 = new ArrayList<>();
         listaEntidadesA2.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"))));
@@ -27,12 +26,17 @@ public class Figura4 {
 
 
         List<Modulo> modulos = new ArrayList<Modulo>();
-        modulos.add(new Modulo(listaEntidadesA2, "A0", "A2"));
-        modulos.add(new Modulo(listaEntidadesA3, "A0", "A3"));
+
+        modulos.add(new Modulo(null, "A0",
+                Arrays.asList(
+                        new Modulo(listaEntidadesA2,"A2",
+                                null),
+                        new Modulo(listaEntidadesA3,"A3",
+                                null))));
 
         HMD hmdFigura4 = new HMD(modulos);
 
-        FormulaComplexidade.executa(hmdFigura4);
+        return hmdFigura4;
 
     }
 
