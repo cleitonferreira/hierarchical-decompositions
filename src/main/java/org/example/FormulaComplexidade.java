@@ -18,6 +18,7 @@ public class FormulaComplexidade {
     public static void executa(HMD hmd){
 
         hmdSolucao = hmd;
+        valorRelativaProfundidade = 0;
 
         if(hmdSolucao.getModulos() != null){
             for (Modulo modulo : hmdSolucao.getModulos()){
@@ -48,13 +49,13 @@ public class FormulaComplexidade {
                                     }
                                 }
 
-                                formula(mPertenceM(submoduloII, hmdSolucao.getModulos()), 0, calculaCm(submoduloII.getListaEntidades()), calculaMm(submoduloII), submoduloII, valorRelativaProfundidade);
+                                formula(mPertenceM(submoduloII, hmdSolucao.getModulos()), 0, calculaCm(submoduloII.getListaEntidades()), calculaMm(submoduloII), submoduloII);
                             }
                         }
-                        formula(mPertenceM(submodulo, hmdSolucao.getModulos()), 0, calculaCm(submodulo.getListaEntidades()), calculaMm(submodulo), submodulo, valorRelativaProfundidade);
+                        formula(mPertenceM(submodulo, hmdSolucao.getModulos()), 0, calculaCm(submodulo.getListaEntidades()), calculaMm(submodulo), submodulo);
                     }
                 }
-                formula(mPertenceM(modulo, hmdSolucao.getModulos()), 0, calculaCm(modulo.getListaEntidades()), calculaMm(modulo), modulo, valorRelativaProfundidade);
+                formula(mPertenceM(modulo, hmdSolucao.getModulos()), 0, calculaCm(modulo.getListaEntidades()), calculaMm(modulo), modulo);
             }
         }
 
@@ -64,15 +65,13 @@ public class FormulaComplexidade {
     }
 
     /*Formula da complexidade*/
-    private static void formula(int mPertenceM, int um, int cm, int submodulo, Modulo modulo, int relativaProfundidade){
+    private static void formula(int mPertenceM, int um, int cm, int mm, Modulo modulo){
 
-        int formula = mPertenceM + (logN(um + 1) + logN(cm + 1) + logN(submodulo + 1) + nPertenceCmUniaoMm(modulo) + logN(relativaProfundidade));
-
+        int formula = mPertenceM + (logN(um + 1) + logN(cm + 1) + logN(mm + 1) + nPertenceCmUniaoMm(modulo) + logN(valorRelativaProfundidade));
         formulaComplexidade = formulaComplexidade + formula;
     }
 
     private static void formulanPertenceCmEnPertenteOutNodes(HashMap<Entidade, Entidade> entradas) {
-        valorRelativaProfundidade = 0;
         for (Map.Entry<Entidade, Entidade> entrada : entradas.entrySet()) {
             valorRelativaProfundidade = valorRelativaProfundidade + relativaProfundidade(entrada.getKey(), lca(entrada.getKey(), entrada.getValue()));
         }
@@ -124,7 +123,9 @@ public class FormulaComplexidade {
     private static int nPertenceCmUniaoMm(Modulo modulo) {
         int valor = 0;
         for (Entidade entidade : modulo.getListaEntidades()) {
+            //System.out.println("log: " + (-log(2,frequenciaN(entidade) / frequenciaM(modulo))));
             valor = logN( (-log(2,frequenciaN(entidade) / frequenciaM(modulo)) - frequenciaN(entidade) * log(2,frequenciaN(entidade) / frequenciaM(modulo)) ));
+            //System.out.println("nPertenceCmUniaoMm: " + valor);
         }
         return valor;
     }
@@ -221,34 +222,157 @@ public class FormulaComplexidade {
         return (int) (Math.log(valor) / Math.log(base));
     }
 
+    /* n é uma Entidade Básica
+     * f(n) = indegree(n) + 1 */
+    private static int frequenciaN(Entidade nEntidade) {
+        int valor = 0;
+        Modulo moduloEntidade = null;
 
-    /*f(n) = indegree(n) + 1 */
-    private static int frequenciaN(Entidade entidade) {
-        int fn = 0;
-        if(entidade.getLinks() != null){
-            for (Entidade link : entidade.getLinks()) {
-                fn = fn + Integer.parseInt(link.getNome()) + 1;
-            }
-        }
-        return fn;//indegree - realizar um loop na entidade e pegar os links
-    }
+        if(hmdSolucao.getModulos() != null){
+            for (Modulo modulo : hmdSolucao.getModulos()){
+                moduloEntidade = encontrarModulo(modulo, nEntidade);
+                if (modulo.getListaEntidades() != null){
+                    for (Entidade entidade : modulo.getListaEntidades()){
+                        if(entidade.getLinks() != null){
+                            for (Entidade link : entidade.getLinks()) {
+                                if (link != null) {
+                                    if ((link.getNome().equals(nEntidade.getNome())) && (modulo != moduloEntidade)) {
+                                        valor++;
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-    /*f(m) = indegree(m) + 1
-    * m † ( m a módulo ) é definido informalmente como o número de arestas cujo destinoção é algum nó interno de m , e cuja fonte é um nó fora de m .
-    * */
-    private static int frequenciaM(Modulo modulo) {
-        int fm = 0;
-        if(modulo.getListaEntidades() != null){
-            for (Entidade entidade : modulo.getListaEntidades()) {
-                if(entidade.getLinks() != null){
-                    for (Entidade link : entidade.getLinks()) {
-                        fm = fm + Integer.parseInt(link.getNome()) + 1;
+                }
+                if(modulo.getSubmodulos() != null){
+                    for (Modulo submodulo : modulo.getSubmodulos()){
+                        moduloEntidade = encontrarModulo(submodulo, nEntidade);
+                        if (submodulo.getListaEntidades() != null){
+                            for (Entidade entidade : submodulo.getListaEntidades()){
+                                if(entidade.getLinks() != null){
+                                    for (Entidade link : entidade.getLinks()) {
+                                        if (link != null) {
+                                            if ((link.getNome().equals(nEntidade.getNome())) && (submodulo != moduloEntidade)) {
+                                                valor++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if(submodulo.getSubmodulos() != null){
+                            for (Modulo submoduloII : submodulo.getSubmodulos()) {
+                                moduloEntidade = encontrarModulo(submoduloII, nEntidade);
+                                if (submoduloII.getListaEntidades() != null){
+                                    for (Entidade entidade : submoduloII.getListaEntidades()){
+                                        if(entidade.getLinks() != null) {
+                                            for (Entidade link : entidade.getLinks()) {
+                                                if (link != null) {
+                                                    if ((link.getNome().equals(nEntidade.getNome())) && (submoduloII != moduloEntidade)) {
+                                                        valor++;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
-        return fm;
+        return valor + 1;
+    }
+
+    private static Modulo encontrarModulo(Modulo modulo, Entidade entidade1){
+
+        Modulo moduloEntidade = null;
+
+        for (Entidade entidade : modulo.getListaEntidades()){
+            if (entidade.getNome().equals(entidade1.getNome())){
+                moduloEntidade = modulo;
+            }
+        }
+
+        return moduloEntidade;
+    }
+
+
+    /*f(m) = indegree(m) + 1
+     * m † (m a módulo) é definido informalmente como o número de arestas cujo destino é algum nó interno de m, e cuja fonte é um nó fora de m.
+     * */
+    private static int frequenciaM(Modulo moduloEntidade) {
+        int valor = 0;
+
+        if(hmdSolucao.getModulos() != null){
+            for (Modulo modulo : hmdSolucao.getModulos()){
+                if (modulo.getListaEntidades() != null){
+                    for (Entidade entidade : modulo.getListaEntidades()){
+                        if(entidade.getLinks() != null){
+                            for (Entidade link : entidade.getLinks()) {
+                                if (link != null) {
+                                    if (moduloEntidade.getListaEntidades() != null){
+                                        for (Entidade nEntidade : moduloEntidade.getListaEntidades()){
+                                            if ((link.getNome().equals(nEntidade.getNome())) && (modulo != moduloEntidade)) {
+                                                valor++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if(modulo.getSubmodulos() != null){
+                    for (Modulo submodulo : modulo.getSubmodulos()){
+                        if (submodulo.getListaEntidades() != null){
+                            for (Entidade entidade : submodulo.getListaEntidades()){
+                                if(entidade.getLinks() != null){
+                                    for (Entidade link : entidade.getLinks()) {
+                                        if (link != null) {
+                                            if (moduloEntidade.getListaEntidades() != null){
+                                                for (Entidade nEntidade : moduloEntidade.getListaEntidades()){
+                                                    if ((link.getNome().equals(nEntidade.getNome())) && (submodulo != moduloEntidade)) {
+                                                        valor++;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if(submodulo.getSubmodulos() != null){
+                            for (Modulo submoduloII : submodulo.getSubmodulos()) {
+                                if (submoduloII.getListaEntidades() != null){
+                                    for (Entidade entidade : submoduloII.getListaEntidades()){
+                                        if(entidade.getLinks() != null) {
+                                            for (Entidade link : entidade.getLinks()) {
+                                                if (link != null) {
+                                                    if (moduloEntidade.getListaEntidades() != null){
+                                                        for (Entidade nEntidade : moduloEntidade.getListaEntidades()){
+                                                            if ((link.getNome().equals(nEntidade.getNome())) && (submoduloII != moduloEntidade)) {
+                                                                valor++;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return valor + 1;
+
     }
 
 }

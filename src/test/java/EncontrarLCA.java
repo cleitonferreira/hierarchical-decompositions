@@ -17,14 +17,14 @@ public class EncontrarLCA {
         hmdSolucao = hmdFigura1;
 
         //7, 4 = A0
-        /*System.out.println(listaEntidadesA4.get(1).getNome());
-        System.out.println(listaEntidadesA2.get(2).getNome());
-        Modulo m = lca(listaEntidadesA4.get(1), listaEntidadesA2.get(2));*/
+        System.out.println(new Entidade("7",null));
+        System.out.println(new Entidade("4",null));
+        Modulo m = lca(new Entidade("7",null), new Entidade("4",null));
 
         // 7, 10 = A3
-        System.out.println(new Entidade("7",null));
+        /*System.out.println(new Entidade("7",null));
         System.out.println(new Entidade("10",null));
-        Modulo m = lca(new Entidade("7",null), new Entidade("10",null));
+        Modulo m = lca(new Entidade("7",null), new Entidade("10",null));*/
 
         // 7, 6 = A4
         /*System.out.println(listaEntidadesA4.get(0).getNome());
