@@ -23,7 +23,11 @@ public class CalculoFrequenciaM {
         //Modulo modulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
 
         //Modulo: A4
-        Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
+        //Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
+        //Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
+
+        //Modulo: A2
+        Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[0];
         Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
 
         System.out.println("ModuloEntidade: "+modulo.getNome());

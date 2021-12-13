@@ -14,7 +14,6 @@ public class Modulo {
 
     private List<Entidade> listaEntidades;
     private String nome;
-    //private String submodulo;
     private Collection<Modulo> submodulos;
 
 }

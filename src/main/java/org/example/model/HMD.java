@@ -13,6 +13,5 @@ import java.util.List;
 public class HMD {
 
     private List<Modulo> modulos;
-    //private Modulo modulo;
 
 }
