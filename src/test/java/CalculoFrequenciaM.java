@@ -17,7 +17,7 @@ public class CalculoFrequenciaM {
         hmdSolucao = hmdFigura1;
 
         //Modulo: A1
-        //Modulo modulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[0];
+        Modulo modulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[0];
 
         //Modulo: A3
         //Modulo modulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
@@ -27,20 +27,30 @@ public class CalculoFrequenciaM {
         //Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
 
         //Modulo: A2
-        Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[0];
-        Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
+        //Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[0];
+        //Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
 
         System.out.println("ModuloEntidade: "+modulo.getNome());
 
-        int valor = frequenciaM(modulo);
+        double valor = frequenciaM(modulo);
         System.out.println("frequenciaM: "+ valor);
+
     }
 
     /*f(m) = indegree(m) + 1
      * m † (m a módulo) é definido informalmente como o número de arestas cujo destino é algum nó interno de m, e cuja fonte é um nó fora de m.
      * */
-    private static int frequenciaM(Modulo moduloEntidade) {
-        int valor = 0;
+
+    /**
+     * f(m) = indegree(m) + 1
+     * m † (m a módulo) é definido informalmente como o número de arestas cujo destino é algum nó interno de m, e cuja fonte é um nó fora de m.
+     * @Modulo - este é um parâmetro do método frequenciaM
+     * @return Este metodo retorna um valor inteiro
+     * @throws Exception - Esta exeption nunca é lançada neste método,
+     * mas tá aqui pra exemplificar o comentário Javadoc para Exceptions
+     */
+    private static double frequenciaM(Modulo moduloEntidade) {
+        double valor = 0;
 
         if(hmdSolucao.getModulos() != null){
             for (Modulo modulo : hmdSolucao.getModulos()){
@@ -52,7 +62,7 @@ public class CalculoFrequenciaM {
                                 if (link != null) {
                                     if (moduloEntidade.getListaEntidades() != null){
                                         for (Entidade nEntidade : moduloEntidade.getListaEntidades()){
-                                            if ((link.getNome().equals(nEntidade.getNome())) && (modulo != moduloEntidade)) {
+                                            if ((link.getNome().equals(nEntidade.getNome()))) {
                                                 System.out.println("Modulo: " + modulo.getNome());
                                                 valor++;
                                             }
@@ -73,7 +83,7 @@ public class CalculoFrequenciaM {
                                         if (link != null) {
                                             if (moduloEntidade.getListaEntidades() != null){
                                                 for (Entidade nEntidade : moduloEntidade.getListaEntidades()){
-                                                    if ((link.getNome().equals(nEntidade.getNome())) && (submodulo != moduloEntidade)) {
+                                                    if ((link.getNome().equals(nEntidade.getNome()))) {
                                                         System.out.println("Submodulo: " + submodulo.getNome());
                                                         valor++;
                                                     }
@@ -94,7 +104,7 @@ public class CalculoFrequenciaM {
                                                 if (link != null) {
                                                     if (moduloEntidade.getListaEntidades() != null){
                                                         for (Entidade nEntidade : moduloEntidade.getListaEntidades()){
-                                                            if ((link.getNome().equals(nEntidade.getNome())) && (submoduloII != moduloEntidade)) {
+                                                            if ((link.getNome().equals(nEntidade.getNome()))) {
                                                                 System.out.println("SubmoduloII: " + submoduloII.getNome());
                                                                 valor++;
                                                             }

@@ -6,23 +6,29 @@ import org.example.model.Modulo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Figura1 figura1 = new Figura1();
-        HMD hmdFigura1 = figura1.hmd();
+        //Figura1
+        /*Figura1 figura1 = new Figura1();
+        HMD hmdFigura = figura1.hmd();*/
 
-        System.out.println(hmdFigura1);
+        //Figura18
+        Figura18 figura18 = new Figura18();
+        HMD hmdFigura = figura18.hmd();
 
-        FormulaComplexidade.executa(hmdFigura1);
+        System.out.println(hmdFigura);
 
-/*
-        System.out.println("modulos: "+ hmdFigura1.getModulos().get(0).getSubmodulos().size());
+        FormulaComplexidade.executa(hmdFigura);
 
-        if(hmdFigura1.getModulos() != null){
+
+ /*         System.out.println("modulos: "+ hmdFigura.getModulos().get(0).getSubmodulos().size());
+
+      if(hmdFigura1.getModulos() != null){
             for (Modulo modulo : hmdFigura1.getModulos()){
                 System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
                 listarEntidade(modulo);
@@ -39,8 +45,8 @@ public class Main {
                     }
                 }
             }
-        }
-*/
+        }*/
+
 
 
     }

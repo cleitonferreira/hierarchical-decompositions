@@ -31,7 +31,7 @@ public class EncontrarLCA {
         System.out.println(listaEntidadesA4.get(1).getNome());
         Modulo m = lca(listaEntidadesA4.get(0), listaEntidadesA4.get(1));*/
 
-        System.out.println(m.getNome());
+        System.out.println("LCA: "+ m.getNome());
 
     }
 

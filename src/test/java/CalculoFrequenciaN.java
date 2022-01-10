@@ -20,20 +20,19 @@ public class CalculoFrequenciaN {
 
 
         System.out.println("Entidade: "+entidade.getNome());
-        int valor = frequenciaN(entidade);
+        double valor = frequenciaN(entidade);
         System.out.println("frequenciaN: "+ valor);
     }
 
     /* n é uma Entidade Básica
      * f(n) = indegree(n) + 1 */
-    private static int frequenciaN(Entidade nEntidade) {
-        int valor = 0;
+    private static double frequenciaN(Entidade nEntidade) {
+        double valor = 0;
         Modulo moduloEntidade = null;
 
         if(hmdSolucao.getModulos() != null){
             for (Modulo modulo : hmdSolucao.getModulos()){
                 //System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
-                moduloEntidade = encontrarModulo(modulo, nEntidade);
                 if (modulo.getListaEntidades() != null){
                     System.out.println("Modulo: " + modulo.getNome());
                     for (Entidade entidade : modulo.getListaEntidades()){
@@ -52,7 +51,6 @@ public class CalculoFrequenciaN {
                 if(modulo.getSubmodulos() != null){
                     for (Modulo submodulo : modulo.getSubmodulos()){
                         //System.out.println("SubmoduloI: " + submodulo.getNome() + " - submódulosI: " + submodulo.getSubmodulos());
-                        moduloEntidade = encontrarModulo(submodulo, nEntidade);
                         if (submodulo.getListaEntidades() != null){
                             for (Entidade entidade : submodulo.getListaEntidades()){
                                 if(entidade.getLinks() != null){
@@ -69,7 +67,6 @@ public class CalculoFrequenciaN {
                         if(submodulo.getSubmodulos() != null){
                             for (Modulo submoduloII : submodulo.getSubmodulos()) {
                                 //System.out.println("SubmoduloII: " + submoduloII.getNome() + " - submoduloII: " + submoduloII.getSubmodulos());
-                                moduloEntidade = encontrarModulo(submoduloII, nEntidade);
                                 if (submoduloII.getListaEntidades() != null){
                                     System.out.println("SubModuloII: " + submoduloII.getNome());
                                     for (Entidade entidade : submoduloII.getListaEntidades()){
