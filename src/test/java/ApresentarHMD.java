@@ -1,15 +1,15 @@
-package org.example;
-
+import org.example.Figura18;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-public class Main {
+public class ApresentarHMD {
+
+    private static HMD hmdSolucao;
 
     public static void main(String[] args) {
 
@@ -19,19 +19,18 @@ public class Main {
 
         //Figura18
         Figura18 figura18 = new Figura18();
-        HMD hmdFigura = figura18.hmd();
+        hmdSolucao = figura18.hmd();
 
-        System.out.println(hmdFigura);
+        //hmdSolucao = new HMD(modulos);
 
-        double formulaComplexidade = FormulaComplexidade.executa(hmdFigura);
+        System.out.println("ListaModulos: " + hmdSolucao.getModulos().size());
+        if(hmdSolucao.getModulos().get(0).getSubmodulos() != null) {
+            System.out.println("ListaSubmodulos: " + hmdSolucao.getModulos().get(0).getSubmodulos().size());
+        }
+        System.out.println("ListaEntidades: " + hmdSolucao.getModulos().get(0).getListaEntidades().size());
 
-        System.out.println("Fórmula da Complexidade: " + formulaComplexidade);
-        System.out.println();
-
-
-/*
-        if (hmdFigura.getModulos() != null) {
-            for (Modulo modulo : hmdFigura.getModulos()) {
+        if (hmdSolucao.getModulos() != null) {
+            for (Modulo modulo : hmdSolucao.getModulos()) {
                 System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
                 listarEntidade(modulo);
                 if (modulo.getSubmodulos() != null) {
@@ -48,7 +47,6 @@ public class Main {
                 }
             }
         }
-*/
 
     }
 
@@ -64,6 +62,5 @@ public class Main {
             }
         }
     }
-
 
 }

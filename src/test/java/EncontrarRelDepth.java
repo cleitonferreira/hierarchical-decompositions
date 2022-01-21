@@ -19,11 +19,11 @@ public class EncontrarRelDepth {
         Entidade entidade = new Entidade("7",null);
 
         //Modulo: A3
-        //Modulo modulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
+        Modulo modulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
 
         //Modulo: A4
-        Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
-        Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
+        //Modulo submodulo = (Modulo) hmdFigura1.getModulos().get(0).getSubmodulos().toArray()[1];
+        //Modulo modulo = (Modulo) submodulo.getSubmodulos().toArray()[0];
 
         System.out.println("Entidade: "+entidade.getNome());
         System.out.println("Modulo: "+modulo.getNome());
