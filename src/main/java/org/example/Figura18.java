@@ -40,10 +40,10 @@ public class Figura18 {
         listaEntidadesA0.add(new Entidade("8", null));
 
 
+        Modulo moduloA0 = new Modulo(listaEntidadesA0, "A0", null);
 
         List<Modulo> modulos = new ArrayList<Modulo>();
-        modulos.add(new Modulo(listaEntidadesA0, "A0",
-                null));
+        modulos.add(moduloA0);
 
         HMD hmdFigura18 = new HMD(modulos);
 

@@ -39,9 +39,9 @@ public class Figura5 {
 
 
         /*Figura 5*/
-        List<Entidade> listaEntidadesA0 = new ArrayList<>();
-        listaEntidadesA0.add(new Entidade("0", Arrays.asList(new Entidade("3"))));
-        listaEntidadesA0.add(new Entidade("2", Arrays.asList(new Entidade("1"))));
+        List<Entidade> listaEntidadesB0 = new ArrayList<>();
+        listaEntidadesB0.add(new Entidade("0", Arrays.asList(new Entidade("3"))));
+        listaEntidadesB0.add(new Entidade("2", Arrays.asList(new Entidade("1"))));
 
         List<Entidade> listaEntidadesB1 = new ArrayList<>();
         listaEntidadesB1.add(new Entidade("1", Arrays.asList(new Entidade("4"), new Entidade("9"))));
@@ -54,13 +54,12 @@ public class Figura5 {
         listaEntidadesB2.add(new Entidade("5", Arrays.asList(new Entidade("10"))));
         listaEntidadesB2.add(new Entidade("10", Arrays.asList(new Entidade("4"))));
 
+        Modulo moduloB1 = new Modulo(listaEntidadesB1, "B1", null);
+        Modulo moduloB2 = new Modulo(listaEntidadesB2, "B2", null);
+        Modulo moduloB0 = new Modulo(listaEntidadesB0, "B0", Arrays.asList(moduloB1, moduloB2));
+
         List<Modulo> modulos = new ArrayList<Modulo>();
-        modulos.add(new Modulo(listaEntidadesA0, "A0",
-                Arrays.asList(
-                        new Modulo(listaEntidadesB1,"B1",
-                                null),
-                        new Modulo(listaEntidadesB2,"B2",
-                                null))));
+        modulos.addAll(Arrays.asList(moduloB0, moduloB1, moduloB2));
 
         HMD hmdFigura5 = new HMD(modulos);
 

@@ -9,47 +9,49 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class Main {
+
+    private static HMD hmdSolucao;
 
     public static void main(String[] args) {
 
         //Figura1
         /*Figura1 figura1 = new Figura1();
-        HMD hmdFigura = figura1.hmd();*/
+        hmdSolucao = figura1.hmd();*/
 
         //Figura18
         Figura18 figura18 = new Figura18();
-        HMD hmdFigura = figura18.hmd();
+        hmdSolucao = figura18.hmd();
 
-        System.out.println(hmdFigura);
+        //System.out.println(hmdFigura);
 
-        double formulaComplexidade = FormulaComplexidade.executa(hmdFigura);
+        FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmdSolucao);
 
-        System.out.println("Fórmula da Complexidade: " + formulaComplexidade);
+       double valorFormulaComplexidade = formulaComplexidade.executa();
+
+        System.out.println("Fórmula da Complexidade: " + valorFormulaComplexidade);
+        System.out.println("Esperado figura1: "+398.5);
+        System.out.println("Esperado figura18: "+208.37);
         System.out.println();
 
+        /*listarModulos(hmdFigura.getModulos());*/
 
-/*
-        if (hmdFigura.getModulos() != null) {
-            for (Modulo modulo : hmdFigura.getModulos()) {
+    }
+
+    private static void listarModulos(List<Modulo> modulos) {
+
+        if (modulos != null) {
+
+            for (Modulo modulo : modulos) {
                 System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
                 listarEntidade(modulo);
-                if (modulo.getSubmodulos() != null) {
-                    for (Modulo submodulo : modulo.getSubmodulos()) {
-                        System.out.println("SubmoduloI: " + submodulo.getNome() + " - submódulosI: " + submodulo.getSubmodulos());
-                        listarEntidade(submodulo);
-                        if (submodulo.getSubmodulos() != null) {
-                            for (Modulo submoduloII : submodulo.getSubmodulos()) {
-                                System.out.println("SubmoduloII: " + submoduloII.getNome() + " - submoduloII: " + submoduloII.getSubmodulos());
-                                listarEntidade(submoduloII);
-                            }
-                        }
-                    }
+                if(modulo.getSubmodulos() != null){
+                    listarModulos(modulo.getSubmodulos().stream().collect(toList()));
                 }
             }
         }
-*/
-
     }
 
     private static void listarEntidade(Modulo modulo) {

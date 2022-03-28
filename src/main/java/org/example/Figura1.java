@@ -75,13 +75,15 @@ public class Figura1 {
 
 
 
+
+        Modulo moduloA4 = new Modulo(listaEntidadesA4, "A4", null);
+        Modulo moduloA3 = new Modulo(listaEntidadesA3, "A3", Arrays.asList(moduloA4));
+        Modulo moduloA2 = new Modulo(listaEntidadesA2, "A2", null);
+        Modulo moduloA1 = new Modulo(listaEntidadesA1, "A1", Arrays.asList(moduloA2));
+        Modulo moduloA0 = new Modulo(listaEntidadesA0, "A0", Arrays.asList(moduloA1, moduloA3));
+
         List<Modulo> modulos = new ArrayList<Modulo>();
-        modulos.add(new Modulo(listaEntidadesA0, "A0",
-                Arrays.asList(
-                        new Modulo(listaEntidadesA1,"A1",
-                                Arrays.asList(new Modulo(listaEntidadesA2,"A2", null))),
-                        new Modulo(listaEntidadesA3,"A3",
-                                Arrays.asList(new Modulo(listaEntidadesA4,"A4", null))))));
+        modulos.addAll(Arrays.asList(moduloA0, moduloA1, moduloA2, moduloA3, moduloA4));
 
         HMD hmdFigura1 = new HMD(modulos);
 

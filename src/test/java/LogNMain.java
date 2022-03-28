@@ -24,10 +24,10 @@ public class LogNMain {
     /* A.4.1 Code lengths for integers
     l(n) = log(n) + 2log * log(n + 1) + 1 */
     static double l(double n) {
-        double resultadofn;
+        double resultadofn = 0.0;
 
-        //resultadofn = log(2, n) + 2 * log(2, log(2, (n + 1))) + 1;
-        resultadofn = log(2, n) + 2 * log(2, n) * log(2, (n + 1)) + 1;
+        n = n + 1;
+        resultadofn = log(2, n) + 2 * log(2, log(2, (n + 1))) + 1;
 
         return resultadofn;
     }

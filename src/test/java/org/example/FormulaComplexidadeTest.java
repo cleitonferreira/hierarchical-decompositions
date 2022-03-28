@@ -4,7 +4,6 @@ package org.example;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
-import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Collection;
 
 
 @ExtendWith(MockitoExtension.class) //activate Mockito
@@ -31,7 +29,7 @@ class FormulaComplexidadeTest {
     public void setUp() {
         Figura1 figura1 = new Figura1();
         hmdSolucao = figura1.hmd();
-        formulaComplexidade.setHmdSolucao(hmdSolucao);
+        formulaComplexidade = new FormulaComplexidade(hmdSolucao);
     }
 
     @Test
@@ -60,7 +58,7 @@ class FormulaComplexidadeTest {
         Modulo submoduloA2 = (Modulo) hmdSolucao.getModulos().get(0).getSubmodulos().toArray()[0];
         Modulo moduloA2 = (Modulo) submoduloA2.getSubmodulos().toArray()[0];
 
-        double valorA1 = formulaComplexidade.frequenciaM(moduloA1);
+        /*double valorA1 = formulaComplexidade.frequenciaM(moduloA1);
         double valorA3 = formulaComplexidade.frequenciaM(moduloA3);
         double valorA4 = formulaComplexidade.frequenciaM(moduloA4);
         double valorA2 = formulaComplexidade.frequenciaM(moduloA2);
@@ -68,22 +66,27 @@ class FormulaComplexidadeTest {
         Assertions.assertEquals(1.0, valorA1);
         Assertions.assertEquals(10.0, valorA3);
         Assertions.assertEquals(7.0, valorA4);
-        Assertions.assertEquals(9.0, valorA2);
+        Assertions.assertEquals(9.0, valorA2);*/
     }
 
     @Test
     void validarLCA() {
 
+        Entidade entidade7 = new Entidade("7",null);
+
         //7, 4 = A0
-        Modulo modulo1 = formulaComplexidade.lca(new Entidade("7",null), new Entidade("4",null));
+        Entidade entidade4 = new Entidade("4",null);
+        Modulo modulo1 = formulaComplexidade.lca(entidade7, entidade4, hmdSolucao.getModulos());
         Assertions.assertEquals("A0", modulo1.getNome());
 
         // 7, 10 = A3
-        Modulo modulo2 = formulaComplexidade.lca(new Entidade("7",null), new Entidade("10",null));
+        Entidade entidade10 = new Entidade("10",null);
+        Modulo modulo2 = formulaComplexidade.lca(entidade7, entidade10, hmdSolucao.getModulos());
         Assertions.assertEquals("A3", modulo2.getNome());
 
         // 7, 6 = A4
-        Modulo modulo3 = formulaComplexidade.lca(new Entidade("7",null), new Entidade("6",null));
+        Entidade entidade6 = new Entidade("6",null);
+        Modulo modulo3 = formulaComplexidade.lca(entidade7, entidade6, hmdSolucao.getModulos());
         Assertions.assertEquals("A4", modulo3.getNome());
 
     }
@@ -102,6 +105,10 @@ class FormulaComplexidadeTest {
         Modulo moduloA4 = (Modulo) submoduloA4.getSubmodulos().toArray()[0];
         Assertions.assertEquals(0, formulaComplexidade.relativaProfundidade(entidade, moduloA4));
 
+        //Modulo: A0
+        Modulo moduloA0 = hmdSolucao.getModulos().get(0);
+        Assertions.assertEquals(2, formulaComplexidade.relativaProfundidade(entidade, moduloA0));
+
     }
 
     @Test
@@ -119,10 +126,10 @@ class FormulaComplexidadeTest {
     @Test
     void validarLogN() {
 
-        Assertions.assertEquals(Double.NEGATIVE_INFINITY, formulaComplexidade.l(0));
-        Assertions.assertEquals(1.0, formulaComplexidade.l(1));
-        Assertions.assertEquals(3.328897414907779, formulaComplexidade.l(2));
-        Assertions.assertEquals(8.3603559294956, formulaComplexidade.l(12));
+        Assertions.assertEquals(1.0, formulaComplexidade.l(0));
+        Assertions.assertEquals(3.328897414907779, formulaComplexidade.l(1));
+        Assertions.assertEquals(4.584962500721156, formulaComplexidade.l(2));
+        Assertions.assertEquals(8.558017846869864, formulaComplexidade.l(12));
 
 
     }
@@ -130,11 +137,13 @@ class FormulaComplexidadeTest {
     @Test
     void validarGetOutNodes() {
 
-        Entidade entidade = new Entidade("6", Arrays.asList(new Entidade("7"), new Entidade("8")));
+        Entidade entidade6 = new Entidade("6", Arrays.asList(new Entidade("7"), new Entidade("8")));
+        Collection<Entidade> linksEntidade6 = formulaComplexidade.getOutNodes(entidade6);
+        Assertions.assertEquals(2, linksEntidade6.size());
 
-        HashMap<Entidade, Entidade> map = formulaComplexidade.getOutNodes(entidade);
-
-        Assertions.assertEquals(1.0, map.size());
+        Entidade entidade0 = new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"), new Entidade("3"), new Entidade("4")));
+        Collection<Entidade> linksEntidade0 = formulaComplexidade.getOutNodes(entidade0);
+        Assertions.assertEquals(4, linksEntidade0.size());
 
     }
 
@@ -176,5 +185,34 @@ class FormulaComplexidadeTest {
         Assertions.assertEquals(1, valor2);
         Assertions.assertEquals(0, valor3);
 
+    }
+
+    @Test
+    void calcularFormulaComplexidadeFigura1() {
+        double formulaComplexidade = FormulaComplexidade.executa();
+
+        double valorExpected = 398.5;
+
+        Assertions.assertEquals(valorExpected, formulaComplexidade);
+    }
+
+    @Test
+    void calcularFormulaComplexidadeFigura18() {
+
+        Figura18 figura18 = new Figura18();
+        HMD hmdFigura = figura18.hmd();
+
+        double valorExpected = 208.37;
+
+        double formulaComplexidade = FormulaComplexidade.executa();
+        Assertions.assertEquals(valorExpected, formulaComplexidade);
+    }
+
+    @Test
+    void calcularQuantidadeModulos() {
+
+        Integer count = hmdSolucao.getModulos().size();
+
+        Assertions.assertEquals(5, count);
     }
 }
