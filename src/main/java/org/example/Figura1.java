@@ -59,7 +59,7 @@ public class Figura1 {
         listaEntidadesA1.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("3"), new Entidade("4"), new Entidade("2"))));
 
         List<Entidade> listaEntidadesA2 = new ArrayList<>();
-        listaEntidadesA2.add(new Entidade("2", Arrays.asList(new Entidade("4"), new Entidade("6"))));
+        listaEntidadesA2.add(new Entidade("2", Arrays.asList(new Entidade("3"), new Entidade("4"), new Entidade("6"))));
         listaEntidadesA2.add(new Entidade("3", Arrays.asList(new Entidade("7"), new Entidade("4"))));
         listaEntidadesA2.add(new Entidade("4", Arrays.asList(new Entidade("7"))));
 
