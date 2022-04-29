@@ -36,11 +36,14 @@ public class PertenceCmUniaoMm {
 
         double valor = 0;
 
-        double valorFrequenciaM = formulaComplexidade.frequenciaM();
+        double valorFrequenciaM = 0;
 
         if (listaModulos != null) {
 
             for (Modulo modulo : listaModulos) {
+
+                valorFrequenciaM = formulaComplexidade.frequenciaM(modulo);
+
                 if (modulo.getListaEntidades() != null){
                     System.out.println("Modulo: " + modulo.getNome());
                     for (Entidade entidade : modulo.getListaEntidades()){

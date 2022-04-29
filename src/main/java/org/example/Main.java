@@ -18,12 +18,12 @@ public class Main {
     public static void main(String[] args) {
 
         //Figura1
-        /*Figura1 figura1 = new Figura1();
-        hmdSolucao = figura1.hmd();*/
+        Figura1 figura1 = new Figura1();
+        hmdSolucao = figura1.hmd();
 
         //Figura18
-        Figura18 figura18 = new Figura18();
-        hmdSolucao = figura18.hmd();
+        /*Figura18 figura18 = new Figura18();
+        hmdSolucao = figura18.hmd();*/
 
         //System.out.println(hmdFigura);
 
@@ -32,6 +32,7 @@ public class Main {
        double valorFormulaComplexidade = formulaComplexidade.executa();
 
         System.out.println("Fórmula da Complexidade: " + valorFormulaComplexidade);
+        System.out.println("Esperado figura1 Prof: "+362.92532577980467);
         System.out.println("Esperado figura1: "+398.5);
         System.out.println("Esperado figura18: "+208.37);
         System.out.println();
@@ -66,6 +67,5 @@ public class Main {
             }
         }
     }
-
 
 }
