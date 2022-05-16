@@ -1,18 +1,15 @@
 package org.example;
 
+import java.util.List;
+import java.util.Objects;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
-
-import java.util.*;
-
-import static java.util.stream.Collectors.toList;
 
 public class FormulaComplexidade {
 
   private static HMD hmdSolucao;
   private static double formulaComplexidade;
-  private static double valorRelativaProfundidade;
   private static Modulo moduloEntidade1;
   private static Modulo moduloEntidade2;
 
@@ -27,15 +24,16 @@ public class FormulaComplexidade {
     if (listaModulos != null) {
 
       for (Modulo modulo : listaModulos) {
+        double valor = 0;
         System.out.println(
             "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
         if (modulo.getListaEntidades() != null) {
           for (Entidade entidade : modulo.getListaEntidades()) {
             System.out.println("Entidade: " + modulo.getNome() + " - " + entidade.getNome());
-            formulanPertenceCmEnPertenteOutNodes(entidade, getOutNodes(entidade));
+            valor += formulanPertenceCmEnPertenteOutNodes(entidade);
           }
         }
-        formula(0, calculaCm(modulo), calculaMm(modulo));
+        formula(0, calculaCm(modulo), calculaMm(modulo), valor);
       }
     }
 
@@ -43,11 +41,10 @@ public class FormulaComplexidade {
   }
 
   /*Formula da complexidade*/
-  private static void formula(int um, int cm, int mm) {
+  private static void formula(int um, int cm, int mm, double valor) {
 
-    double formula = l(um + 1) + l(cm + 1) + l(mm + 1) +
-        valorRelativaProfundidade;
-    formulaComplexidade = formulaComplexidade + formula;
+    double formula = l(um + 1) + l(cm + 1) + l(mm + 1) + valor;
+    formulaComplexidade += formula;
   }
 
   /* n pertence Cm uniao Mm
@@ -81,27 +78,18 @@ public class FormulaComplexidade {
     return valor;
   }
 
-  public static void formulanPertenceCmEnPertenteOutNodes(Entidade nEntidade,
-      Collection<Entidade> links) {
-    for (Entidade link : links) {
-
-      Modulo m = lca(nEntidade, link, hmdSolucao.getModulos());
-      int r = relativaProfundidade(nEntidade, m);
-      valorRelativaProfundidade = valorRelativaProfundidade + l(r);
-    }
-  }
-
-  public static Collection<Entidade> getOutNodes(Entidade nEntidade) {
-
-    Collection<Entidade> links = new ArrayList<>();
-    // Links de saída da entidade
+  public static double formulanPertenceCmEnPertenteOutNodes(Entidade nEntidade) {
+    double result = 0;
     if (nEntidade.getLinks() != null) {
       for (Entidade link : nEntidade.getLinks()) {
-        links.add(link);
+
+        Modulo m = lca(nEntidade, link, hmdSolucao.getModulos());
+        int r = relativaProfundidade(nEntidade, m);
+        result += l(r);
       }
     }
 
-    return links;
+    return result;
   }
 
   /*C(m) é o conjunto de entidades básicas conectadas no módulo m*/
@@ -146,6 +134,7 @@ public class FormulaComplexidade {
 
         if (moduloEntidade1.getNome().equals(moduloEntidade2.getNome())) {
           moduloLCA = modulo;
+          break;
         } else {
 
           /*valida pai e filho*/
@@ -158,10 +147,6 @@ public class FormulaComplexidade {
           }
         }
       }
-
-      if (Objects.nonNull(modulo.getSubmodulos())) {
-        lca(entidade1, entidade2, modulo.getSubmodulos().stream().collect(toList()));
-      }
     }
 
     return moduloLCA;
@@ -171,22 +156,30 @@ public class FormulaComplexidade {
   /* n é uma Entidade Básica, M é um nó módulo */
   public static int relativaProfundidade(Entidade entidade, Modulo modulo) {
     int valor = 0;
+    boolean flag = false;
 
     if (Objects.nonNull(modulo.getListaEntidades())) {
-      if (modulo.getListaEntidades().contains(entidade)) {
+      if (containsNomeEntidade(modulo.getListaEntidades(), entidade.getNome())) {
         valor = 0;
+        flag = true;
       }
     }
 
-    if (Objects.nonNull(modulo.getSubmodulos())) {
+    if (flag == false && Objects.nonNull(modulo.getSubmodulos())) {
       for (Modulo submodulo : modulo.getSubmodulos()) {
-        if (submodulo.getListaEntidades().contains(entidade)) {
-          ++valor;
+        ++valor;
+        if (containsNomeEntidade(submodulo.getListaEntidades(), entidade.getNome())) {
+          break;
         }
       }
     }
 
     return valor;
+  }
+
+  private static boolean containsNomeEntidade(final List<Entidade> listaEntidades,
+      final String name) {
+    return listaEntidades.stream().anyMatch(o -> o.getNome().equals(name));
   }
 
   /* A.4.1 Code lengths for integers

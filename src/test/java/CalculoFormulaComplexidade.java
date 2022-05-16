@@ -1,12 +1,9 @@
-import org.example.Figura1;
+import java.util.List;
 import org.example.Figura18;
 import org.example.FormulaComplexidade;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
-
-import java.util.Collection;
-import java.util.List;
 
 public class CalculoFormulaComplexidade {
 
@@ -54,7 +51,7 @@ public class CalculoFormulaComplexidade {
                 if (modulo.getListaEntidades() != null){
                     for (Entidade entidade : modulo.getListaEntidades()){
                         System.out.println("Entidade: " + modulo.getNome() + " - " + entidade.getNome());
-                        formulanPertenceCmEnPertenteOutNodes(entidade, formulaComplexidade.getOutNodes(entidade));
+                        formulaComplexidade.formulanPertenceCmEnPertenteOutNodes(entidade);
                     }
                 }
                 formula(0, formulaComplexidade.calculaCm(modulo), formulaComplexidade.calculaMm(modulo));
@@ -71,15 +68,4 @@ public class CalculoFormulaComplexidade {
                 valorRelativaProfundidade;
         valorFormulaComplexidade = valorFormulaComplexidade + formula;
     }
-
-    public static void formulanPertenceCmEnPertenteOutNodes(Entidade nEntidade, Collection<Entidade> links) {
-        for (Entidade link : links) {
-
-            Modulo m = formulaComplexidade.lca(nEntidade, link, hmdSolucao.getModulos());
-            int r = formulaComplexidade.relativaProfundidade(nEntidade, m);
-            valorRelativaProfundidade = valorRelativaProfundidade + formulaComplexidade.l(r);
-        }
-    }
-
-
 }

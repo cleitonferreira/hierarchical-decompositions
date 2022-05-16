@@ -1,11 +1,8 @@
 import org.example.Figura1;
-import org.example.Figura18;
 import org.example.FormulaComplexidade;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
-
-import java.util.List;
 
 public class CalculoFm {
 
@@ -24,10 +21,10 @@ public class CalculoFm {
     formulaComplexidade = new FormulaComplexidade(hmdSolucao);
 
     //Modulo: A0
-    Modulo modulo = hmdSolucao.getModulos().get(0);
+    /*Modulo modulo = hmdSolucao.getModulos().get(0);*/
 
     //Modulo: A1
-    /*Modulo modulo = (Modulo) hmdSolucao.getModulos().get(0).getSubmodulos().toArray()[0];*/
+    Modulo modulo = (Modulo) hmdSolucao.getModulos().get(0).getSubmodulos().toArray()[0];
 
     //Modulo: A2
         /*Modulo submodulo = (Modulo) hmdSolucao.getModulos().get(0).getSubmodulos().toArray()[0];

@@ -1,10 +1,9 @@
-import org.example.Figura1;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import org.example.Figura18;
 import org.example.model.Entidade;
 import org.example.model.HMD;
-import org.example.model.Modulo;
-
-import java.util.*;
 
 public class EncontrarGetOutNodes {
 

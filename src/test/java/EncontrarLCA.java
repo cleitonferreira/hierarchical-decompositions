@@ -1,12 +1,9 @@
+import java.util.List;
+import java.util.Objects;
 import org.example.Figura1;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
-
-import java.util.List;
-import java.util.Objects;
-
-import static java.util.stream.Collectors.toList;
 
 public class EncontrarLCA {
 
@@ -17,31 +14,33 @@ public class EncontrarLCA {
     public static void main(String[] args) {
 
         Figura1 figura1 = new Figura1();
-        HMD hmdFigura1 = figura1.hmd();
+        HMD hmdFigura = figura1.hmd();
 
-        hmdSolucao = hmdFigura1;
+        /*Figura21 figura1 = new Figura21();
+        HMD hmdFigura = figura1.hmd();*/
+
+        hmdSolucao = hmdFigura;
 
         //7, 4 = A0
         Entidade entidade1 = new Entidade("7",null);
         Entidade entidade2 = new Entidade("4",null);
-        System.out.println(entidade1);
-        System.out.println(entidade2);
-        Modulo m = lca(entidade1, entidade2, hmdSolucao.getModulos());
+
 
         // 7, 10 = A3
         /*Entidade entidade1 = new Entidade("7",null);
-        Entidade entidade2 = new Entidade("10",null);
-        System.out.println(entidade1);
-        System.out.println(entidade2);
-        Modulo m = lca(entidade1, entidade2, hmdSolucao.getModulos());*/
+        Entidade entidade2 = new Entidade("10",null);*/
 
         // 7, 6 = A4
         /*Entidade entidade1 = new Entidade("7",null);
-        Entidade entidade2 = new Entidade("6",null);
+        Entidade entidade2 = new Entidade("6",null);*/
+
+        //5, 6 = A0
+        /*Entidade entidade1 = new Entidade("5",null);
+        Entidade entidade2 = new Entidade("6",null);*/
+
         System.out.println(entidade1);
         System.out.println(entidade2);
-        Modulo m = lca(entidade1, entidade2, hmdSolucao.getModulos());*/
-
+        Modulo m = lca(entidade1, entidade2, hmdSolucao.getModulos());
         System.out.println("LCA: "+ m.getNome());
 
     }
@@ -72,6 +71,7 @@ public class EncontrarLCA {
                 if (moduloEntidade1.getNome().equals(moduloEntidade2.getNome())){
                     moduloLCA = modulo;
                     System.out.println("if"+moduloLCA.getNome());
+                    break;
                 } else {
 
                     /*valida pai e filho*/
@@ -86,10 +86,6 @@ public class EncontrarLCA {
                         moduloLCA = hmdSolucao.getModulos().get(0);
                     }
                 }
-            }
-
-            if(Objects.nonNull(modulo.getSubmodulos())){
-                lca(entidade1, entidade2, modulo.getSubmodulos().stream().collect(toList()));
             }
         }
 

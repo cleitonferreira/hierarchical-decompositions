@@ -3,10 +3,6 @@ import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class ApresentarHMD {
 
     private static HMD hmdSolucao;
