@@ -31,6 +31,7 @@ B2 10
     9 3 5
     4 5 9
     5 10
+    10 4
 */
 public class Figura5 {
 

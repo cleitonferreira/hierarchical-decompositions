@@ -94,7 +94,11 @@ public class FormulaComplexidade {
 
   /*C(m) é o conjunto de entidades básicas conectadas no módulo m*/
   public static int calculaCm(Modulo modulo) {
-    return modulo.getListaEntidades().size();
+    int quantidade = 0;
+    if (Objects.nonNull(modulo.getListaEntidades())) {
+      quantidade = modulo.getListaEntidades().size();
+    }
+    return quantidade;
   }
 
   /*M(m) é o conjunto de submódulos do modulo m*/
@@ -120,13 +124,15 @@ public class FormulaComplexidade {
 
     for (Modulo modulo : modulos) {
 
-      for (Entidade entidade : modulo.getListaEntidades()) {
-        if (entidade.getNome().equals(entidade1.getNome())) {
-          moduloEntidade1 = modulo;
-        }
+      if (Objects.nonNull(modulo.getListaEntidades())) {
+        for (Entidade entidade : modulo.getListaEntidades()) {
+          if (entidade.getNome().equals(entidade1.getNome())) {
+            moduloEntidade1 = modulo;
+          }
 
-        if (entidade.getNome().equals(entidade2.getNome())) {
-          moduloEntidade2 = modulo;
+          if (entidade.getNome().equals(entidade2.getNome())) {
+            moduloEntidade2 = modulo;
+          }
         }
       }
 

@@ -15,7 +15,9 @@ public class CalculoFrequenciaN {
 
         hmdSolucao = hmdFigura1;
 
-        Entidade entidade = new Entidade("4",null);
+        /*Entidade entidade = new Entidade("4",null);*/
+
+        Entidade entidade = new Entidade("0",null);
 
         double valor = frequenciaN(entidade);
         System.out.println("frequenciaN: "+ valor);
