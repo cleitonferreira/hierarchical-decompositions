@@ -1,12 +1,8 @@
 package org.example.ils.constructive;
 
+import org.example.ils.ClusterMetrics;
 import org.example.model.HMD;
 
-/**
- * Constructive aglomerative method
- *
- * @author User
- */
 public class ConstrutiveAglomerativeMQ extends ConstrutiveAbstract {
 
   @Override
@@ -24,12 +20,11 @@ public class ConstrutiveAglomerativeMQ extends ConstrutiveAbstract {
     return aglomerateClustering(hmd, solution, quantity);
   }
 
-  private int[][] aglomerateClustering(HMD hmd, int[] solution,
-      int solutionsQuantity) {
-   int[][] topSolutions = new int[solutionsQuantity][solution.length];
+  private int[][] aglomerateClustering(HMD hmd, int[] solution, int solutionsQuantity) {
+    int[][] topSolutions = new int[solutionsQuantity][solution.length];
     Double[] topSolutionsMQ = new Double[solutionsQuantity];
 
-/*     int n = hmd.getModulos().size();
+    int n = hmd.getModulos().size();
     ClusterMetrics cm = new ClusterMetrics(hmd, solution);
 
     // solucao de entrada e a melhor. Unica conhecida
@@ -66,12 +61,15 @@ public class ConstrutiveAglomerativeMQ extends ConstrutiveAbstract {
       addSolutionOnTopSolutions(cm.cloneSolution(), cm.calculateMQ(), topSolutions, topSolutionsMQ);
 
       k += 1;
-    }*/
+    }
     return topSolutions;
   }
 
-  private void addSolutionOnTopSolutions(int[] currentSolution, double currentSolutionMQ,
-      int[][] topSolutions, Double[] topSolutionsMQ) {
+  private void addSolutionOnTopSolutions(
+          int[] currentSolution,
+          double currentSolutionMQ,
+          int[][] topSolutions,
+          Double[] topSolutionsMQ) {
     for (int i = 0; i < topSolutionsMQ.length; i++) {
       if (topSolutionsMQ[i] == null) {
         topSolutions[i] = currentSolution;
