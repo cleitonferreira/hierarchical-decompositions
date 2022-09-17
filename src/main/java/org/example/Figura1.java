@@ -1,12 +1,11 @@
 package org.example;
 
-import org.example.model.Entidade;
-import org.example.model.HMD;
-import org.example.model.Modulo;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.example.model.Entidade;
+import org.example.model.HMD;
+import org.example.model.Modulo;
 
 /*
 A0 A1
@@ -50,13 +49,13 @@ public class Figura1 {
     public static HMD hmd() {
 
         List<Entidade> listaEntidadesA0 = new ArrayList<>();
-        listaEntidadesA0.add(new Entidade("1", Arrays.asList(new Entidade("3"), new Entidade("2"), new Entidade("4"), new Entidade("5"))));
+        listaEntidadesA0.add(new Entidade("1", Arrays.asList(new Entidade("2"), new Entidade("3"), new Entidade("4"), new Entidade("5"))));
         listaEntidadesA0.add(new Entidade("5", Arrays.asList(new Entidade("6"), new Entidade("7"), new Entidade("8"))));
         listaEntidadesA0.add(new Entidade("12", Arrays.asList(new Entidade("13"))));
         listaEntidadesA0.add(new Entidade("13", null));
 
         List<Entidade> listaEntidadesA1 = new ArrayList<>();
-        listaEntidadesA1.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("3"), new Entidade("4"), new Entidade("2"))));
+        listaEntidadesA1.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"), new Entidade("3"), new Entidade("4"))));
 
         List<Entidade> listaEntidadesA2 = new ArrayList<>();
         listaEntidadesA2.add(new Entidade("2", Arrays.asList(new Entidade("3"), new Entidade("4"), new Entidade("6"))));
@@ -72,9 +71,6 @@ public class Figura1 {
         List<Entidade> listaEntidadesA4 = new ArrayList<>();
         listaEntidadesA4.add(new Entidade("6", Arrays.asList(new Entidade("7"), new Entidade("8"))));
         listaEntidadesA4.add(new Entidade("7", Arrays.asList(new Entidade("8"), new Entidade("9"), new Entidade("10"))));
-
-
-
 
         Modulo moduloA4 = new Modulo(listaEntidadesA4, "A4", null);
         Modulo moduloA3 = new Modulo(listaEntidadesA3, "A3", Arrays.asList(moduloA4));

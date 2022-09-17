@@ -1,12 +1,11 @@
 package org.example;
 
-import org.example.model.Entidade;
-import org.example.model.HMD;
-import org.example.model.Modulo;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.example.model.Entidade;
+import org.example.model.HMD;
+import org.example.model.Modulo;
 
 /*
 
@@ -32,6 +31,7 @@ B2 10
     9 3 5
     4 5 9
     5 10
+    10 4
 */
 public class Figura5 {
 

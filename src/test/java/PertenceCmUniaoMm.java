@@ -1,11 +1,9 @@
-import org.example.Figura1;
+import java.util.List;
 import org.example.Figura18;
 import org.example.FormulaComplexidade;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
-
-import java.util.List;
 
 public class PertenceCmUniaoMm {
 
@@ -36,11 +34,14 @@ public class PertenceCmUniaoMm {
 
         double valor = 0;
 
-        double valorFrequenciaM = formulaComplexidade.frequenciaM();
+        double valorFrequenciaM = 0;
 
         if (listaModulos != null) {
 
             for (Modulo modulo : listaModulos) {
+
+                valorFrequenciaM = formulaComplexidade.frequenciaM(modulo);
+
                 if (modulo.getListaEntidades() != null){
                     System.out.println("Modulo: " + modulo.getNome());
                     for (Entidade entidade : modulo.getListaEntidades()){
