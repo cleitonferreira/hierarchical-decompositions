@@ -1,10 +1,14 @@
 package org.example.ils;
 
+import org.example.model.Entidade;
 import org.example.model.HMD;
+import org.example.model.Modulo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Metricas utilizadas para calulos e operacoes na clusterizacao
@@ -35,12 +39,14 @@ public class ClusterMetrics {
     this.solution = solution;
 
     totalClusteres = 0;
-    totalModulesOnCluster = new int[hmd.getModulos().size() + 1];
+    int countModule = hmd.getModulos().size();
+
+    totalModulesOnCluster = new int[countModule + 1];
     modulesOnCluster = new ArrayList<>();
 
-    internalDependencyWeight = new int[hmd.getModulos().size() + 1];
-    externalDependencyWeight = new int[hmd.getModulos().size() + 1];
-    modularizationFactor = new double[hmd.getModulos().size() + 1];
+    internalDependencyWeight = new int[countModule + 1];
+    externalDependencyWeight = new int[countModule + 1];
+    modularizationFactor = new double[countModule + 1];
 
     resetAllMetrics();
   }
@@ -78,7 +84,7 @@ public class ClusterMetrics {
   private void updateDependencyMetrics(int i, int j) {
     if (i > j) return;
 
-    int depWeight = mdg.dependencyWeight(i, j);
+    int depWeight = dependencyWeight(i, j);
 
     if (depWeight > 0) {
       int clusteri = solution[i];
@@ -222,12 +228,13 @@ public class ClusterMetrics {
 
     if (fromCluster != toCluster) {
       // for (int depModule=0;depModule< hmd.getModulos().size();depModule++){
-      for (int i = 0; i < mdg.moduleDependenciesCount(module); i++) {
-        int depModule = mdg.moduleDependencies(module)[i];
+      //countEntidades(hmd.getModulos())
+      for (int i = 0; i < moduleDependenciesCount(module); i++) {
+        int depModule = moduleDependencies(module)[i];
         /*
          * if(depModule==module){//não verifica o próprio módulo continue; }
          */
-        int depWeight = mdg.dependencyWeight(module, depModule);
+        int depWeight = dependencyWeight(module, depModule);
         /*
          * if(depWeight == 0){ throw new RuntimeException("DEPENDENCIA ESTA NA LISTA MAS NAO EXISTE!");//nAo
          * existe dependencia entre o modulo module e j }
@@ -284,7 +291,7 @@ public class ClusterMetrics {
 
     for (int i : modulesOnCluster.get(cluster1)) {
       for (int j : modulesOnCluster.get(cluster2)) {
-        int dependencyEachOtherWeight = mdg.dependencyWeight(i, j);
+        int dependencyEachOtherWeight = dependencyWeight(i, j);
         joinClusterInternalDependency +=
             dependencyEachOtherWeight; // aresta externa passou a ser interna
         joinClusterExternalDependency -=
@@ -596,5 +603,51 @@ public class ClusterMetrics {
 
   public List<Integer> getModulesOnCluster(int cluster) {
     return this.modulesOnCluster.get(cluster);
+  }
+
+  private static void listarModulos(List<Modulo> modulos) {
+
+    if (modulos != null) {
+
+      for (Modulo modulo : modulos) {
+        System.out.println(
+                "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
+        //countEntidades(modulo);
+        if (modulo.getSubmodulos() != null) {
+          listarModulos(modulo.getSubmodulos().stream().collect(toList()));
+        }
+      }
+    }
+  }
+
+  /**
+   * Retorna a forca da dependencia entre dois modulos
+   * peso das dependencias
+   */
+  private int dependencyWeight(int module, int otherModule) {
+    if (module > otherModule)
+      return dependencyWeight(otherModule, module);
+
+    //return dependencyWeight[module][otherModule];
+    return 0;
+  }
+
+  /**
+   * total de dependencias que o modulo informado possui
+   * total de dependencias de cada módulo
+   */
+  private int moduleDependenciesCount(int module)
+  {
+    //return moduleDependenciesCount[module];
+    return 0;
+  }
+
+  /**
+   * Lista com os modulos que possuem relacionamento com o modulo informado
+   */
+  private int[] moduleDependencies(int module)
+  {
+    //return moduleDependencies[module];
+    return null;
   }
 }
