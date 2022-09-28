@@ -12,11 +12,11 @@ public class ConstrutiveRandom extends ConstrutiveAbstract {
 
   @Override
   public int[] createSolution(HMD hmd) {
-    int classCount = hmd.getModulos().size();
-    int[] solution = new int[classCount];
+    int countEntidades = hmd.getCountEntidades();
+    int[] solution = new int[countEntidades];
 
-		for (int i = 0; i < classCount; i++) {
-			solution[i] = PseudoRandom.randInt(0, classCount - 1);
+		for (int i = 0; i < countEntidades; i++) {
+			solution[i] = PseudoRandom.randInt(0, countEntidades - 1);
 		}
 
     return solution;

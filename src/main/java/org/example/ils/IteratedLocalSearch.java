@@ -57,7 +57,7 @@ public class IteratedLocalSearch
 	public IteratedLocalSearch(ConstrutiveAbstract constructor, HMD hmdSolucao, int maxEvaluations) throws Exception
 	{
 		this.constructor = constructor;
-		//this.classCount = project.getClassCount();
+		this.classCount = hmdSolucao.getCountEntidades();
 		this.hmd = hmdSolucao;
 		this.maxEvaluations = maxEvaluations;
 		this.evaluationsConsumed = 0;

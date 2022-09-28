@@ -11,9 +11,9 @@ public class ConstrutiveAglomerativeMQ extends ConstrutiveAbstract {
   }
 
   private int[][] createSolution(HMD hmd, int quantity) {
-    int[] solution = new int[hmd.getModulos().size()];
+    int[] solution = new int[hmd.getCountEntidades()];
 
-    for (int index = 0; index < hmd.getModulos().size(); index++) {
+    for (int index = 0; index < hmd.getCountEntidades(); index++) {
       solution[index] = index;
     }
 
@@ -24,7 +24,7 @@ public class ConstrutiveAglomerativeMQ extends ConstrutiveAbstract {
     int[][] topSolutions = new int[solutionsQuantity][solution.length];
     Double[] topSolutionsMQ = new Double[solutionsQuantity];
 
-    int n = hmd.getModulos().size();
+    int n = hmd.getCountEntidades();
     ClusterMetrics cm = new ClusterMetrics(hmd, solution);
 
     // solucao de entrada e a melhor. Unica conhecida

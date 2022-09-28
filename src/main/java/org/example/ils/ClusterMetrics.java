@@ -1,6 +1,5 @@
 package org.example.ils;
 
-import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
@@ -12,8 +11,6 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * Metricas utilizadas para calulos e operacoes na clusterizacao
- *
- * @author kiko
  */
 public class ClusterMetrics {
   private final HMD hmd;
@@ -39,14 +36,14 @@ public class ClusterMetrics {
     this.solution = solution;
 
     totalClusteres = 0;
-    int countModule = hmd.getModulos().size();
+    int countEntidades = hmd.getCountEntidades();
 
-    totalModulesOnCluster = new int[countModule + 1];
+    totalModulesOnCluster = new int[countEntidades + 1];
     modulesOnCluster = new ArrayList<>();
 
-    internalDependencyWeight = new int[countModule + 1];
-    externalDependencyWeight = new int[countModule + 1];
-    modularizationFactor = new double[countModule + 1];
+    internalDependencyWeight = new int[countEntidades + 1];
+    externalDependencyWeight = new int[countEntidades + 1];
+    modularizationFactor = new double[countEntidades + 1];
 
     resetAllMetrics();
   }
@@ -54,10 +51,10 @@ public class ClusterMetrics {
   /** Reseta todas as mericas e calcula o MF de todos os modulos novamente */
   private void resetAllMetrics() {
     availableClusters = new Stack<>();
-    usedClusters = new ArrayList<>(hmd.getModulos().size());
+    usedClusters = new ArrayList<>(hmd.getCountEntidades());
 
-    for (int i = 0; i < hmd.getModulos().size(); i++) {
-      availableClusters.push(hmd.getModulos().size() - i - 1);
+    for (int i = 0; i < hmd.getCountEntidades(); i++) {
+      availableClusters.push(hmd.getCountEntidades() - i - 1);
       internalDependencyWeight[i] = 0;
       externalDependencyWeight[i] = 0;
       modularizationFactor[i] = 0d;
@@ -72,7 +69,7 @@ public class ClusterMetrics {
         updateClusterCreatedInfo(cluster);
       }
 
-      for (int j = i; j < hmd.getModulos().size(); j++) { // para cada outro módulo seguinte
+      for (int j = i; j < hmd.getCountEntidades(); j++) { // para cada outro módulo seguinte
         updateDependencyMetrics(i, j);
       }
     }
@@ -196,9 +193,9 @@ public class ClusterMetrics {
 
     if (fromCluster == toCluster) return 0d; // mover para o próprio cluster
 
-    if (toCluster == -1) toCluster = hmd.getModulos().size();
+    if (toCluster == -1) toCluster = hmd.getCountEntidades();
 
-    if (fromCluster == -1) fromCluster = hmd.getModulos().size();
+    if (fromCluster == -1) fromCluster = hmd.getCountEntidades();
 
     double MFBefore = modularizationFactor[fromCluster] + modularizationFactor[toCluster];
 
@@ -214,9 +211,9 @@ public class ClusterMetrics {
   private int[] calculateMovimentMetrics(int module, int toCluster) {
     int fromCluster = solution[module];
 
-    if (toCluster == -1) toCluster = hmd.getModulos().size();
+    if (toCluster == -1) toCluster = hmd.getCountEntidades();
 
-    if (fromCluster == -1) fromCluster = hmd.getModulos().size();
+    if (fromCluster == -1) fromCluster = hmd.getCountEntidades();
 
     // valores do cluster de onde o módulo vai sair
     int fromInternalDependencyWeight = internalDependencyWeight[fromCluster];
@@ -227,8 +224,6 @@ public class ClusterMetrics {
     int toExternalDependencyWeight = externalDependencyWeight[toCluster];
 
     if (fromCluster != toCluster) {
-      // for (int depModule=0;depModule< hmd.getModulos().size();depModule++){
-      //countEntidades(hmd.getModulos())
       for (int i = 0; i < moduleDependenciesCount(module); i++) {
         int depModule = moduleDependencies(module)[i];
         /*
@@ -474,7 +469,7 @@ public class ClusterMetrics {
    * @return
    */
   public int convertToClusterNumber(int position) {
-    if (position >= hmd.getModulos().size()) {
+    if (position >= hmd.getCountEntidades()) {
       throw new RuntimeException("POSICAO LIDA TEM QUE SER MENOR QUE O TOTAL!");
     }
     if (position < (totalClusteres)) {

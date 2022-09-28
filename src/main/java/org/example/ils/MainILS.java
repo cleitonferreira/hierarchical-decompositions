@@ -1,8 +1,6 @@
 package org.example.ils;
 
-import org.example.Figura1;
 import org.example.Figura18;
-import org.example.FormulaComplexidade;
 import org.example.ils.constructive.ConstrutiveAbstract;
 import org.example.ils.constructive.ConstrutiveAglomerativeMQ;
 import org.example.model.Entidade;
@@ -28,22 +26,9 @@ public class MainILS {
         Figura18 figura = new Figura18();
         hmdSolucao = figura.hmd();
 
-        //System.out.println(hmdFigura);
-
-        /*FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmdSolucao);
-
-        double valorFormulaComplexidade = formulaComplexidade.executa();
-
-        System.out.println("Fórmula da Complexidade: " + valorFormulaComplexidade);
-        System.out.println("Esperado figura1 Prof: " + 362.92532577980467);
-        System.out.println("Esperado figura1: " + 398.5);
-        System.out.println("Esperado figura18: " + 208.37);
-        System.out.println();*/
-
-        //listarModulos(hmdSolucao.getModulos());
-
         DecimalFormat df4 = new DecimalFormat("0.0000");
         ConstrutiveAbstract constructor = new ConstrutiveAglomerativeMQ();
+        //ConstrutiveAbstract constructor = new ConstrutiveRandom();
 
         long startTimestamp = System.currentTimeMillis();
 
