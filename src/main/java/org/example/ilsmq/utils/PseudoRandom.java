@@ -1,4 +1,4 @@
-package org.example.ils.utils;
+package org.example.ilsmq.utils;
 
 import java.util.Random;
 

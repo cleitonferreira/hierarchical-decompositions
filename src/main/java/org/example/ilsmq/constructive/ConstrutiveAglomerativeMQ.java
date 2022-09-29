@@ -1,6 +1,6 @@
-package org.example.ils.constructive;
+package org.example.ilsmq.constructive;
 
-import org.example.ils.ClusterMetrics;
+import org.example.ilsmq.ClusterMetrics;
 import org.example.model.HMD;
 
 public class ConstrutiveAglomerativeMQ extends ConstrutiveAbstract {

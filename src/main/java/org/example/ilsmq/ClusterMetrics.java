@@ -1,4 +1,4 @@
-package org.example.ils;
+package org.example.ilsmq;
 
 import org.example.model.HMD;
 import org.example.model.Modulo;
@@ -98,10 +98,9 @@ public class ClusterMetrics {
 
   /** Atualiza o array modularizationFactor com todos os MFs considerando as métricas existentes */
   private void resetAllMF() {
-    for (int i = 0; i < modularizationFactor.length; i++)
-      modularizationFactor[i] =
-          calculateClusterModularizationFactor(
-              internalDependencyWeight[i], externalDependencyWeight[i]);
+    for (int i = 0; i < modularizationFactor.length; i++) {
+      modularizationFactor[i] = calculateClusterModularizationFactor(internalDependencyWeight[i], externalDependencyWeight[i]);
+    }
   }
 
   /** Calcula o MF de um cluster dado as suas arestas internas e externas */

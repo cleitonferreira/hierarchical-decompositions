@@ -1,8 +1,8 @@
-package org.example.ils;
+package org.example.ilsmq;
 
 import org.example.Figura18;
-import org.example.ils.constructive.ConstrutiveAbstract;
-import org.example.ils.constructive.ConstrutiveAglomerativeMQ;
+import org.example.ilsmq.constructive.ConstrutiveAbstract;
+import org.example.ilsmq.constructive.ConstrutiveAglomerativeMQ;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;

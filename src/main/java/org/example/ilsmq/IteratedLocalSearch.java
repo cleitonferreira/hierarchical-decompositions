@@ -1,7 +1,7 @@
-package org.example.ils;
+package org.example.ilsmq;
 
-import org.example.ils.constructive.ConstrutiveAbstract;
-import org.example.ils.utils.PseudoRandom;
+import org.example.ilsmq.constructive.ConstrutiveAbstract;
+import org.example.ilsmq.utils.PseudoRandom;
 import org.example.model.HMD;
 
 /**
