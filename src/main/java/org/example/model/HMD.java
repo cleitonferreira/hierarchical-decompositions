@@ -28,5 +28,4 @@ public class HMD {
         }
         return count;
     }
-
 }
