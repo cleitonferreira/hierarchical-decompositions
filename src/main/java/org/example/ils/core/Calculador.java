@@ -92,7 +92,7 @@ public class Calculador extends CalculadorAbstract {
 		
 		int[][]listaDependencias = this.problema.getListaDependenciasPara();
 		int[] qtdDependencias = this.problema.getQtdDependenciasPara();
-		
+
 		for (int i=0; i<classCount; i++) {
 			int sourcePackage = valores[i];
 			for (int j=0; j<qtdDependencias[i]; j++) {

@@ -8,17 +8,17 @@ import java.util.LinkedList;
 import java.util.Set;
 
 /**
- * Representação de uma solução com inteiros
+ * RepresentaÃ§Ã£o de uma soluÃ§Ã£o com inteiros
  */
 public class SolucaoCNMLL implements SolucaoAbstract {
 
-	// representa o número da geração em que a solução foi encontrada
+	// representa o nÃºmero da geraÃ§Ã£o em que a soluÃ§Ã£o foi encontrada
 	private int location;
 
-	// valor de fitness da solução
+	// valor de fitness da soluÃ§Ã£o
 	private double fitness = 0.00;
 
-	// parte básica da representação da solução
+	// parte bÃ¡sica da representaÃ§Ã£o da soluÃ§Ã£o
 	private HashMap<Integer,LinkedList<Integer>> mapa;
 	
 	private int[] valores;
@@ -121,7 +121,7 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	}
 	
 	/**
-	 * Utilizado para exibição dos resultados
+	 * Utilizado para exibiÃ§Ã£o dos resultados
 	 */
 	public String getString() {
 		StringBuilder sb = new StringBuilder("");

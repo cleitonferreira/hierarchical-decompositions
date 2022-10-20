@@ -26,7 +26,7 @@ public class ExperimentoFinalParte1 extends ExperimentoModel {
 			Double[] percentuais1 = { null, null, null, null, null };
 			percentuais1[perturbacao1] = percentual;
 			Parametro paramILS1 = new Parametro(paramILSPadrao);
-			// somente adiciona os métodos com uma estratégia uma vez, para o flag sequencia = true
+			// somente adiciona os mÃ©todos com uma estratÃ©gia uma vez, para o flag sequencia = true
 			if (metodosPerturbacaoSimultaneos) {
 				paramILS1.setILS(percentuais1[0], percentuais1[1], percentuais1[2], percentuais1[3], percentuais1[4], maxIteracoesSemMelhoria, inicialConstrutivo, metodosPerturbacaoSimultaneos);
 				params.add(paramILS1);
@@ -123,7 +123,7 @@ public class ExperimentoFinalParte1 extends ExperimentoModel {
 			System.out.println(++i + "=" + param.getInfoParametros());	
 		}
 
-		//Configura a exibição conforme algoritmo e problema
+		//Configura a exibiÃ§Ã£o conforme algoritmo e problema
 		TipoExibicao tipoExibicao = TipoExibicao.DEFAULT;
 		tipoExibicao.setDebug(true);
 		

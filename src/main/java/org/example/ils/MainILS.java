@@ -2,9 +2,12 @@ package org.example.ils;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import org.example.Figura18;
-import org.example.FormulaComplexidade;
+import org.example.Figura21;
 import org.example.ils.core.Exibicao;
 import org.example.ils.core.ExperimentoFactory;
 import org.example.ils.core.ExperimentoModel;
@@ -18,12 +21,17 @@ import org.example.model.Modulo;
 public class MainILS {
 
   private static HMD hmdSolucao;
+  private static HashMap<Integer, List<Integer>> dependenciasPara;
+  private static HashMap<Integer, List<Integer>> dependenciasDe;
+  private static int[] originalPackage;
+  private static int[] originalClasses;
+
 
   public static void main(String[] args) throws Exception {
 
-    //Figura1
-        /*Figura1 figura = new Figura1();
-        hmdSolucao = figura.hmd();*/
+    //Figura21
+    /*Figura21 figura = new Figura21();
+    hmdSolucao = figura.hmd();*/
 
     //Figura18
     Figura18 figura = new Figura18();
@@ -41,6 +49,7 @@ public class MainILS {
       throws Exception {
 
     Problema problema = loadHMD(hmdSolucao);
+    //Problema problema = getProblema6Classes();
     Exibicao[] exibicoes = experimento.iniciaExibicoes();
     List<Parametro> params = experimento.getParametros();
 
@@ -74,11 +83,10 @@ public class MainILS {
   }
 
   /**
-   * A partir do objeto modelo Project, carrega os dados do problema
-   * Adaptado do projeto de Marcio Barros
+   * A partir do objeto modelo Project, carrega os dados do problema Adaptado do projeto de Marcio
+   * Barros
    */
-  private static Problema loadHMD(HMD hmd) throws Exception
-  {
+  private static Problema loadHMD(HMD hmd) throws Exception {
     int classCount = hmd.getCountEntidades();
     int packageCount = hmd.getModulos().size();
     int[][] listaDependenciasPara = new int[classCount][classCount];
@@ -86,24 +94,27 @@ public class MainILS {
     int[][] listaDependenciasDe = new int[classCount][classCount];
     int[] qtdDependenciasDe = new int[classCount];
 
-    int[] originalPackage = new int[classCount];
-    int[] originalClasses = new int[classCount];
+    originalPackage = new int[classCount];
+    originalClasses = new int[classCount];
 
-    for (int i = 0; i < packageCount; i++) {
-      for (int j = 0; j < classCount; j++) {
-        //ProjectClass _class = modelo.getClassIndex(i);
-        //int sourcePackageIndex = modelo.getIndexForPackage(_class.getPackage());
-        int sourcePackageIndex = dependenciaDE(hmd.getModulos().get(i).getListaEntidades().get(j));
+    dependenciasPara = new HashMap<Integer, List<Integer>>();
+    dependenciasDe = new HashMap<Integer, List<Integer>>();
+    load(hmd.getModulos());
 
-        originalPackage[i] = sourcePackageIndex;
-        originalClasses[sourcePackageIndex]++;
-
-        int classIndex = dependenciaPara(hmd.getModulos().get(i).getListaEntidades().get(j));
-
-        listaDependenciasPara[i][j] = classIndex;
-        qtdDependenciasPara[i]++;
-
-        listaDependenciasDe[classIndex][qtdDependenciasDe[classIndex]++] = i;
+    for (Integer moduloOrigem : dependenciasPara.keySet()) {
+      List<Integer> depPARA = dependenciasPara.get(moduloOrigem);
+      qtdDependenciasPara[moduloOrigem] = depPARA.size();
+      for (int i = 0; i < depPARA.size(); i++) {
+        //System.out.println("PARA[" + moduloOrigem + "][" + i + "]=" + depPARA.get(i));
+        listaDependenciasPara[moduloOrigem][i] = depPARA.get(i);
+      }
+    }
+    for (Integer moduloDestino : dependenciasDe.keySet()) {
+      List<Integer> depDE = dependenciasDe.get(moduloDestino);
+      qtdDependenciasDe[moduloDestino] = depDE.size();
+      for (int i = 0; i < depDE.size(); i++) {
+        //System.out.println("DE[" + moduloDestino + "][" + i + "]=" + depDE.get(i));
+        listaDependenciasDe[moduloDestino][i] = depDE.get(i);
       }
     }
 
@@ -129,7 +140,7 @@ public class MainILS {
   public static int dependenciaDE(Entidade nEntidade) {
 
     List<Modulo> listaModulos = hmdSolucao.getModulos();
-    int valorFrequenciaN = 1;
+    int valorFrequenciaN = 0;
 
     if (listaModulos != null) {
 
@@ -156,7 +167,7 @@ public class MainILS {
   public static int dependenciaPara(Entidade nEntidade) {
 
     List<Modulo> listaModulos = hmdSolucao.getModulos();
-    int valorFrequenciaN = 1;
+    int valorFrequenciaN = 0;
 
     if (listaModulos != null) {
 
@@ -176,13 +187,90 @@ public class MainILS {
     return valorFrequenciaN;
   }
 
-  private static void listarModulos(List<Modulo> modulos) {
+  private static void load(List<Modulo> modulos) {
 
+    if (Objects.nonNull(modulos)) {
+      for (Modulo modulo : modulos) {
+        int count = 0;
+        /*System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());*/
+        loadEntidade(modulo);
+        originalClasses[count] = modulo.getListaEntidades().size();
+        originalPackage[count] = modulos.indexOf(modulo);
+        ++count;
+      }
+    }
+  }
+
+  private static void loadEntidade(Modulo modulo) {
+
+    if (modulo.getListaEntidades() != null) {
+      for (Entidade entidade : modulo.getListaEntidades()) {
+        int valorDe = dependenciaDE(entidade);
+        if (valorDe > 0) {
+          List<Integer> depDE = new ArrayList<>();
+          for (int i = 0; i < valorDe; i++) {
+            depDE = listaDependenciaDE(entidade);
+          }
+          dependenciasDe.put(Integer.valueOf(entidade.getNome()), depDE);
+        }
+        int chavePara = dependenciasPara.size();
+        int valorPara = dependenciaPara(entidade);
+        if (valorPara > 0) {
+          List<Integer> depPARA = new ArrayList<>();
+          for (int i = 0; i < valorPara; i++) {
+            Entidade link = (Entidade) entidade.getLinks().stream().toArray()[i];
+            int value = getIndexOf(modulo.getListaEntidades(), link.getNome());
+            depPARA.add(value);
+          }
+          dependenciasPara.put(chavePara++, depPARA);
+        }
+
+      }
+    }
+  }
+
+  private static int getIndexOf(List<Entidade> list, String name) {
+    int pos = 0;
+
+    for (Entidade entidade : list) {
+      if (name.equalsIgnoreCase(entidade.getNome())) {
+        return pos;
+      }
+      pos++;
+    }
+    return -1;
+  }
+
+  public static List<Integer> listaDependenciaDE(Entidade nEntidade) {
+
+    List<Modulo> listaModulos = hmdSolucao.getModulos();
+    List<Integer> indices = new ArrayList<>();
+
+    if (listaModulos != null) {
+      for (Modulo modulo : listaModulos) {
+        if (modulo.getListaEntidades() != null) {
+          for (Entidade entidade : modulo.getListaEntidades()) {
+            if (entidade.getLinks() != null) {
+              for (Entidade link : entidade.getLinks()) {
+                if (link != null) {
+                  if ((link.getNome().equals(nEntidade.getNome()))) {
+                    indices.add(Integer.parseInt(entidade.getNome()));
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return indices;
+  }
+
+  private static void listarModulos(List<Modulo> modulos) {
     if (modulos != null) {
 
       for (Modulo modulo : modulos) {
-        System.out.println(
-            "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
+        System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
         listarEntidade(modulo);
         if (modulo.getSubmodulos() != null) {
           listarModulos(modulo.getSubmodulos().stream().collect(toList()));
@@ -202,5 +290,56 @@ public class MainILS {
         }
       }
     }
+  }
+
+  public static Problema getProblema6Classes() {
+    int numClasses = 6;
+    int numPackages = 3;
+    int[] originalPackages = {0, 0, 1, 1, 2, 2};
+    int[] originalClasses = {2, 2, 2, 0, 0, 0};
+
+    int[][] listaDependenciasPara =
+        {
+            {1, 0, 0, 0, 0, 0},
+            {2, 3, 4, 0, 0, 0},
+            {0, 1, 3, 0, 0, 0},
+            {4, 0, 0, 0, 0, 0},
+            {5, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0}
+        };
+    int[] qtdDependenciasPara =
+        {
+            1, 3, 3, 1, 1, 0
+        };
+
+    int[][] listaDependenciasDe =
+        {
+            {2, 0, 0, 0, 0, 0},
+            {0, 2, 0, 0, 0, 0},
+            {1, 0, 0, 0, 0, 0},
+            {1, 2, 0, 0, 0, 0},
+            {1, 3, 0, 0, 0, 0},
+            {4, 0, 0, 0, 0, 0}
+        };
+    int[] qtdDependenciasDe =
+        {
+            1, 2, 1, 2, 2, 1
+        };
+
+    Problema problema = new Problema(
+        "teste6",
+        "",
+        numClasses,
+        numPackages,
+        originalClasses,
+        originalPackages,
+        listaDependenciasPara,
+        qtdDependenciasPara,
+        listaDependenciasDe,
+        qtdDependenciasDe,
+        hmdSolucao
+    );
+
+    return problema;
   }
 }
