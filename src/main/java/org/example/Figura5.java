@@ -34,9 +34,9 @@ B2 10
     5 10
     10 4
 */
-public class Figura5 {
+public class Figura5 implements Figura {
 
-    public static HMD hmd() {
+    public HMD hmd() {
 
 
         /*Figura 5*/

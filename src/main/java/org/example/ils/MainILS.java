@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import org.example.Figura;
 import org.example.Figura18;
 import org.example.Figura21;
 import org.example.ils.core.Exibicao;
@@ -21,6 +22,7 @@ import org.example.model.Modulo;
 public class MainILS {
 
   private static HMD hmdSolucao;
+  private static Class classe;
   private static HashMap<Integer, List<Integer>> dependenciasPara;
   private static HashMap<Integer, List<Integer>> dependenciasDe;
   private static int[] originalPackage;
@@ -30,11 +32,12 @@ public class MainILS {
   public static void main(String[] args) throws Exception {
 
     //Figura21
-    /*Figura21 figura = new Figura21();
+    /*Figura figura = new Figura21();
     hmdSolucao = figura.hmd();*/
 
     //Figura18
-    Figura18 figura = new Figura18();
+    Figura figura = new Figura18();
+    classe = figura.getClass();
     hmdSolucao = figura.hmd();
 
     //Configura a exibição conforme algoritmo e problema
@@ -118,8 +121,8 @@ public class MainILS {
       }
     }
 
-    String name = Figura18.class.getClass().getSimpleName();
-    String filename = Figura18.class.getClass().getPackageName();
+    String name = classe.getSimpleName();
+    String filename = classe.getPackageName();
 
     Problema problema = new Problema(
         filename,

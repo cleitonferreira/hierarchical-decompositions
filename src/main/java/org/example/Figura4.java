@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Figura4 {
+public class Figura4 implements Figura {
 
-    public static HMD hmd() {
+    public HMD hmd() {
 
         List<Entidade> listaEntidadesA2 = new ArrayList<>();
         listaEntidadesA2.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"))));

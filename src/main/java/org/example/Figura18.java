@@ -24,9 +24,9 @@ Links
 8
 
 */
-public class Figura18 {
+public class Figura18 implements Figura {
 
-    public static HMD hmd() {
+    public HMD hmd() {
 
         List<Entidade> listaEntidadesA0 = new ArrayList<>();
         listaEntidadesA0.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"), new Entidade("3"), new Entidade("4"))));

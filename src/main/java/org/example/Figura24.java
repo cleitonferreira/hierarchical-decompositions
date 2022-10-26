@@ -24,9 +24,9 @@ import java.util.List;
 12 - 13
 13
 */
-public class Figura24 {
+public class Figura24 implements Figura {
 
-  public static HMD hmd() {
+  public HMD hmd() {
 
     List<Entidade> listaEntidadesA0 = new ArrayList<>();
     listaEntidadesA0.add(new Entidade("5", Arrays.asList(new Entidade("6"), new Entidade("7"), new Entidade("8"))));

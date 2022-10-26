@@ -9,9 +9,12 @@ public class CalculoListaDependenciaDE {
 
   private static HMD hmdSolucao;
 
+  private static Class classe;
+
   public static void main(String[] args) {
 
     Figura18 figura18 = new Figura18();
+    classe = figura18.getClass();
     HMD hmdFigura = figura18.hmd();
 
     hmdSolucao = hmdFigura;
@@ -19,6 +22,12 @@ public class CalculoListaDependenciaDE {
     /*Entidade entidade = new Entidade("4", null);*/
 
     Entidade entidade = new Entidade("8", null);
+
+    String name = classe.getSimpleName();
+    String filename = classe.getPackageName();
+
+    System.out.println("name: " + name);
+    System.out.println("filename: " + filename);
 
     System.out.println("dependenciaDE: " + listaDependenciaDE(entidade));
   }

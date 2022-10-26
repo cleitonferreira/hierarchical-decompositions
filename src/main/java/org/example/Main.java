@@ -15,12 +15,12 @@ public class Main {
   public static void main(String[] args) {
 
     //Figura1
-    Figura1 figura1 = new Figura1();
-    hmdSolucao = figura1.hmd();
+    /*Figura figura = new Figura1();
+    hmdSolucao = figura.hmd();*/
 
     //Figura18
-        /*Figura18 figura18 = new Figura18();
-        hmdSolucao = figura18.hmd();*/
+        Figura figura = new Figura18();
+        hmdSolucao = figura.hmd();
 
     //System.out.println(hmdFigura);
 
