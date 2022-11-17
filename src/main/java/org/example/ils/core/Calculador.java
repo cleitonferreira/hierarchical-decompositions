@@ -1,5 +1,15 @@
 package org.example.ils.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import org.example.FormulaComplexidade;
+import org.example.model.Entidade;
+import org.example.model.HMD;
+import org.example.model.Modulo;
+
 /**
  * DEFINICÕES:
  * 
@@ -120,6 +130,62 @@ public class Calculador extends CalculadorAbstract {
 		}
 		
 		return mq;
+	}
+
+	public double calculateMQ2(int[] valores) {
+
+		HMD hmd = converterProblemaParaHMD(problema, valores);
+
+		FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
+
+		double valorFormulaComplexidade = formulaComplexidade.executa();
+
+		return  valorFormulaComplexidade;
+	}
+
+	private static HMD converterProblemaParaHMD(Problema problema, int[] valores) {
+		Modulo modulo = null;
+		List<Modulo> modulos = new ArrayList<Modulo>();
+		boolean flag = false;
+		for (int a = 0; a < valores.length; a++) {
+			if ((valores[a] == 0 && flag == false) || (valores[a] == 1 && flag == true)) {
+				modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+						String.valueOf("A" + a), null);
+				modulos.add(modulo);
+				flag = !flag;
+			} else if (valores[a] > 1) {
+				Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+						String.valueOf("A" + a), null);
+				modulo.setSubmodulos(Arrays.asList(submodulo));
+				modulos.add(modulo);
+			}
+		}
+		return new HMD(modulos);
+	}
+
+	private static List<Entidade> getListaEntidadesPorModulo(Problema problema, int[] valores,
+			int modulo) {
+		List<Entidade> listaEntidades = new ArrayList<>();
+		for (int a = 0; a < valores.length; a++) {
+			if (Objects.nonNull(problema.getClassCount())) {
+				for (int i = 0; i < problema.getClassCount(); i++) {
+					if (Objects.nonNull(problema.getListaDependenciasPara())) {
+						Collection<Entidade> links = new ArrayList<>();
+						for (int j = 0; j < problema.getListaDependenciasPara().length; j++) {
+							int value = problema.getListaDependenciasPara()[i][j];
+							if (value > 0) {
+								links.add(new Entidade(String.valueOf(value), null));
+							}
+						}
+						if ((valores[i] == modulo) && modulo == a) {
+							listaEntidades.add(
+									new Entidade(String.valueOf(i), (links.size() > 0 ? links : null)));
+						}
+					}
+				}
+			}
+		}
+		return listaEntidades;
 	}
 
 	/**

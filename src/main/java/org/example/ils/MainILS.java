@@ -32,11 +32,10 @@ public class MainILS {
   public static void main(String[] args) throws Exception {
 
     //Figura21
-    /*Figura figura = new Figura21();
-    hmdSolucao = figura.hmd();*/
-
+    /*Figura figura = new Figura21();*/
     //Figura18
     Figura figura = new Figura18();
+
     classe = figura.getClass();
     hmdSolucao = figura.hmd();
 

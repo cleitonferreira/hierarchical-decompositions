@@ -26,11 +26,11 @@ public class FormulaComplexidade {
 
       for (Modulo modulo : listaModulos) {
         double valor = 0;
-        System.out.println(
-            "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
+        /*System.out.println(
+            "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());*/
         if (modulo.getListaEntidades() != null) {
           for (Entidade entidade : modulo.getListaEntidades()) {
-            System.out.println("Entidade: " + modulo.getNome() + " - " + entidade.getNome());
+            /*System.out.println("Entidade: " + modulo.getNome() + " - " + entidade.getNome());*/
             valor += formulanPertenceCmEnPertenteOutNodes(entidade);
           }
         }

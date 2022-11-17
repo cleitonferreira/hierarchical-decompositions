@@ -24,6 +24,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/SolucaoAbstract.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/TipoAlgoritmo.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/TipoExibicao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Verificador.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoCrossover.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoDescarte.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoElite.java" charset="ISO-8859-1" />
