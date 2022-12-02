@@ -1,8 +1,9 @@
-import java.util.List;
 import org.example.Figura1;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
+
+import java.util.List;
 
 public class CalculoFrequenciaN {
 
@@ -15,9 +16,9 @@ public class CalculoFrequenciaN {
 
         hmdSolucao = hmdFigura1;
 
-        /*Entidade entidade = new Entidade("4",null);*/
+        Entidade entidade = new Entidade("4",null);
 
-        Entidade entidade = new Entidade("0",null);
+        /*Entidade entidade = new Entidade("0",null);*/
 
         double valor = frequenciaN(entidade);
         System.out.println("frequenciaN: "+ valor);

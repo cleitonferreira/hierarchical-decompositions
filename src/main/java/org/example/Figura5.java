@@ -1,11 +1,12 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /*
 
@@ -33,9 +34,9 @@ B2 10
     5 10
     10 4
 */
-public class Figura5 {
+public class Figura5 implements Figura {
 
-    public static HMD hmd() {
+    public HMD hmd() {
 
 
         /*Figura 5*/

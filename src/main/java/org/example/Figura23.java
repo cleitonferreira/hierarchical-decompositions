@@ -1,11 +1,12 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /*
 0 - 1 2 3 4
@@ -23,9 +24,9 @@ import org.example.model.Modulo;
 12 - 13
 13
 */
-public class Figura23 {
+public class Figura23 implements Figura {
 
-  public static HMD hmd() {
+  public HMD hmd() {
 
     List<Entidade> listaEntidadesA0 = new ArrayList<>();
     listaEntidadesA0.add(new Entidade("1", Arrays.asList(new Entidade("2"), new Entidade("3"), new Entidade("4"), new Entidade("5"))));

@@ -1,9 +1,10 @@
-import java.util.List;
 import org.example.Figura18;
 import org.example.FormulaComplexidade;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
+
+import java.util.List;
 
 public class PertenceCmUniaoMm {
 

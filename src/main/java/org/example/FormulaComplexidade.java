@@ -1,15 +1,15 @@
 package org.example;
 
-import java.util.List;
-import java.util.Objects;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
+import java.util.List;
+import java.util.Objects;
+
 public class FormulaComplexidade {
 
   private static HMD hmdSolucao;
-  private static double formulaComplexidade;
   private static Modulo moduloEntidade1;
   private static Modulo moduloEntidade2;
 
@@ -20,20 +20,21 @@ public class FormulaComplexidade {
   public static double executa() {
 
     List<Modulo> listaModulos = hmdSolucao.getModulos();
+    double formulaComplexidade = 0;
 
     if (listaModulos != null) {
 
       for (Modulo modulo : listaModulos) {
         double valor = 0;
-        System.out.println(
-            "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
+        /*System.out.println(
+            "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());*/
         if (modulo.getListaEntidades() != null) {
           for (Entidade entidade : modulo.getListaEntidades()) {
-            System.out.println("Entidade: " + modulo.getNome() + " - " + entidade.getNome());
+            /*System.out.println("Entidade: " + modulo.getNome() + " - " + entidade.getNome());*/
             valor += formulanPertenceCmEnPertenteOutNodes(entidade);
           }
         }
-        formula(0, calculaCm(modulo), calculaMm(modulo), valor);
+        formulaComplexidade = formula(0, calculaCm(modulo), calculaMm(modulo), valor, formulaComplexidade);
       }
     }
 
@@ -41,10 +42,11 @@ public class FormulaComplexidade {
   }
 
   /*Formula da complexidade*/
-  private static void formula(int um, int cm, int mm, double valor) {
+  private static double formula(int um, int cm, int mm, double valor, double formulaComplexidade) {
 
     double formula = l(um + 1) + l(cm + 1) + l(mm + 1) + valor;
     formulaComplexidade += formula;
+    return formulaComplexidade;
   }
 
   /* n pertence Cm uniao Mm

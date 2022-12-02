@@ -1,15 +1,16 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
-public class Figura4 {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    public static HMD hmd() {
+public class Figura4 implements Figura {
+
+    public HMD hmd() {
 
         List<Entidade> listaEntidadesA2 = new ArrayList<>();
         listaEntidadesA2.add(new Entidade("0", Arrays.asList(new Entidade("1"), new Entidade("2"))));

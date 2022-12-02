@@ -1,8 +1,6 @@
 package org.example;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
@@ -12,6 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @ExtendWith(MockitoExtension.class) //activate Mockito
