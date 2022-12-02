@@ -6,32 +6,36 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import org.example.FormulaComplexidade;
+import org.example.ils.busca.SolucaoHC;
+import org.example.ils.construtivo.SolucaoCNM;
+import org.example.ils.construtivoLista.SolucaoCNMLL;
+import org.example.ils.metaheuristica.SolucaoILS;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
 /**
- * DEFINICÕES:
+ * DEFINICÃ•ES:
  * 
- * - acoplamento = número de dependências que as classes de um pacote possuem
+ * - acoplamento = nÃºmero de dependÃªncias que as classes de um pacote possuem
  * com classes de fora do pacote. Deve ser minimizado.
  * 
- * - coesão = número de dependências que as classes de um pacote possuem com
+ * - coesÃ£o = nÃºmero de dependÃªncias que as classes de um pacote possuem com
  * outras classes do mesmo pacote. Deve ser maximizado (ou seja, minimizamos seu
  * valor com sinal invertido)
  * 
  * - spread = partindo de zero e percorrendo cada pacote, acumula o quadrado da
- * diferença entre o número de classes do pacote e o número de classes do menor
+ * diferenÃ§a entre o nÃºmero de classes do pacote e o nÃºmero de classes do menor
  * pacote
  * 
- * - diferenca = diferença entre o número máximo de classes em um pacote e o
- * número mínimo de classes em um pacote
+ * - diferenca = diferenÃ§a entre o nÃºmero mÃ¡ximo de classes em um pacote e o
+ * nÃºmero mÃ­nimo de classes em um pacote
  * 
  * @author Marcio Barros
  */
 public class Calculador extends CalculadorAbstract {
 
-	//Limite do vetor é o limite superior informado para o problema
+	//Limite do vetor Ã© o limite superior informado para o problema
 	protected int[] inboundEdges;
 	protected int[] outboundEdges;
 	protected int[] intraEdges;
@@ -93,7 +97,7 @@ public class Calculador extends CalculadorAbstract {
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
 	 */
-	public double calculateMQ(int[] valores) {
+	public double calculateMQ2(SolucaoAbstract s, int[] valores) {
 
 		int classCount = this.problema.getClassCount();
 		int[] inboundEdges = new int[classCount];
@@ -132,9 +136,19 @@ public class Calculador extends CalculadorAbstract {
 		return mq;
 	}
 
-	public double calculateMQ2(int[] valores) {
+	public double calculateMQ(SolucaoAbstract s, int[] valores) {
 
-		HMD hmd = converterProblemaParaHMD(problema, valores);
+		HMD hmd = null;
+
+		if(s instanceof SolucaoCNMLL) {
+			hmd = problema.getHMD();
+		} else if (s instanceof SolucaoCNM) {
+			System.out.println("SolucaoCNM: "+s.getValores());
+		} else if (s instanceof SolucaoHC) {
+			System.out.println("SolucaoHC: "+s.getValores());
+		} else if (s instanceof SolucaoILS) {
+			hmd = converterProblemaParaHMD(s, problema, valores);
+		}
 
 		FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
 
@@ -143,23 +157,39 @@ public class Calculador extends CalculadorAbstract {
 		return  valorFormulaComplexidade;
 	}
 
-	private static HMD converterProblemaParaHMD(Problema problema, int[] valores) {
+	private static HMD converterProblemaParaHMD(SolucaoAbstract s, Problema problema, int[] valores) {
+
 		Modulo modulo = null;
 		List<Modulo> modulos = new ArrayList<Modulo>();
 		boolean flag = false;
-		for (int a = 0; a < valores.length; a++) {
-			if ((valores[a] == 0 && flag == false) || (valores[a] == 1 && flag == true)) {
-				modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-						String.valueOf("A" + a), null);
-				modulos.add(modulo);
-				flag = !flag;
-			} else if (valores[a] > 1) {
-				Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-						String.valueOf("A" + a), null);
-				modulo.setSubmodulos(Arrays.asList(submodulo));
-				modulos.add(modulo);
+		int somaModulos = 0;
+
+			// Modulo A0
+			modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "A0", null);
+			modulos.add(modulo);
+
+
+			for (int i = 0; i < s.getGrupos().length; i++) {
+				somaModulos += s.getGrupos()[i];
 			}
-		}
+
+			for (int a = 0; a < valores.length; a++) {
+				for (int b = 0; b < s.getGrupos().length; b++) {
+					if (s.getGrupos()[b] == 0 && valores[a] == 1 && flag == false && somaModulos == 0) {
+						Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+								String.valueOf("B" + a), null);
+						modulo.setSubmodulos(Arrays.asList(submodulo));
+						//modulos.add(modulo);
+						flag = !flag;
+					} else if (s.getGrupos()[b] == 0 && valores[a] == 1 && flag == false && somaModulos > 0) {
+						modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+								String.valueOf("A" + a), null);
+						modulos.add(modulo);
+						flag = !flag;
+					}
+				}
+			}
+
 		return new HMD(modulos);
 	}
 
@@ -192,18 +222,18 @@ public class Calculador extends CalculadorAbstract {
 	 * Calcula o fitness
 	 */
 	public double evaluate(SolucaoAbstract s) {
-		return evaluate(s.getValores());
-	}
-	
-	/**
-	 * Avalia a solução
-	 */
-	public double evaluate(int[] valores) {
-		return -calculateMQ(valores);
+		return evaluate(s, s.getValores());
 	}
 
 	/**
-	 * Avalia a solução
+	 * Avalia a soluÃ§Ã£o
+	 */
+	public double evaluate(SolucaoAbstract s, int[] valores) {
+		return -calculateMQ(s, valores);
+	}
+
+	/**
+	 * Avalia a soluÃ§Ã£o
 	 */
 	public double evaluateEGravaEstado(int[] valores) {
 		return calculateMQEgravaEstado(valores);
@@ -211,7 +241,7 @@ public class Calculador extends CalculadorAbstract {
 
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
-	 * Considera somente a diferença nos vetores intraEdges, inboundEdges, outboundEdges calculado na última iteração
+	 * Considera somente a diferenÃ§a nos vetores intraEdges, inboundEdges, outboundEdges calculado na Ãºltima iteraÃ§Ã£o
 	 */
 	public double evaluateMove(int[] valores, int item, int grupo1, int grupo2) {
 		
@@ -234,7 +264,7 @@ public class Calculador extends CalculadorAbstract {
 				this.outboundEdges[grupo1]--;
 				this.intraEdges[grupo2]++;
 			}
-			// se o dependente não for nenhum dos dois grupos
+			// se o dependente nÃ£o for nenhum dos dois grupos
 			else {
 				this.outboundEdges[grupo1]--;
 				this.outboundEdges[grupo2]++;
@@ -255,7 +285,7 @@ public class Calculador extends CalculadorAbstract {
 				this.outboundEdges[grupo2]--;
 				this.intraEdges[grupo2]++;
 			}
-			// se o dependente não for nenhum dos dois grupos
+			// se o dependente nÃ£o for nenhum dos dois grupos
 			else {
 				this.inboundEdges[grupo1]--;
 				this.inboundEdges[grupo2]++;

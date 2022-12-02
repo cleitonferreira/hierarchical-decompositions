@@ -8,52 +8,52 @@ import org.example.ils.core.*;
 
 public class AlgoritmoILS extends AlgoritmoAbstract {
 
-  // se a soluÁ„o inicial È aleatÛria ou por algoritmo construtivo
+  // se a solu√ß√£o inicial √© aleat√≥ria ou por algoritmo construtivo
   private Boolean inicialConstrutivo = true;
 
-  // algoritmo construtivo para gerar soluÁ„o inicial
+  // algoritmo construtivo para gerar solu√ß√£o inicial
   private AlgoritmoAbstract algoritmoConstrutor;
 
   // algoritmo de busca local
   private AlgoritmoHC algoritmoBusca;
 
-  // quantidade de movimentaÁıes para alterar uma soluÁ„o
+  // quantidade de movimenta√ß√µes para alterar uma solu√ß√£o
   private int quantidadeMovimentacoes = 0;
 
-  // quantidade de swaps para alterar uma soluÁ„o
+  // quantidade de swaps para alterar uma solu√ß√£o
   private int quantidadeSwaps = 0;
 
-  // quantidade de splits para alterar uma soluÁ„o
+  // quantidade de splits para alterar uma solu√ß√£o
   private int quantidadeSplits = 0;
 
-  // quantidade de joins para alterar uma soluÁ„o
+  // quantidade de joins para alterar uma solu√ß√£o
   private int quantidadeJoins = 0;
 
-  // quantidade de explosion para alterar uma soluÁ„o
+  // quantidade de explosion para alterar uma solu√ß√£o
   private int quantidadeExplosion = 0;
 
-  // quantidade m·xima de iteraÁıes sem melhoria antes de iniciar o restar aleatorio
+  // quantidade m√°xima de itera√ß√µes sem melhoria antes de iniciar o restar aleatorio
   private int maxIteracoesSemMelhoria = -1;
 
-  // quantidade mÌnima de movimentaÁıes
+  // quantidade m√≠nima de movimenta√ß√µes
   private int quantidadeMinimaMovimentacoes = 2;
 
-  // quantidade mÌnima de trocas
+  // quantidade m√≠nima de trocas
   private int quantidadeMinimaSwaps = 2;
 
-  // quantidade mÌnima de splits
+  // quantidade m√≠nima de splits
   private int quantidadeMinimaSplits = 1;
 
-  // quantidade mÌnima de joins
+  // quantidade m√≠nima de joins
   private int quantidadeMinimaJoins = 1;
 
-  // quantidade mÌnima de explosion
+  // quantidade m√≠nima de explosion
   private int quantidadeMinimaExplosion = 1;
 
-  // se os mÈtodos de perturbaÁ„o ser„o simultaneos ou selecionados aleatoriamente
+  // se os m√©todos de perturba√ß√£o ser√£o simultaneos ou selecionados aleatoriamente
   private boolean metodosPerturbacaoSimultaneos = true;
 
-  // vetor auxiliar que informa os mÈtodos a serem selecionados e a quantidade de mÈtodos disponÌveis para seleÁ„o
+  // vetor auxiliar que informa os m√©todos a serem selecionados e a quantidade de m√©todos dispon√≠veis para sele√ß√£o
   private TipoPerturbacao[] metodosPerturbacaoDisponiveis = null;
 
   public AlgoritmoILS(
@@ -92,7 +92,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
   }
 
   /**
-   * Utiliza um algoritmo construtivo r·pido para gerar uma soluÁ„o inicial
+   * Utiliza um algoritmo construtivo r√°pido para gerar uma solu√ß√£o inicial
    */
   public SolucaoILS geraSolucaoInicial() {
     if (!this.inicialConstrutivo) {
@@ -107,7 +107,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
   }
 
   /**
-   * Utiliza um algoritmo construtivo r·pido para gerar uma soluÁ„o inicial
+   * Utiliza um algoritmo construtivo r√°pido para gerar uma solu√ß√£o inicial
    */
   public SolucaoILS buscaLocal(SolucaoILS solucaoAtual) {
     algoritmoBusca.reset();
@@ -234,7 +234,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
       qtdItens[totalGrupos - 1] = 0;
       totalGrupos--;
 
-      // shift dos grupos para os valores, pois os cÛdigos v„o reduzir em um
+      // shift dos grupos para os valores, pois os c√≥digos v√£o reduzir em um
       for (int j = 0; j < totalItens; j++) {
         if (valores[j] >= maiorGrupo) {
           valores[j]--;
@@ -324,7 +324,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
   public SolucaoILS modificaSolucaoPorMetodosSimultaneos(SolucaoILS solucaoAtual) {
     SolucaoILS solucaoModificada = new SolucaoILS(solucaoAtual);
 
-    // apÛs movimentaÁ„o de mÛdulos podem ficar buracos no vetor qtdItens, influindo nos mÈtodos de split, join, explosion, que sorteiam grupos
+    // ap√≥s movimenta√ß√£o de m√≥dulos podem ficar buracos no vetor qtdItens, influindo nos m√©todos de split, join, explosion, que sorteiam grupos
     modificaSolucaoPorMovimentacao(solucaoModificada);
     GeradorSolucao.normalizar(solucaoModificada);
 
@@ -359,7 +359,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
     GeradorSolucao.inicia(tamanhoSolucao, limiteInferior, limiteSuperior, seed);
 
     // Debug
-    // se n„o houver debug, comentar o bloco para otimizaÁ„o
+    // se n√£o houver debug, comentar o bloco para otimiza√ß√£o
     this.exibicao.printDebugGeracaoCabecalho(this, seed);
     // fim Debug
 
@@ -386,7 +386,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
 
         SolucaoILS solucaoEstrelaLinha = buscaLocal(solucaoLinha);
 
-        // Criterio de aceitaÁ„o
+        // Criterio de aceita√ß√£o
         if (solucaoEstrelaLinha.getFitness() <= solucaoEstrela.getFitness()) {
           solucaoEstrela = solucaoEstrelaLinha;
         }
@@ -415,7 +415,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
 
         SolucaoILS solucaoEstrelaLinha = buscaLocal(solucaoLinha);
 
-        // Criterio de aceitaÁ„o
+        // Criterio de aceita√ß√£o
         if (solucaoEstrelaLinha.getFitness() <= solucaoEstrela.getFitness()) {
           solucaoEstrela = solucaoEstrelaLinha;
         }
@@ -538,7 +538,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
   }
 
   private void configuraPerturbacaoDisponiveis() {
-    // vetor para seleÁ„o dos mÈtodos de perturbacao
+    // vetor para sele√ß√£o dos m√©todos de perturbacao
     int qtdSelecoes = 0;
     if (this.quantidadeMovimentacoes > 0) {
       qtdSelecoes++;

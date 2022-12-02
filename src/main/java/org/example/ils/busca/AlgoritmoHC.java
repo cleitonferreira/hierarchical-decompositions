@@ -42,6 +42,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		int[] qtdItens = solucaoMelhor.getQtdItens();
 		int totalItens  = solucaoMelhor.getTotalItens();
 		int totalGrupos = solucaoMelhor.getTotalGrupos();
+		int[] grupos = solucaoMelhor.getGrupos();
 		
 		int melhorItem  = -1;
 		int melhorGrupo = -1;
@@ -95,7 +96,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		valores[melhorItem] = melhorGrupo;
 
 		//double fitness = this.calculador.evaluate(solucaoMelhor);
-		solucaoMelhor.setSolucao(valores, qtdItens, totalGrupos, melhorFitness, evaluationSolucao);
+		solucaoMelhor.setSolucao(valores, qtdItens, totalGrupos, melhorFitness, evaluationSolucao, grupos);
 		GeradorSolucao.normalizar(solucaoMelhor);
 		
 		return solucaoMelhor;

@@ -26,7 +26,8 @@ public class Main {
 
     FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmdSolucao);
 
-    double valorFormulaComplexidade = formulaComplexidade.executa();
+    double valorFormulaComplexidade = 0;
+    valorFormulaComplexidade = formulaComplexidade.executa();
 
     System.out.println("Fórmula da Complexidade: " + valorFormulaComplexidade);
     System.out.println("Esperado figura1 Prof: " + 362.92532577980467);

@@ -7,18 +7,20 @@ import org.example.ils.metaheuristica.SolucaoILS;
 import java.util.Arrays;
 
 /**
- * Representação de uma solução com inteiros
+ * Representaï¿½ï¿½o de uma soluï¿½ï¿½o com inteiros
  */
 public class SolucaoHC implements SolucaoAbstract {
 
-	// representa o número da geração em que a solução foi encontrada
+	// representa o nï¿½mero da geraï¿½ï¿½o em que a soluï¿½ï¿½o foi encontrada
 	private int location;
 
-	// valor de fitness da solução
+	// valor de fitness da soluï¿½ï¿½o
 	private double fitness = 0.00;
 
-	// parte básica da representação da solução
+	// parte bï¿½sica da representaï¿½ï¿½o da soluï¿½ï¿½o
 	private int[] valores;
+
+	private int[] grupos;
 
 	// quantidade dos grupos
 	private int totalGrupos;
@@ -35,6 +37,7 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = s.getGrupos();
 	}
 
 	public SolucaoHC(SolucaoCNM s) {
@@ -46,6 +49,7 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = s.getGrupos();
 	}
 
  	public SolucaoHC(SolucaoILS s) {
@@ -57,6 +61,7 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = s.getGrupos();
 	}
 
 	public SolucaoHC(int[] valores, int[] qtdItens, int totalGrupos ) {
@@ -65,12 +70,13 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = totalGrupos;
 	}
 
-	public SolucaoHC(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location ) {
+	public SolucaoHC(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
 		this.fitness = fitness;
 		this.location = location;
+		this.grupos = grupos;
 	}
 
 	public SolucaoHC(int tamanho) {
@@ -79,12 +85,13 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = 0;
 	}
 	
-	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location) {
+	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
 		this.fitness = fitness;
 		this.location = location;
+		this.grupos = grupos;
 	}
 
 	public void setFitness(double fitness) {
@@ -133,7 +140,7 @@ public class SolucaoHC implements SolucaoAbstract {
 	}
 	
 	/**
-	 * Utilizado para exibição dos resultados
+	 * Utilizado para exibiï¿½ï¿½o dos resultados
 	 */
 	public String getString() {
 		StringBuilder sb = new StringBuilder("");
@@ -145,6 +152,14 @@ public class SolucaoHC implements SolucaoAbstract {
 			sb.append(String.valueOf(this.valores[i]));
 		}
 		return sb.toString();
+	}
+
+	public int[] getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(int[] grupos) {
+		this.grupos = grupos;
 	}
 
 

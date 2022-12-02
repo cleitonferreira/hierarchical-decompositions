@@ -92,7 +92,11 @@ public class Problema {
 	public String getName() {
 		return name;
 	}
-	
+
+	public HMD getHMD() {
+		return hmd;
+	}
+
 	public int calculaTotalDependencias() {
 		int total = 0;
 		for (int i = 0; i < this.classCount; i++) {

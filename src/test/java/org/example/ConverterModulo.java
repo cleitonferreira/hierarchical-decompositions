@@ -22,28 +22,50 @@ public class ConverterModulo {
 
     int[] valores = {0, 0, 0, 0, 0, 1, 1, 1, 1};
 
-    int[] submodulos = {-1, 0, 1};
+    //{0, 0}; modulo 0 tem submodulo
+    //{0, 1}; modulo 1 tem submodulo
 
-    HMD hmd = converterProblemaParaHMD(problema, valores);
+    //int[] submodulos = {0, 1};
+    int[] submodulos = {0, 0};
+
+    HMD hmd = converterProblemaParaHMD(problema, valores, submodulos);
     System.out.println(hmd);
   }
 
-  private static HMD converterProblemaParaHMD(Problema problema, int[] valores) {
+  private static HMD converterProblemaParaHMD(Problema problema, int[] valores, int[] submodulos) {
     Modulo modulo = null;
     List<Modulo> modulos = new ArrayList<Modulo>();
     boolean flag = false;
+    int somaModulos = 0;
+
+    // Modulo A0
+    modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "A0", null);
+    modulos.add(modulo);
+
+    for (int i = 0; i < submodulos.length; i++) {
+      somaModulos += submodulos[i];
+    }
+
     for (int a = 0; a < valores.length; a++) {
-      if ((valores[a] == 0 && flag == false) || (valores[a] == 1 && flag == true)) {
-        modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-            String.valueOf("A" + a), null);
-        modulos.add(modulo);
-        flag = !flag;
-      } else if (valores[a] > 1) {
-        Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-            String.valueOf("A" + a), null);
-        modulo.setSubmodulos(Arrays.asList(submodulo));
-        modulos.add(modulo);
-      }
+
+        for (int b = 0; b < submodulos.length; b++) {
+
+          //modulos.get(b).getSubmodulos().contains(modulo)
+          //!modulos.contains(modulo)
+
+          if (submodulos[b] == 0 && valores[a] == 1 && flag == false && somaModulos == 0) {
+            Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+                String.valueOf("B" + a), null);
+            modulo.setSubmodulos(Arrays.asList(submodulo));
+            //modulos.add(modulo);
+            flag = !flag;
+          } else if (submodulos[b] == 0 && valores[a] == 1 && flag == false && somaModulos > 0) {
+            modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+                String.valueOf("A" + a), null);
+            modulos.add(modulo);
+            flag = !flag;
+          }
+        }
     }
     return new HMD(modulos);
   }

@@ -3,7 +3,7 @@ package org.example.ils.metaheuristica;
 public abstract class GeradorSolucaoAbstract {
 
 	//****************************************************************************
-	// MÉTODOS GENÉRICOS  
+	// MÃ‰TODOS GENÃ‰RICOS  
 	//****************************************************************************
 
 	// private static GeradorNumero random = null;

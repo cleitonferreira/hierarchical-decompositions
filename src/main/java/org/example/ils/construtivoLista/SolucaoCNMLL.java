@@ -1,5 +1,6 @@
 package org.example.ils.construtivoLista;
 
+import java.util.Random;
 import org.example.ils.core.SolucaoAbstract;
 
 import java.util.Arrays;
@@ -66,7 +67,26 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	public int getTotalItens() {
 		return this.valores.length;
 	}
-	
+
+	@Override
+	public int[] getGrupos() {
+
+		int min = 0;
+		int max = getTotalGrupos();
+		int soma = 0;
+		Random rand = new Random();
+		int[] subgrupos = new int[getTotalGrupos()];
+
+		for (int i = 0; i < getTotalGrupos(); i++) {
+			if (soma < getTotalGrupos() && i > 0) {
+				subgrupos[i] = rand.nextInt(max - min) + min;
+			}
+			soma += subgrupos[i];
+		}
+
+		return subgrupos;
+	}
+
 	public int getTotalGrupos() {
 		return this.mapa.size();
 	}

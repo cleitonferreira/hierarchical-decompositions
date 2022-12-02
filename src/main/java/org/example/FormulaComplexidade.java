@@ -10,7 +10,6 @@ import java.util.Objects;
 public class FormulaComplexidade {
 
   private static HMD hmdSolucao;
-  private static double formulaComplexidade;
   private static Modulo moduloEntidade1;
   private static Modulo moduloEntidade2;
 
@@ -21,6 +20,7 @@ public class FormulaComplexidade {
   public static double executa() {
 
     List<Modulo> listaModulos = hmdSolucao.getModulos();
+    double formulaComplexidade = 0;
 
     if (listaModulos != null) {
 
@@ -34,7 +34,7 @@ public class FormulaComplexidade {
             valor += formulanPertenceCmEnPertenteOutNodes(entidade);
           }
         }
-        formula(0, calculaCm(modulo), calculaMm(modulo), valor);
+        formulaComplexidade = formula(0, calculaCm(modulo), calculaMm(modulo), valor, formulaComplexidade);
       }
     }
 
@@ -42,10 +42,11 @@ public class FormulaComplexidade {
   }
 
   /*Formula da complexidade*/
-  private static void formula(int um, int cm, int mm, double valor) {
+  private static double formula(int um, int cm, int mm, double valor, double formulaComplexidade) {
 
     double formula = l(um + 1) + l(cm + 1) + l(mm + 1) + valor;
     formulaComplexidade += formula;
+    return formulaComplexidade;
   }
 
   /* n pertence Cm uniao Mm

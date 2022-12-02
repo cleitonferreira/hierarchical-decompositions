@@ -51,7 +51,7 @@ public class Experimento {
 			
 			this.algoritmo.getExibicao().printCiclo(i, solucao, tempoExecucao);
 
-			// Verifica se a soluÁ„o est· correta e normalizada
+			// Verifica se a solu√ß√£o est√° correta e normalizada
 			Verificador.validaSolucao(this.algoritmo, solucao);
 
 			somaFitness += fitness;

@@ -24,7 +24,7 @@ public class Exibicao {
 	}
 
 	/**
-	 * Construtor abrindo uma saída
+	 * Construtor abrindo uma saï¿½da
 	 */
 	public Exibicao(PrintStream pw, String nomeArquivo) {
 		this.saida = new PrintStream[1];
@@ -34,7 +34,7 @@ public class Exibicao {
 	}
 
 	/**
-	 * Inicializa o publicador com um arquivo de saída
+	 * Inicializa o publicador com um arquivo de saï¿½da
 	 */
 	public Exibicao(String nomeArquivo) {
 		saida = new PrintStream[1];
@@ -44,7 +44,7 @@ public class Exibicao {
 	}
 
 	/**
-	 * Inicializa o publicador com vários arquivos de saída
+	 * Inicializa o publicador com vï¿½rios arquivos de saï¿½da
 	 */
 	public Exibicao(String[] nomeArquivos) {
 		for (String nomeArquivo : nomeArquivos) {
@@ -54,21 +54,21 @@ public class Exibicao {
 	}
 
 	/**
-	 * Adiciona um arquivo de saída no publicador
+	 * Adiciona um arquivo de saï¿½da no publicador
 	 */
 	public void addListener(PrintStream ps, String nomeArquivo) {
 		resizeSaida(ps,nomeArquivo);
 	}
 
 	/**
-	 * Adiciona um arquivo de saída no publicador
+	 * Adiciona um arquivo de saï¿½da no publicador
 	 */
 	public void addListener(String nomeArquivo) {
 		resizeSaida(abreArquivo(nomeArquivo), nomeArquivo);
 	}
 
 	/**
-	 * Acrescenta um elemento na saída
+	 * Acrescenta um elemento na saï¿½da
 	 */
 	private void resizeSaida(PrintStream ps, String nomeArquivo) {
 		if (this.saida == null) {
@@ -98,7 +98,7 @@ public class Exibicao {
 			PrintStream ps = new PrintStream(arquivo);
 			return ps;
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo não localizado: [" + nomeArquivo);
+			System.out.println("Arquivo nï¿½o localizado: [" + nomeArquivo);
 			System.exit(1);
 		}
 		return null;
@@ -147,19 +147,19 @@ public class Exibicao {
 	}
 
 	/**
-	 * Início da execução do experimento
+	 * Inï¿½cio da execuï¿½ï¿½o do experimento
 	 */
 	public void printDadosExperimento(Experimento experimento, AlgoritmoAbstract algoritmo)
 	{
-		// se a exibicação está no modo simplificado
+		// se a exibicaï¿½ï¿½o estï¿½ no modo simplificado
 		if (this.tipoExibicao.isSimplificado()) {
-			/*printx("\nINSTÂNCIA=" + algoritmo.getProblema().getName());*/
+			/*printx("\nINSTï¿½NCIA=" + algoritmo.getProblema().getName());*/
 			printx("; ALGORITMO=" + experimento.getNomeExperimento());
 			printlnx("; PARAMETROS=" + algoritmo.getInfoParametros());
 			return;
 		}
 		
-		/*printlnx("INSTÂNCIA=" + algoritmo.getProblema().getName());*/
+		/*printlnx("INSTï¿½NCIA=" + algoritmo.getProblema().getName());*/
 		printlnx("ALGORITMO=" + experimento.getNomeExperimento());
 		printlnx("PARAMETROS=" + algoritmo.getInfoParametros());
 	}
@@ -171,7 +171,7 @@ public class Exibicao {
 		
 		DecimalFormat dc = new DecimalFormat("0.####");
 		
-		// se a exibicação está no modo simplificado
+		// se a exibicaï¿½ï¿½o estï¿½ no modo simplificado
 		if (this.tipoExibicao.isSimplificado()) {
 			printx(dc.format(solucao.getFitness())+ "; ");
 			printx(formataTempo(executionTime)+ "; ");
@@ -179,7 +179,7 @@ public class Exibicao {
 		}
 		
 		if (solucao == null) {
-			printlnx("Cycle #" + cycleNumber + "; solução não encontrada.");
+			printlnx("Cycle #" + cycleNumber + "; soluï¿½ï¿½o nï¿½o encontrada.");
 			return;
 		}
 
@@ -188,10 +188,10 @@ public class Exibicao {
 		// Objetivos
 		printx("; " + dc.format(solucao.getFitness()));
 
-		// localização
+		// localizaï¿½ï¿½o
 		printx("; " + solucao.getLocation() + "; ");
 
-		// solução
+		// soluï¿½ï¿½o
 		printlnx(solucao.getString());
 	}
 	
@@ -200,7 +200,7 @@ public class Exibicao {
 	 */
 	public void printFitness(SolucaoAbstract solucao) {
 		if (solucao == null) {
-			printlnx("Solução não encontrada.");
+			printlnx("Solucao nao encontrada.");
 			return;
 		}
 
@@ -231,9 +231,9 @@ public class Exibicao {
 		printlnx("Resultado Algoritmo " + a.getNomeAlgoritmo());
 		printlnx("Problema " + a.getProblema().getName()); // + " solucaoInicial=" + a.getSolucaoInicial().getString() );
 		if (e.getMelhorSolucao() == null)
-			printlnx("Solução ---");
+			printlnx("Solucao ---");
 		else
-			printlnx("Solução " + e.getMelhorSolucao().getString());
+			printlnx("Solucao " + e.getMelhorSolucao().getString());
 		printlnx("Melhor fitness " + e.getMelhorFitness());
 		printlnx("Media fitness " + e.getMediaFitness());
 		printlnx("Media execucao " + e.getMediaTempoExecucao());

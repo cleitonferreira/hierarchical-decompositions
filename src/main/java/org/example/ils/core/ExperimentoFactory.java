@@ -12,7 +12,7 @@ public class ExperimentoFactory {
 		int tamanho = problema.getTamanho();
 		
 		if (param.getEvaluationMax()==null)
-			throw new Exception("Quantidade de avaliaÁıes n„o definida.");
+			throw new Exception("Quantidade de avalia√ß√µes n√£o definida.");
 				
 		TipoAlgoritmo tipoAlgoritmo = param.getTipoAlgoritmo();
 
@@ -30,7 +30,7 @@ public class ExperimentoFactory {
 			
 		}
 		if(algoritmo==null) {
-			System.out.println("Algoritmo n„o encontrado=" + tipoAlgoritmo);
+			System.out.println("Algoritmo n√£o encontrado=" + tipoAlgoritmo);
 			return null;
 		}
 		
@@ -46,7 +46,7 @@ public class ExperimentoFactory {
 	{		
 		AlgoritmoAbstract algoritmo = getAlgoritmo(problema, exibicao, param);
 		if (algoritmo == null) 
-			throw new Exception("Algoritmo n„o executado:" + param.getTipoAlgoritmo());
+			throw new Exception("Algoritmo n√£o executado:" + param.getTipoAlgoritmo());
 		Experimento experimento = new Experimento(param.getInfoParametros(), algoritmo);
 		
 		int nCicloInicial = param.getnCicloInicial();

@@ -17,18 +17,18 @@ public class Verificador {
 			Problema problema = calculador.getProblema();
 			
 			if (opcoes.indexOf("sem_fitness")<0) {		
-				double fitnessOk = calculador.evaluate(solucao.getValores());
+				double fitnessOk = calculador.evaluate(solucao, solucao.getValores());
 				if (Math.abs(solucao.getFitness() - fitnessOk) > 0.0000000001) {
-					throw new Exception("ERRO: Fitness da solução está incorreto. Obtido=" + solucao.getFitness() + ". Esperado=" + fitnessOk);
+					throw new Exception("ERRO: Fitness da soluï¿½ï¿½o estï¿½ incorreto. Obtido=" + solucao.getFitness() + ". Esperado=" + fitnessOk);
 				}
 			}
 			int totalItensOk = problema.getTamanho();
 			if (solucao.getTotalItens() != totalItensOk) {
-				throw new Exception("ERRO: Quantidade de módulos da solução está incorreto.");
+				throw new Exception("ERRO: Quantidade de mï¿½dulos da soluï¿½ï¿½o estï¿½ incorreto.");
 			}
 			if (solucao instanceof SolucaoILS) {
 				if (((SolucaoILS)solucao).getTotalGrupos() > totalItensOk || ((SolucaoILS)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
+					throw new Exception("ERRO: Quantidade de clusters da soluï¿½ï¿½o estï¿½ incorreto.");
 				}
 			}
 		}
@@ -45,7 +45,7 @@ public class Verificador {
 			if (qtd==null) qtd = 0;
 			qtdModulos.put(cluster, qtd+1);
 			if (valores[i] > valores.length) {
-				throw new Exception("ERRO: Solução contém cluster maior do que " + valores.length);
+				throw new Exception("ERRO: Soluï¿½ï¿½o contï¿½m cluster maior do que " + valores.length);
 			}
 		}
 		
@@ -62,12 +62,12 @@ public class Verificador {
 			for (Integer cluster : clusters) {
 				int qtd = qtdModulos.get(cluster);
 				if (qtd != qtdItens[cluster]) {
-					throw new Exception("ERRO: Solução contém número de módulos diferente da variável qtdItens[" + cluster + "]=" + qtdItens[cluster] + " <> " + qtd);
+					throw new Exception("ERRO: Soluï¿½ï¿½o contï¿½m nï¿½mero de mï¿½dulos diferente da variï¿½vel qtdItens[" + cluster + "]=" + qtdItens[cluster] + " <> " + qtd);
 				}
 			}
 		
 			if (clusters.size() != totalGrupos) {
-				throw new Exception("ERRO: " + nomeAlgoritmo + " - Solução contém número de clusters diferente da variável totalGrupos");
+				throw new Exception("ERRO: " + nomeAlgoritmo + " - Soluï¿½ï¿½o contï¿½m nï¿½mero de clusters diferente da variï¿½vel totalGrupos");
 			}
 		}
 		

@@ -1,5 +1,6 @@
 package org.example.ils.busca;
 
+import java.util.Random;
 import org.example.ils.metaheuristica.GeradorSolucaoAbstract;
 
 import java.util.Arrays;
@@ -35,6 +36,20 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 				}
 			}
 		}
+
+		int min = 0;
+		int max = s.getTotalGrupos();
+		int soma = 0;
+		Random rand = new Random();
+		int[] subgrupos = new int[s.getTotalGrupos()];
+
+		for (int i = 0; i < s.getTotalGrupos(); i++) {
+			if (soma < s.getTotalGrupos() && i > 0) {
+				subgrupos[i] = rand.nextInt(max - min) + min;
+			}
+			soma += subgrupos[i];
+		}
+		s.setGrupos(subgrupos);
 		
 		// libera a memoria
 		valoresOriginal = null;

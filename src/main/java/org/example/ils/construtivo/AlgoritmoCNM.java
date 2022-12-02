@@ -60,7 +60,7 @@ public class AlgoritmoCNM extends AlgoritmoAbstract {
 			qtdItens[i] = 1;
 		}
 		
-		double fitness = this.calculador.evaluate(valores);
+		double fitness = this.calculador.evaluate(solucao, valores);
 		solucao.setSolucao(valores, qtdItens, totalGrupos, fitness, 0);
 	}
 	
@@ -86,7 +86,7 @@ public class AlgoritmoCNM extends AlgoritmoAbstract {
 				}
 				
 				this.evaluation++;
-				double fitnessJuncao = this.calculador.evaluate(valores);
+				double fitnessJuncao = this.calculador.evaluate(solucao, valores);
 				
 				if (fitnessJuncao < fitnessMelhor) {
 					encontrouMelhor = true;

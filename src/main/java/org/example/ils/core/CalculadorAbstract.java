@@ -21,7 +21,7 @@ public abstract class CalculadorAbstract {
 	/**
 	 * Avalia a solução
 	 */
-	public abstract double evaluate(int[] valores);
+	public abstract double evaluate(SolucaoAbstract s, int[] valores);
 	
 	public Problema getProblema() {
 		return problema;

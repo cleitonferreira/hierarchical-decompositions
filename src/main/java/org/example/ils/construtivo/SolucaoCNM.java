@@ -5,18 +5,20 @@ import org.example.ils.core.SolucaoAbstract;
 import java.util.Arrays;
 
 /**
- * Representação de uma solução com inteiros
+ * Representaï¿½ï¿½o de uma soluï¿½ï¿½o com inteiros
  */
 public class SolucaoCNM implements SolucaoAbstract {
 
-	// representa o número da geração em que a solução foi encontrada
+	// representa o nï¿½mero da geraï¿½ï¿½o em que a soluï¿½ï¿½o foi encontrada
 	private int location;
 
-	// valor de fitness da solução
+	// valor de fitness da soluï¿½ï¿½o
 	private double fitness = 0.00;
 
-	// parte básica da representação da solução
+	// parte bï¿½sica da representaï¿½ï¿½o da soluï¿½ï¿½o
 	private int[] valores;
+
+	private int[] grupos;
 
 	// quantidade dos grupos
 	private int totalGrupos;
@@ -40,7 +42,7 @@ public class SolucaoCNM implements SolucaoAbstract {
 		this.totalGrupos = totalGrupos;
 	}
 
-	public SolucaoCNM(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location ) {
+	public SolucaoCNM(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
@@ -106,9 +108,17 @@ public class SolucaoCNM implements SolucaoAbstract {
 	public int[] getQtdItens() {
 		return qtdItens;
 	}
+
+	public int[] getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(int[] grupos) {
+		this.grupos = grupos;
+	}
 	
 	/**
-	 * Utilizado para exibição dos resultados
+	 * Utilizado para exibiï¿½ï¿½o dos resultados
 	 */
 	public String getString() {
 		StringBuffer sb = new StringBuffer("[");
