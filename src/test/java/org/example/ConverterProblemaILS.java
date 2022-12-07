@@ -20,19 +20,20 @@ public class ConverterProblemaILS {
 
   public static void main(String[] args) throws Exception {
     //Figura21
-    Figura figura = new Figura21();
+    //Figura figura = new Figura21();
     //Figura18
-    //Figura figura = new Figura18();
+    Figura figura = new Figura18();
 
     classe = figura.getClass();
     hmdSolucao = figura.hmd();
 
     Problema problema = loadHMD(hmdSolucao);
+    System.out.println(problema);
   }
 
   private static Problema loadHMD(HMD hmd) throws Exception {
     int classCount = hmd.getCountEntidades();
-    int packageCount = hmd.getModulos().size();
+    int packageCount = hmd.getCountModulos();
     int[][] listaDependenciasPara = new int[classCount][classCount];
     int[] qtdDependenciasPara = new int[classCount];
     int[][] listaDependenciasDe = new int[classCount][classCount];
@@ -55,12 +56,10 @@ public class ConverterProblemaILS {
     }
     for (Integer moduloDestino : dependenciasDe.keySet()) {
       List<Integer> depDE = dependenciasDe.get(moduloDestino);
-      //TODO remover comentário
-      //qtdDependenciasDe[moduloDestino] = depDE.size();
+      qtdDependenciasDe[moduloDestino] = depDE.size();
       for (int i = 0; i < depDE.size(); i++) {
         //System.out.println("DE[" + moduloDestino + "][" + i + "]=" + depDE.get(i));
-        //TODO remover comentário 2
-        //listaDependenciasDe[moduloDestino][i] = depDE.get(i);
+        listaDependenciasDe[moduloDestino][i] = depDE.get(i);
       }
     }
 
@@ -86,13 +85,30 @@ public class ConverterProblemaILS {
   private static void load(List<Modulo> modulos) {
 
     if (Objects.nonNull(modulos)) {
+      int count = 0;
       for (Modulo modulo : modulos) {
-        int count = 0;
         /*System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());*/
         loadEntidade(modulo);
         originalClasses[count] = modulo.getListaEntidades().size();
-        originalPackage[count] = modulos.indexOf(modulo);
+        if (modulo.getListaEntidades() != null) {
+          for (int a = 0; a < modulo.getListaEntidades().size(); a++) {
+            originalPackage[a] = count;
+          }
+        }
         ++count;
+        if (modulo.getSubmodulos() != null) {
+          for (Modulo submodulo : modulo.getSubmodulos()) {
+            loadEntidade(submodulo);
+            originalClasses[count] = submodulo.getListaEntidades().size();
+            if (submodulo.getListaEntidades() != null) {
+              int indiceModulo = modulo.getListaEntidades().size();
+              for (int b = 0; b < submodulo.getListaEntidades().size(); b++) {
+                originalPackage[indiceModulo + b] = count;
+              }
+            }
+            ++count;
+          }
+        }
       }
     }
   }
@@ -102,25 +118,21 @@ public class ConverterProblemaILS {
     if (modulo.getListaEntidades() != null) {
       for (Entidade entidade : modulo.getListaEntidades()) {
         int valorDe = dependenciaDE(entidade);
-        if (valorDe > 0) {
-          List<Integer> depDE = new ArrayList<>();
-          for (int i = 0; i < valorDe; i++) {
-            depDE = listaDependenciaDE(entidade);
-          }
-          dependenciasDe.put(Integer.valueOf(entidade.getNome()), depDE);
+        int chaveDe = dependenciasDe.size();
+        List<Integer> depDE = new ArrayList<>();
+        for (int i = 0; i < valorDe; i++) {
+          depDE = listaDependenciaDE(entidade);
         }
+        dependenciasDe.put(chaveDe++, depDE);
         int chavePara = dependenciasPara.size();
         int valorPara = dependenciaPara(entidade);
-        if (valorPara > 0) {
-          List<Integer> depPARA = new ArrayList<>();
-          for (int i = 0; i < valorPara; i++) {
-            Entidade link = (Entidade) entidade.getLinks().stream().toArray()[i];
-            int value = getIndexOf(modulo.getListaEntidades(), link.getNome());
-            depPARA.add(value);
-          }
-          dependenciasPara.put(chavePara++, depPARA);
+        List<Integer> depPARA = new ArrayList<>();
+        for (int i = 0; i < valorPara; i++) {
+          Entidade link = (Entidade) entidade.getLinks().stream().toArray()[i];
+          int value = Integer.valueOf(link.getNome());
+          depPARA.add(value);
         }
-
+        dependenciasPara.put(chavePara++, depPARA);
       }
     }
   }
@@ -140,6 +152,23 @@ public class ConverterProblemaILS {
                 if (link != null) {
                   if ((link.getNome().equals(nEntidade.getNome()))) {
                     valorFrequenciaN++;
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (modulo.getSubmodulos() != null) {
+          for (Modulo submodulo : modulo.getSubmodulos()) {
+            if (submodulo.getListaEntidades() != null) {
+              for (Entidade entidade : submodulo.getListaEntidades()) {
+                if (entidade.getLinks() != null) {
+                  for (Entidade link : entidade.getLinks()) {
+                    if (link != null) {
+                      if ((link.getNome().equals(nEntidade.getNome()))) {
+                        valorFrequenciaN++;
+                      }
+                    }
                   }
                 }
               }
@@ -169,22 +198,23 @@ public class ConverterProblemaILS {
             }
           }
         }
+        if (modulo.getSubmodulos() != null) {
+          for (Modulo submodulo : modulo.getSubmodulos()) {
+            if (submodulo.getListaEntidades() != null) {
+              for (Entidade entidade : submodulo.getListaEntidades()) {
+                if (entidade.getLinks() != null) {
+                  if ((entidade.getNome().equals(nEntidade.getNome()))) {
+                    valorFrequenciaN = entidade.getLinks().size();
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
 
     return valorFrequenciaN;
-  }
-
-  private static int getIndexOf(List<Entidade> list, String name) {
-    int pos = 0;
-
-    for (Entidade entidade : list) {
-      if (name.equalsIgnoreCase(entidade.getNome())) {
-        return pos;
-      }
-      pos++;
-    }
-    return -1;
   }
 
   public static List<Integer> listaDependenciaDE(Entidade nEntidade) {
@@ -201,6 +231,23 @@ public class ConverterProblemaILS {
                 if (link != null) {
                   if ((link.getNome().equals(nEntidade.getNome()))) {
                     indices.add(Integer.parseInt(entidade.getNome()));
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (modulo.getSubmodulos() != null) {
+          for (Modulo submodulo : modulo.getSubmodulos()) {
+            if (submodulo.getListaEntidades() != null) {
+              for (Entidade entidade : submodulo.getListaEntidades()) {
+                if (entidade.getLinks() != null) {
+                  for (Entidade link : entidade.getLinks()) {
+                    if (link != null) {
+                      if ((link.getNome().equals(nEntidade.getNome()))) {
+                        indices.add(Integer.parseInt(entidade.getNome()));
+                      }
+                    }
                   }
                 }
               }
@@ -273,41 +320,41 @@ public class ConverterProblemaILS {
   public static Problema getProblemaFigura21() {
     int numClasses = 9;
     int numPackages = 2;
-    int[] originalPackages = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    int[] originalClasses = {9, 0, 0, 0, 0, 0, 0, 0, 0};
+    int[] originalPackages = {0, 0, 0, 0, 1, 1, 1, 1, 1};
+    int[] originalClasses = {4, 5, 0, 0, 0, 0, 0, 0, 0};
 
     int[][] listaDependenciasPara =
         {
+            {6, 7, 8, 0, 0, 0, 0, 0, 0},
+            {7, 8, 0, 0, 0, 0, 0, 0, 0},
+            {8, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {1, 2, 3, 4, 0, 0, 0, 0, 0},
             {2, 3, 4, 5, 0, 0, 0, 0, 0},
             {3, 4, 6, 0, 0, 0, 0, 0, 0},
             {4, 7, 0, 0, 0, 0, 0, 0, 0},
-            {7, 0, 0, 0, 0, 0, 0, 0, 0},
-            {6, 7, 8, 0, 0, 0, 0, 0, 0},
-            {7, 8, 0, 0, 0, 0, 0, 0, 0},
-            {8, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0}
+            {7, 0, 0, 0, 0, 0, 0, 0, 0}
         };
     int[] qtdDependenciasPara =
         {
-            4, 4, 3, 2, 1, 3, 2, 1, 0
+            3, 2, 1, 0, 4, 4, 3, 2, 1
         };
 
     int[][] listaDependenciasDe =
         {
+            {1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {5, 2, 0, 0, 0, 0, 0, 0, 0},
+            {5, 6, 3, 4, 0, 0, 0, 0, 0},
+            {5, 6, 7, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 1, 0, 0, 0, 0, 0, 0, 0},
             {0, 1, 2, 0, 0, 0, 0, 0, 0},
-            {0, 1, 2, 3, 0, 0, 0, 0, 0},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {2, 5, 0, 0, 0, 0, 0, 0, 0},
-            {3, 4, 5, 6, 0, 0, 0, 0, 0},
-            {5, 6, 7, 0, 0, 0, 0, 0, 0}
+            {0, 1, 2, 3, 0, 0, 0, 0, 0}
         };
     int[] qtdDependenciasDe =
         {
-            0, 1, 2, 3, 4, 1, 2, 4, 3
+            1, 2, 4, 3, 0, 1, 2, 3, 4
         };
 
     Problema problema = new Problema(
