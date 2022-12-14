@@ -38,7 +38,7 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 		}
 
 		int min = 0;
-		int max = s.getTotalGrupos();
+		int max = 2;
 		int soma = 0;
 		Random rand = new Random();
 		int[] subgrupos = new int[s.getTotalGrupos()];

@@ -10,7 +10,7 @@ public class GeradorSolucaoTest {
   public static void main(String[] args) {
 
 // declare & initialize numbers collection, random generator
-    int length = 2;
+    int length = 5;
     int[] numbers = new int[length];
     Random rand = new Random();
 

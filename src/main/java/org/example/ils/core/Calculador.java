@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import org.example.FormulaComplexidade;
 import org.example.ils.busca.SolucaoHC;
-import org.example.ils.construtivo.SolucaoCNM;
 import org.example.ils.construtivoLista.SolucaoCNMLL;
 import org.example.ils.metaheuristica.SolucaoILS;
 import org.example.model.Entidade;
@@ -52,7 +51,7 @@ public class Calculador extends CalculadorAbstract {
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
 	 */
-	public double calculateMQEgravaEstado(int[] valores) {
+	public double calculateMQEgravaEstado(SolucaoAbstract s, int[] valores) {
 
 		int classCount = this.problema.getClassCount();
 		this.inboundEdges = new int[classCount];
@@ -94,16 +93,14 @@ public class Calculador extends CalculadorAbstract {
 		return -mq;
 	}
 
-	/**
-	 * Calcula o coeficiente de modularidade do projeto
-	 */
-	public double calculateMQ2(SolucaoAbstract s, int[] valores) {
-
+	public double calculateMQEgravaEstado2(SolucaoAbstract s, int[] valores) {
+		HMD hmd = converterProblemaParaHMD(s, problema, valores);
 		int classCount = this.problema.getClassCount();
-		int[] inboundEdges = new int[classCount];
-		int[] outboundEdges = new int[classCount];
-		int[] intraEdges = new int[classCount];
-		
+		this.inboundEdges = new int[classCount];
+		this.outboundEdges = new int[classCount];
+		this.intraEdges = new int[classCount];
+		this.mf = new double[classCount];
+
 		int[][]listaDependencias = this.problema.getListaDependenciasPara();
 		int[] qtdDependencias = this.problema.getQtdDependenciasPara();
 
@@ -119,33 +116,34 @@ public class Calculador extends CalculadorAbstract {
 			}
 		}
 
-		double mq = 0.0;
+		FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
+		double valorFormulaComplexidade = formulaComplexidade.executa();
 
-		//for (int i = 0; i < this.problema.getMaxPackages(); i++) {
+		this.mq = valorFormulaComplexidade;
+
 		for (int i = 0; i < classCount; i++) {
 			int inter = inboundEdges[i] + outboundEdges[i];
 			int intra = intraEdges[i];
 
-			//if (intra != 0 && inter != 0) {
 			if (intra != 0) {
-				double mf = intra / (intra + 0.5 * inter);
-				mq += mf;
+				this.mf[i] = valorFormulaComplexidade;
 			}
 		}
-		
-		return mq;
+
+		return -valorFormulaComplexidade;
 	}
 
-	public double calculateMQ(SolucaoAbstract s, int[] valores) {
+	/**
+	 * Calcula a Formula Complexidade do projeto
+	 */
+	public double calculateFormulaComplexidade(SolucaoAbstract s, int[] valores) {
 
 		HMD hmd = null;
 
 		if(s instanceof SolucaoCNMLL) {
 			hmd = problema.getHMD();
-		} else if (s instanceof SolucaoCNM) {
-			System.out.println("SolucaoCNM: "+s.getValores());
 		} else if (s instanceof SolucaoHC) {
-			System.out.println("SolucaoHC: "+s.getValores());
+			System.out.println();
 		} else if (s instanceof SolucaoILS) {
 			hmd = converterProblemaParaHMD(s, problema, valores);
 		}
@@ -161,31 +159,24 @@ public class Calculador extends CalculadorAbstract {
 
 		Modulo modulo = null;
 		List<Modulo> modulos = new ArrayList<Modulo>();
-		boolean flag = false;
-		int somaModulos = 0;
 
 			// Modulo A0
 			modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "A0", null);
 			modulos.add(modulo);
 
-
-			for (int i = 0; i < s.getGrupos().length; i++) {
-				somaModulos += s.getGrupos()[i];
-			}
-
 			for (int a = 0; a < valores.length; a++) {
 				for (int b = 0; b < s.getGrupos().length; b++) {
-					if (s.getGrupos()[b] == 0 && valores[a] == 1 && flag == false && somaModulos == 0) {
-						Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-								String.valueOf("B" + a), null);
-						modulo.setSubmodulos(Arrays.asList(submodulo));
-						//modulos.add(modulo);
-						flag = !flag;
-					} else if (s.getGrupos()[b] == 0 && valores[a] == 1 && flag == false && somaModulos > 0) {
+
+					int verificaModulo = getVerificaModulo(modulos, b);
+
+					if (verificaModulo == -1 && s.getGrupos()[b] == 0 && valores[a] == b) {
 						modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-								String.valueOf("A" + a), null);
+								String.valueOf("modulo-" + b), null);
 						modulos.add(modulo);
-						flag = !flag;
+					} else if (verificaModulo == -1 && s.getGrupos()[b] == 1 && valores[a] == b) { //(verificaModulo == 0 && valores[b] != submodulos[b] && somaModulos == 0)
+						Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
+								String.valueOf("submodulo-" + b), null);
+						modulo.setSubmodulos(Arrays.asList(submodulo));
 					}
 				}
 			}
@@ -193,24 +184,61 @@ public class Calculador extends CalculadorAbstract {
 		return new HMD(modulos);
 	}
 
+	public static int getVerificaModulo(List<Modulo> modulos, int valor) {
+
+		int retorno = -1;
+
+		for (Modulo modulo : modulos) {
+			if (Objects.nonNull(modulo)){
+				if (modulo.getNome().equals("modulo-"+valor)) {
+					retorno = 0;
+				}
+			}
+			if (Objects.nonNull(modulo.getSubmodulos())){
+				for (Modulo submodulo : modulo.getSubmodulos()) {
+					if (submodulo.getNome().equals("submodulo-"+valor)) {
+						retorno = 1;
+					}
+				}
+			}
+		}
+
+		return retorno;
+	}
+
 	private static List<Entidade> getListaEntidadesPorModulo(Problema problema, int[] valores,
 			int modulo) {
+		HMD hmd = problema.getHMD();
 		List<Entidade> listaEntidades = new ArrayList<>();
 		for (int a = 0; a < valores.length; a++) {
 			if (Objects.nonNull(problema.getClassCount())) {
 				for (int i = 0; i < problema.getClassCount(); i++) {
-					if (Objects.nonNull(problema.getListaDependenciasPara())) {
-						Collection<Entidade> links = new ArrayList<>();
-						for (int j = 0; j < problema.getListaDependenciasPara().length; j++) {
-							int value = problema.getListaDependenciasPara()[i][j];
-							if (value > 0) {
-								links.add(new Entidade(String.valueOf(value), null));
+					if ((valores[i] == modulo) && modulo == a) {
+
+						if (Objects.nonNull(hmd.getModulos())) {
+							for (Modulo m : hmd.getModulos()){
+								if (Objects.nonNull(m.getListaEntidades())) {
+									for (Entidade em : m.getListaEntidades()){
+										if (em.getNome().equals(String.valueOf(i))){
+											listaEntidades.add(em);
+										}
+									}
+								}
+
+								if (Objects.nonNull(m.getSubmodulos())) {
+									for (Modulo s : m.getSubmodulos()){
+										if (Objects.nonNull(s.getListaEntidades())) {
+											for (Entidade es : s.getListaEntidades()){
+												if (es.getNome().equals(String.valueOf(i))){
+													listaEntidades.add(es);
+												}
+											}
+										}
+									}
+								}
 							}
 						}
-						if ((valores[i] == modulo) && modulo == a) {
-							listaEntidades.add(
-									new Entidade(String.valueOf(i), (links.size() > 0 ? links : null)));
-						}
+
 					}
 				}
 			}
@@ -229,14 +257,14 @@ public class Calculador extends CalculadorAbstract {
 	 * Avalia a solução
 	 */
 	public double evaluate(SolucaoAbstract s, int[] valores) {
-		return -calculateMQ(s, valores);
+		return -calculateFormulaComplexidade(s, valores);
 	}
 
 	/**
 	 * Avalia a solução
 	 */
-	public double evaluateEGravaEstado(int[] valores) {
-		return calculateMQEgravaEstado(valores);
+	public double evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
+		return calculateMQEgravaEstado(s, valores);
 	}
 
 	/**

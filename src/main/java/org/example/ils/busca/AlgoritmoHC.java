@@ -53,7 +53,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		for(int i = 0; i < totalItens; i++) {
 			int iGrupoAtual = valores[i];
 			
-			((CalculadorHC)calculador).evaluateEGravaEstado(valores);
+			((CalculadorHC)calculador).evaluateEGravaEstado(solucao, valores);
 			this.evaluation++;
 			
 			//além de todos os grupos permite movimentar para um novo grupo
@@ -123,7 +123,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		GeradorSolucao.inicia(tamanhoSolucao, limiteInferior, limiteSuperior, seed);
 		
 		SolucaoHC solucao = GeradorSolucao.getSolucaoHCRandom();
-		double fitness = ((CalculadorHC)this.calculador).evaluateEGravaEstado(solucao.getValores());
+		double fitness = ((CalculadorHC)this.calculador).evaluateEGravaEstado(solucao, solucao.getValores());
 		solucao.setFitness(fitness);
 		SolucaoHC solucaoMelhor = solucao;
 		
