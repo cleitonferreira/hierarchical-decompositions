@@ -67,6 +67,10 @@ public class FormulaComplexidade {
             double b = valorFrequenciaM;
             double c = a / b;
             double d = -log(2, c);
+            //TODO foi implementado if pq nao existe log de número negativo
+            if(d < 0){
+              d = 1;
+            }
             double e = l(d);
             double f = -a * log(2, c);
             double g = e + f;

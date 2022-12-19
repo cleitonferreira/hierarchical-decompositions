@@ -72,7 +72,7 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	public int[] getGrupos() {
 
 		int min = 0;
-		int max = getTotalGrupos();
+		int max = 2;
 		int soma = 0;
 		Random rand = new Random();
 		int[] subgrupos = new int[getTotalGrupos()];

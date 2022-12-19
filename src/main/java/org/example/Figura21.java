@@ -40,7 +40,7 @@ public class Figura21 implements Figura {
     Modulo moduloA0 = new Modulo(listaEntidadesA0, "A0", Arrays.asList(moduloA4118));
 
     List<Modulo> modulos = new ArrayList<Modulo>();
-    modulos.addAll(Arrays.asList(moduloA0, moduloA4118));
+    modulos.addAll(Arrays.asList(moduloA0));
 
     HMD hmdFigura21 = new HMD(modulos);
 

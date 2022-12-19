@@ -14,7 +14,18 @@ public class HMD {
     private List<Modulo> modulos;
 
     public int getCountModulos() {
-        return modulos.size();
+        int count = 0;
+        if (modulos != null) {
+            for (Modulo modulo : modulos) {
+                count++;
+                if (modulo.getSubmodulos() != null) {
+                    for (Modulo submodulo : modulo.getSubmodulos()) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     public int getCountEntidades() {
@@ -23,6 +34,13 @@ public class HMD {
             for (Modulo modulo : modulos) {
                 if (modulo.getListaEntidades() != null) {
                     count = count + modulo.getListaEntidades().size();
+                }
+                if (modulo.getSubmodulos() != null) {
+                    for (Modulo submodulo : modulo.getSubmodulos()) {
+                        if (submodulo.getListaEntidades() != null) {
+                            count = count + submodulo.getListaEntidades().size();
+                        }
+                    }
                 }
             }
         }

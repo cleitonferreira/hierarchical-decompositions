@@ -17,10 +17,10 @@ public class Verificador {
 			Problema problema = calculador.getProblema();
 			
 			if (opcoes.indexOf("sem_fitness")<0) {		
-				double fitnessOk = calculador.evaluate(solucao, solucao.getValores());
+				/*double fitnessOk = calculador.evaluate(solucao, solucao.getValores());
 				if (Math.abs(solucao.getFitness() - fitnessOk) > 0.0000000001) {
 					throw new Exception("ERRO: Fitness da solu��o est� incorreto. Obtido=" + solucao.getFitness() + ". Esperado=" + fitnessOk);
-				}
+				}*/
 			}
 			int totalItensOk = problema.getTamanho();
 			if (solucao.getTotalItens() != totalItensOk) {

@@ -52,7 +52,7 @@ public class Calculador extends CalculadorAbstract {
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
 	 */
-	public double calculateMQEgravaEstado(int[] valores) {
+	public double calculateMQEgravaEstado2(int[] valores) {
 
 		int classCount = this.problema.getClassCount();
 		this.inboundEdges = new int[classCount];
@@ -92,6 +92,55 @@ public class Calculador extends CalculadorAbstract {
 		this.mq = mq;
 		
 		return -mq;
+	}
+
+	public double calculateMQEgravaEstado(SolucaoAbstract s, int[] valores) {
+
+		HMD hmd = null;
+		//HMD hmd = converterProblemaParaHMD(s, problema, valores);
+
+		if(s instanceof SolucaoCNMLL) {
+			hmd = problema.getHMD();
+		} else {
+			hmd = converterProblemaParaHMD(s, problema, valores);
+		}
+
+		int classCount = this.problema.getClassCount();
+		this.inboundEdges = new int[classCount];
+		this.outboundEdges = new int[classCount];
+		this.intraEdges = new int[classCount];
+		this.mf = new double[classCount];
+
+		int[][]listaDependencias = this.problema.getListaDependenciasPara();
+		int[] qtdDependencias = this.problema.getQtdDependenciasPara();
+
+		for (int i=0; i<classCount; i++) {
+			int sourcePackage = valores[i];
+			for (int j=0; j<qtdDependencias[i]; j++) {
+				int targetPackage = valores[listaDependencias[i][j]];
+				if (targetPackage != sourcePackage) {
+					outboundEdges[sourcePackage]++;
+					inboundEdges[targetPackage]++;
+				} else
+					intraEdges[sourcePackage]++;
+			}
+		}
+
+		FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
+		double valorFormulaComplexidade = formulaComplexidade.executa();
+
+		this.mq = valorFormulaComplexidade;
+
+		for (int i = 0; i < classCount; i++) {
+			int inter = inboundEdges[i] + outboundEdges[i];
+			int intra = intraEdges[i];
+
+			if (intra != 0) {
+				this.mf[i] = valorFormulaComplexidade;
+			}
+		}
+
+		return valorFormulaComplexidade;
 	}
 
 	/**
@@ -142,11 +191,7 @@ public class Calculador extends CalculadorAbstract {
 
 		if(s instanceof SolucaoCNMLL) {
 			hmd = problema.getHMD();
-		} else if (s instanceof SolucaoCNM) {
-			System.out.println("SolucaoCNM: "+s.getValores());
-		} else if (s instanceof SolucaoHC) {
-			System.out.println("SolucaoHC: "+s.getValores());
-		} else if (s instanceof SolucaoILS) {
+		} else {
 			hmd = converterProblemaParaHMD(s, problema, valores);
 		}
 
@@ -160,57 +205,100 @@ public class Calculador extends CalculadorAbstract {
 	private static HMD converterProblemaParaHMD(SolucaoAbstract s, Problema problema, int[] valores) {
 
 		Modulo modulo = null;
+		Modulo submodulo = null;
 		List<Modulo> modulos = new ArrayList<Modulo>();
-		boolean flag = false;
-		int somaModulos = 0;
 
-			// Modulo A0
-			modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "A0", null);
-			modulos.add(modulo);
+		// Modulo A0
+		modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "modulo-0", null);
+		modulos.add(modulo);
 
+		/*Remover valores repetidos*/
+		int[] resultado = Arrays.stream(valores).distinct().toArray();
+		/*Ordenar*/
+		Arrays.sort(resultado);
 
-			for (int i = 0; i < s.getGrupos().length; i++) {
-				somaModulos += s.getGrupos()[i];
-			}
+		for (int a = 0; a < resultado.length; a++) {
+			for (int b = 0; b < s.getGrupos().length; b++) {
 
-			for (int a = 0; a < valores.length; a++) {
-				for (int b = 0; b < s.getGrupos().length; b++) {
-					if (s.getGrupos()[b] == 0 && valores[a] == 1 && flag == false && somaModulos == 0) {
-						Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-								String.valueOf("B" + a), null);
+				int verificaModulo = getVerificaModulo(modulos, resultado[a]);
+
+				if (verificaModulo == -1 && s.getGrupos()[b] == 0 && a == b) {
+					modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
+							String.valueOf("modulo-" + resultado[a]), null);
+					modulos.add(modulo);
+				} else if (verificaModulo == -1 && s.getGrupos()[b] == 1 && a == b) {
+					int position = b - 1;
+					if ((s.getGrupos()[position] == 1) && (s.getGrupos()[b] == 1)){
+						Modulo submoduloII = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
+								String.valueOf("submodulo-" + resultado[a]), null);
+						submodulo.setSubmodulos(Arrays.asList(submoduloII));
+					} else {
+						submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
+								String.valueOf("submodulo-" + resultado[a]), null);
 						modulo.setSubmodulos(Arrays.asList(submodulo));
-						//modulos.add(modulo);
-						flag = !flag;
-					} else if (s.getGrupos()[b] == 0 && valores[a] == 1 && flag == false && somaModulos > 0) {
-						modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-								String.valueOf("A" + a), null);
-						modulos.add(modulo);
-						flag = !flag;
 					}
 				}
 			}
+		}
 
 		return new HMD(modulos);
 	}
 
+	public static int getVerificaModulo(List<Modulo> modulos, int valor) {
+
+		int retorno = -1;
+
+		for (Modulo modulo : modulos) {
+			if (Objects.nonNull(modulo)){
+				if (modulo.getNome().equals("modulo-"+valor)) {
+					retorno = 0;
+				}
+			}
+			if (Objects.nonNull(modulo.getSubmodulos())){
+				for (Modulo submodulo : modulo.getSubmodulos()) {
+					if (submodulo.getNome().equals("submodulo-"+valor)) {
+						retorno = 1;
+					}
+				}
+			}
+		}
+
+		return retorno;
+	}
+
 	private static List<Entidade> getListaEntidadesPorModulo(Problema problema, int[] valores,
 			int modulo) {
+		HMD hmd = problema.getHMD();
 		List<Entidade> listaEntidades = new ArrayList<>();
 		for (int a = 0; a < valores.length; a++) {
 			if (Objects.nonNull(problema.getClassCount())) {
 				for (int i = 0; i < problema.getClassCount(); i++) {
-					if (Objects.nonNull(problema.getListaDependenciasPara())) {
-						Collection<Entidade> links = new ArrayList<>();
-						for (int j = 0; j < problema.getListaDependenciasPara().length; j++) {
-							int value = problema.getListaDependenciasPara()[i][j];
-							if (value > 0) {
-								links.add(new Entidade(String.valueOf(value), null));
+					if ((valores[i] == modulo) && modulo == a) {
+
+						if (Objects.nonNull(hmd.getModulos())) {
+							for (Modulo m : hmd.getModulos()){
+								if (Objects.nonNull(m.getListaEntidades())) {
+									for (Entidade em : m.getListaEntidades()){
+										if (em.getNome().equals(String.valueOf(i))){
+											listaEntidades.add(em);
+										}
+									}
+								}
+
+								if (Objects.nonNull(m.getSubmodulos())) {
+									for (Modulo s : m.getSubmodulos()){
+										if (Objects.nonNull(s.getListaEntidades())) {
+											for (Entidade es : s.getListaEntidades()){
+												if (es.getNome().equals(String.valueOf(i))){
+													listaEntidades.add(es);
+												}
+											}
+										}
+									}
+								}
 							}
 						}
-						if ((valores[i] == modulo) && modulo == a) {
-							listaEntidades.add(
-									new Entidade(String.valueOf(i), (links.size() > 0 ? links : null)));
-						}
+
 					}
 				}
 			}
@@ -229,14 +317,14 @@ public class Calculador extends CalculadorAbstract {
 	 * Avalia a solução
 	 */
 	public double evaluate(SolucaoAbstract s, int[] valores) {
-		return -calculateMQ(s, valores);
+		return calculateMQ(s, valores);
 	}
 
 	/**
 	 * Avalia a solução
 	 */
-	public double evaluateEGravaEstado(int[] valores) {
-		return calculateMQEgravaEstado(valores);
+	public double evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
+		return calculateMQEgravaEstado(s, valores);
 	}
 
 	/**

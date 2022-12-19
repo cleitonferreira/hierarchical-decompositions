@@ -53,7 +53,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		for(int i = 0; i < totalItens; i++) {
 			int iGrupoAtual = valores[i];
 			
-			((CalculadorHC)calculador).evaluateEGravaEstado(valores);
+			((CalculadorHC)calculador).evaluateEGravaEstado(solucaoMelhor, valores);
 			this.evaluation++;
 			
 			//além de todos os grupos permite movimentar para um novo grupo
@@ -62,8 +62,10 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 					int grupoOrigem = valores[i];
 					int grupoDestino = j;
 					valores[i] = grupoDestino;
-					
-					double fitness = ((CalculadorHC)calculador).evaluateMove(valores, i, grupoOrigem, grupoDestino);
+
+					// TODO remover evaluateMove. OBS: add formulaComplexidade
+					//double fitness = ((CalculadorHC)calculador).evaluateMove(valores, i, grupoOrigem, grupoDestino);
+					double fitness = ((CalculadorHC)calculador).evaluateEGravaEstado(solucaoMelhor, valores);
 					this.evaluation++;
 					
 					// verifica se este é o melhor vizinho
@@ -123,7 +125,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		GeradorSolucao.inicia(tamanhoSolucao, limiteInferior, limiteSuperior, seed);
 		
 		SolucaoHC solucao = GeradorSolucao.getSolucaoHCRandom();
-		double fitness = ((CalculadorHC)this.calculador).evaluateEGravaEstado(solucao.getValores());
+		double fitness = ((CalculadorHC)this.calculador).evaluateEGravaEstado(solucao, solucao.getValores());
 		solucao.setFitness(fitness);
 		SolucaoHC solucaoMelhor = solucao;
 		

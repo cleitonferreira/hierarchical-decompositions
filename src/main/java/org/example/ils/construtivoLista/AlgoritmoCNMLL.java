@@ -91,7 +91,7 @@ public class AlgoritmoCNMLL extends AlgoritmoAbstract {
 
 		// salva o status do cálculo para otimizar o cálculo dos diversos joins.
 		// double fitnessMelhor = solucao.getFitness();
-		double fitnessMelhor = ((CalculadorCNM)this.calculador).calculateMQEgravaEstado(solucao.getValores());
+		double fitnessMelhor = ((CalculadorCNM)this.calculador).calculateMQEgravaEstado(solucao, solucao.getValores());
 
 		for (int i = 0; i < clustersAtivos.size()-1; i++) {
 			for (int j = i+1; j < clustersAtivos.size(); j++) {

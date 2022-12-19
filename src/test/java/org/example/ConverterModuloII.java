@@ -10,28 +10,31 @@ import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
 
-public class ConverterModulo {
-
-  private static HMD hmdSolucao;
-
-  private static int COUNTENTIDADEPORMODULO = 0;
+public class ConverterModuloII {
 
   public static void main(String[] args) {
-    //Problema problema = getProblemaFigura18();
-    Problema problema = getProblemaFigura21();
+    Problema problema = getProblemaFigura18();
+    //Problema problema = getProblemaFigura21();
 
     /*int[] originalPackages = {0, 0, 1, 1, 2, 2};*/
 
     //int[] valores = {0, 0, 0, 0, 0, 1, 1, 1, 1};
-    int[] valores = {1, 1, 1, 1, 1, 0, 0, 0, 0};
-    //int[] valores = {0, 1, 1, 2, 3, 0, 4, 3, 0};
+    //int[] valores = {1, 1, 1, 1, 1, 0, 0, 0, 0};
+    //int[] valores = {0, 1, 1, 2, 3, 0, 3, 3, 0}; //TODO posicao em cada modulo
+    //int[] valores = {0, 0, 2, 3, 3, 5, 2, 7, 5};
+    //int[] valores = {0, 0, 1, 2, 2, 3, 1, 4, 3};
+    int[] valores = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    //{0, 0}; modulo 0 tem submodulo
-    //{0, 1}; modulo 1 tem submodulo
+    //0; add um módulo
+    //1; add um submodulo no módulo anterior
 
     //int[] submodulos = {0, 1};
-    int[] submodulos = {0, 0};
-    //int[] submodulos = {0, 1, 1, 2, 4};
+    //int[] submodulos = {0, 0};
+    //int[] submodulos = {0, 1, 1, 2, 3}; //TODO posicao em cada submodulo
+    //int[] submodulos = {0, 0, 0, 1};
+    //int[] submodulos = {0, 0, 0, 0, 1};
+    //int[] submodulos = {0, 1, 1, 0, 0};
+    int[] submodulos = {0};
 
     HMD hmd = converterProblemaParaHMD(problema, valores, submodulos);
     System.out.println(hmd);
@@ -39,67 +42,102 @@ public class ConverterModulo {
     FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
     double valorFormulaComplexidade = formulaComplexidade.executa();
     System.out.println("FormulaComplexidade: "+valorFormulaComplexidade);
-
-    System.out.println("fitnessOk: "+ -55.61900456452551);
   }
 
   private static HMD converterProblemaParaHMD(Problema problema, int[] valores, int[] submodulos) {
     Modulo modulo = null;
+    Modulo submodulo = null;
     List<Modulo> modulos = new ArrayList<Modulo>();
-    boolean flag = false;
-    int somaModulos = 0;
 
     // Modulo A0
-    modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "A0", null);
+    modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "modulo-0", null);
     modulos.add(modulo);
 
-    for (int i = 0; i < submodulos.length; i++) {
-      somaModulos += submodulos[i];
-    }
+    /*Remover valores repetidos*/
+    int[] resultado = Arrays.stream(valores).distinct().toArray();
+    /*Ordenar*/
+    Arrays.sort(resultado);
 
-    for (int a = 0; a < valores.length; a++) {
-
+    for (int a = 0; a < resultado.length; a++) {
       for (int b = 0; b < submodulos.length; b++) {
 
-        //modulos.get(b).getSubmodulos().contains(modulo)
-        //!modulos.contains(modulo)
+        int verificaModulo = getVerificaModulo(modulos, resultado[a]);
 
-        if (submodulos[b] == 0 && valores[a] == 1 && flag == false && somaModulos == 0) {
-          Modulo submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-              String.valueOf("B" + a), null);
-          modulo.setSubmodulos(Arrays.asList(submodulo));
-          //modulos.add(modulo);
-          flag = !flag;
-        } else if (submodulos[b] == 0 && valores[a] == 1 && flag == false && somaModulos > 0) {
-          modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, valores[a]),
-              String.valueOf("A" + a), null);
+        if (verificaModulo == -1 && submodulos[b] == 0 && a == b) {
+          modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
+              String.valueOf("modulo-" + resultado[a]), null);
           modulos.add(modulo);
-          flag = !flag;
+        } else if (verificaModulo == -1 && submodulos[b] == 1 && a == b) { //(verificaModulo == 0 && valores[b] != submodulos[b] && somaModulos == 0)
+          int position = b - 1;
+          if ((submodulos[position] == 1) && (submodulos[b] == 1)){
+            Modulo submoduloII = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
+                String.valueOf("submodulo-" + resultado[a]), null);
+            submodulo.setSubmodulos(Arrays.asList(submoduloII));
+          } else {
+            submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
+                String.valueOf("submodulo-" + resultado[a]), null);
+            modulo.setSubmodulos(Arrays.asList(submodulo));
+          }
         }
+
       }
     }
     return new HMD(modulos);
   }
 
+  public static int getVerificaModulo(List<Modulo> modulos, int valor) {
+
+    int retorno = -1;
+
+    for (Modulo modulo : modulos) {
+      if (Objects.nonNull(modulo)){
+        if (modulo.getNome().equals("modulo-"+valor)) {
+          retorno = 0;
+        }
+      }
+      if (Objects.nonNull(modulo.getSubmodulos())){
+        for (Modulo submodulo : modulo.getSubmodulos()) {
+          if (submodulo.getNome().equals("submodulo-"+valor)) {
+            retorno = 1;
+          }
+        }
+      }
+    }
+
+    return retorno;
+  }
+
   private static List<Entidade> getListaEntidadesPorModulo(Problema problema, int[] valores,
       int modulo) {
+    HMD hmd = problema.getHMD();
     List<Entidade> listaEntidades = new ArrayList<>();
     for (int a = 0; a < valores.length; a++) {
       if (Objects.nonNull(problema.getClassCount())) {
         for (int i = 0; i < problema.getClassCount(); i++) {
           if ((valores[i] == modulo) && modulo == a) {
 
-            if (Objects.nonNull(problema.getListaDependenciasPara())) {
-              Collection<Entidade> links = new ArrayList<>();
-              for (int j = 0; j < problema.getListaDependenciasPara().length; j++) {
-                int value = problema.getListaDependenciasPara()[COUNTENTIDADEPORMODULO][j];
-                if (value > 0) {
-                  links.add(new Entidade(String.valueOf(value), null));
+            if (Objects.nonNull(hmd.getModulos())) {
+              for (Modulo m : hmd.getModulos()){
+                if (Objects.nonNull(m.getListaEntidades())) {
+                  for (Entidade em : m.getListaEntidades()){
+                    if (em.getNome().equals(String.valueOf(i))){
+                      listaEntidades.add(em);
+                    }
+                  }
+                }
+
+                if (Objects.nonNull(m.getSubmodulos())) {
+                  for (Modulo s : m.getSubmodulos()){
+                    if (Objects.nonNull(s.getListaEntidades())) {
+                      for (Entidade es : s.getListaEntidades()){
+                        if (es.getNome().equals(String.valueOf(i))){
+                          listaEntidades.add(es);
+                        }
+                      }
+                    }
+                  }
                 }
               }
-              listaEntidades.add(
-                  new Entidade(String.valueOf(i), (links.size() > 0 ? links : null)));
-              COUNTENTIDADEPORMODULO++;
             }
 
           }
@@ -114,6 +152,8 @@ public class ConverterModulo {
     int numPackages = 1;
     int[] originalPackages = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     int[] originalClasses = {9, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    Figura figura = new Figura18();
 
     int[][] listaDependenciasPara =
         {
@@ -160,7 +200,7 @@ public class ConverterModulo {
         qtdDependenciasPara,
         listaDependenciasDe,
         qtdDependenciasDe,
-        hmdSolucao
+        figura.hmd()
     );
 
     return problema;
@@ -171,6 +211,8 @@ public class ConverterModulo {
     int numPackages = 2;
     int[] originalPackages = {0, 0, 0, 0, 1, 1, 1, 1, 1};
     int[] originalClasses = {4, 5, 0, 0, 0, 0, 0, 0, 0};
+
+    Figura figura = new Figura21();
 
     int[][] listaDependenciasPara =
         {
@@ -217,7 +259,7 @@ public class ConverterModulo {
         qtdDependenciasPara,
         listaDependenciasDe,
         qtdDependenciasDe,
-        hmdSolucao
+        figura.hmd()
     );
 
     return problema;
