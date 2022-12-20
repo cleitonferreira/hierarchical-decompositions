@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import org.example.ils.core.Problema;
@@ -23,7 +22,8 @@ public class ConverterModuloII {
     //int[] valores = {0, 1, 1, 2, 3, 0, 3, 3, 0}; //TODO posicao em cada modulo
     //int[] valores = {0, 0, 2, 3, 3, 5, 2, 7, 5};
     //int[] valores = {0, 0, 1, 2, 2, 3, 1, 4, 3};
-    int[] valores = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    //int[] valores = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int[] valores = {1, 1, 1, 1, 1, 1, 1, 1, 0};
 
     //0; add um módulo
     //1; add um submodulo no módulo anterior
@@ -34,7 +34,8 @@ public class ConverterModuloII {
     //int[] submodulos = {0, 0, 0, 1};
     //int[] submodulos = {0, 0, 0, 0, 1};
     //int[] submodulos = {0, 1, 1, 0, 0};
-    int[] submodulos = {0};
+    //int[] submodulos = {0};
+    int[] submodulos = {0, 1};
 
     HMD hmd = converterProblemaParaHMD(problema, valores, submodulos);
     System.out.println(hmd);

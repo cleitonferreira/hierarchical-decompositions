@@ -4,7 +4,12 @@ import org.example.ils.busca.AlgoritmoHC;
 import org.example.ils.busca.SolucaoHC;
 import org.example.ils.construtivoLista.AlgoritmoCNMLL;
 import org.example.ils.construtivoLista.SolucaoCNMLL;
-import org.example.ils.core.*;
+import org.example.ils.core.AlgoritmoAbstract;
+import org.example.ils.core.Calculador;
+import org.example.ils.core.Exibicao;
+import org.example.ils.core.Parametro;
+import org.example.ils.core.Problema;
+import org.example.ils.core.TipoAlgoritmo;
 
 public class AlgoritmoILS extends AlgoritmoAbstract {
 

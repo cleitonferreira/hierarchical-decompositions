@@ -2,14 +2,10 @@ package org.example.ils.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import org.example.FormulaComplexidade;
-import org.example.ils.busca.SolucaoHC;
-import org.example.ils.construtivo.SolucaoCNM;
 import org.example.ils.construtivoLista.SolucaoCNMLL;
-import org.example.ils.metaheuristica.SolucaoILS;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;

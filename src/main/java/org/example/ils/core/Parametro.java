@@ -1,8 +1,11 @@
 package org.example.ils.core;
 
-import org.example.ils.genetico.*;
-
 import java.util.HashMap;
+import org.example.ils.genetico.TipoCrossover;
+import org.example.ils.genetico.TipoDescarte;
+import org.example.ils.genetico.TipoElite;
+import org.example.ils.genetico.TipoMutacao;
+import org.example.ils.genetico.TipoSelection;
 
 /**
  * Parâmetros utilizados em todos os algoritmos,

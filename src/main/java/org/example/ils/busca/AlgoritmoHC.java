@@ -4,7 +4,6 @@ import org.example.ils.core.AlgoritmoAbstract;
 import org.example.ils.core.Exibicao;
 import org.example.ils.core.Parametro;
 import org.example.ils.core.Problema;
-import org.example.model.HMD;
 
 /**
  * Algoritmo Hill Climbing com multiplos reinicios (Random Restar Hill Climbing)

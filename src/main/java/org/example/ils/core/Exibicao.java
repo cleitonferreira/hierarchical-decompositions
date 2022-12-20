@@ -1,11 +1,10 @@
 package org.example.ils.core;
 
-import org.example.ils.genetico.Populacao;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.text.DecimalFormat;
+import org.example.ils.genetico.Populacao;
 
 public class Exibicao {
 	

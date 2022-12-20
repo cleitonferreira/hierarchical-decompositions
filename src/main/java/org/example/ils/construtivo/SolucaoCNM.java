@@ -1,8 +1,7 @@
 package org.example.ils.construtivo;
 
-import org.example.ils.core.SolucaoAbstract;
-
 import java.util.Arrays;
+import org.example.ils.core.SolucaoAbstract;
 
 /**
  * Representa��o de uma solu��o com inteiros

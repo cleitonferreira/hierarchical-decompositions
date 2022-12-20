@@ -1,12 +1,10 @@
 package org.example.ils.construtivoLista;
 
+import java.util.ArrayList;
 import org.example.ils.core.AlgoritmoAbstract;
 import org.example.ils.core.Exibicao;
 import org.example.ils.core.Parametro;
 import org.example.ils.core.Problema;
-import org.example.model.HMD;
-
-import java.util.ArrayList;
 
 /**
  * Algoritmo guloso para o problema Software Module Clustering

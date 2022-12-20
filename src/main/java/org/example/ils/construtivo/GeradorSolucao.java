@@ -1,9 +1,8 @@
 package org.example.ils.construtivo;
 
+import java.util.Arrays;
 import java.util.Random;
 import org.example.ils.metaheuristica.GeradorSolucaoAbstract;
-
-import java.util.Arrays;
 
 public class GeradorSolucao extends GeradorSolucaoAbstract {
 

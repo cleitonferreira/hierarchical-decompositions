@@ -1,12 +1,11 @@
 package org.example.ils.construtivoLista;
 
-import java.util.Random;
-import org.example.ils.core.SolucaoAbstract;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Set;
+import org.example.ils.core.SolucaoAbstract;
 
 /**
  * Representação de uma solução com inteiros

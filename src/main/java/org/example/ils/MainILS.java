@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import org.example.Figura;
 import org.example.Figura18;
-import org.example.Figura21;
 import org.example.ils.core.Exibicao;
 import org.example.ils.core.ExperimentoFactory;
 import org.example.ils.core.ExperimentoModel;

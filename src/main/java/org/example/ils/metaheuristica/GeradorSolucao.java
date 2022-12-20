@@ -2,8 +2,6 @@ package org.example.ils.metaheuristica;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.IntStream;
 
 public class GeradorSolucao extends GeradorSolucaoAbstract {
 

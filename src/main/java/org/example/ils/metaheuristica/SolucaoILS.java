@@ -1,12 +1,11 @@
 package org.example.ils.metaheuristica;
 
 
+import java.util.Arrays;
 import org.example.ils.busca.SolucaoHC;
 import org.example.ils.construtivo.SolucaoCNM;
 import org.example.ils.construtivoLista.SolucaoCNMLL;
 import org.example.ils.core.SolucaoAbstract;
-
-import java.util.Arrays;
 
 /**
  * Representação de uma solução com inteiros

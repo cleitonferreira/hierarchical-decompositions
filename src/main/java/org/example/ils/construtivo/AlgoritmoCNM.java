@@ -1,12 +1,11 @@
 package org.example.ils.construtivo;
 
+import java.util.Arrays;
 import org.example.ils.construtivoLista.CalculadorCNM;
 import org.example.ils.core.AlgoritmoAbstract;
 import org.example.ils.core.Exibicao;
 import org.example.ils.core.Parametro;
 import org.example.ils.core.Problema;
-
-import java.util.Arrays;
 
 
 public class AlgoritmoCNM extends AlgoritmoAbstract {

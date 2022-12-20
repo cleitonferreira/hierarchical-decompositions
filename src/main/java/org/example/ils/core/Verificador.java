@@ -1,9 +1,8 @@
 package org.example.ils.core;
 
-import org.example.ils.metaheuristica.SolucaoILS;
-
 import java.util.TreeMap;
 import java.util.TreeSet;
+import org.example.ils.metaheuristica.SolucaoILS;
 
 public class Verificador {
 

@@ -1,7 +1,5 @@
 package org.example.ils.core;
 
-import org.example.model.HMD;
-
 public abstract class CalculadorAbstract {
 
 	protected Problema problema = null;

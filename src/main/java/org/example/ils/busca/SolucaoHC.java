@@ -1,10 +1,9 @@
 package org.example.ils.busca;
 
+import java.util.Arrays;
 import org.example.ils.construtivo.SolucaoCNM;
 import org.example.ils.core.SolucaoAbstract;
 import org.example.ils.metaheuristica.SolucaoILS;
-
-import java.util.Arrays;
 
 /**
  * Representa��o de uma solu��o com inteiros
