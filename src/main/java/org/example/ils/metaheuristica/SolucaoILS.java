@@ -174,4 +174,16 @@ public class SolucaoILS implements SolucaoAbstract {
 		return sb.toString();
 	}
 
+	public String getGruposString() {
+		StringBuilder sb = new StringBuilder("");
+		if (this.grupos.length > 0) {
+			sb.append(String.valueOf(this.grupos[0]));
+		}
+		for (int i = 1; i < grupos.length; i++) {
+			sb.append(",");
+			sb.append(String.valueOf(this.grupos[i]));
+		}
+		return sb.toString();
+	}
+
 }

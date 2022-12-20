@@ -153,7 +153,12 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 		}
 		return sb.toString();
 	}
-	
+
+	@Override
+	public String getGruposString() {
+		return "---";
+	}
+
 	public void setValores(int[] valores, HashMap<Integer, LinkedList<Integer>> mapa) {
 		this.valores = valores;
 		this.mapa = mapa;

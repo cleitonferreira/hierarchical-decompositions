@@ -5,6 +5,8 @@ public interface SolucaoAbstract {
 	public abstract double getFitness();
 	
 	public abstract String getString();
+
+	public abstract String getGruposString();
 	
 	public abstract int getLocation();
 	

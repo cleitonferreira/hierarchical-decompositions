@@ -191,7 +191,10 @@ public class Exibicao {
 		printx("; " + solucao.getLocation() + "; ");
 
 		// solu��o
-		printlnx(solucao.getString());
+		printx(solucao.getString() + "; ");
+
+		// grupos
+		printlnx(solucao.getGruposString());
 	}
 	
 	/**
@@ -227,15 +230,17 @@ public class Exibicao {
 			return;
 		}
 		
-		printlnx("Resultado Algoritmo " + a.getNomeAlgoritmo());
-		printlnx("Problema " + a.getProblema().getName()); // + " solucaoInicial=" + a.getSolucaoInicial().getString() );
-		if (e.getMelhorSolucao() == null)
-			printlnx("Solucao ---");
-		else
-			printlnx("Solucao " + e.getMelhorSolucao().getString());
-		printlnx("Melhor fitness " + e.getMelhorFitness());
-		printlnx("Media fitness " + e.getMediaFitness());
-		printlnx("Media execucao " + e.getMediaTempoExecucao());
+		printlnx("Resultado Algoritmo: " + a.getNomeAlgoritmo());
+		printlnx("Problema: " + a.getProblema().getName()); // + " solucaoInicial=" + a.getSolucaoInicial().getString() );
+		if (e.getMelhorSolucao() == null) {
+			printlnx("Solucao: ---");
+		} else {
+			printlnx("Solucao: [" + e.getMelhorSolucao().getString() + "]");
+		}
+		printlnx("Grupo: [" + e.getMelhorSolucao().getGruposString() + "]");
+		printlnx("Melhor fitness: " + e.getMelhorFitness());
+		printlnx("Media fitness: " + e.getMediaFitness());
+		printlnx("Media execucao: " + e.getMediaTempoExecucao());
 		//printlnx("Media tempo" + formataTempo(e.getMediaTempoExecucao()));
 		printlnx("----------------");
 	}

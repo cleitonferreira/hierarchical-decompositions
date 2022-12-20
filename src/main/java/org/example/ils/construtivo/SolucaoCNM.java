@@ -151,5 +151,10 @@ public class SolucaoCNM implements SolucaoAbstract {
 		return sb.toString();
 	}
 
+	@Override
+	public String getGruposString() {
+		return "---";
+	}
+
 
 }

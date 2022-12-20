@@ -1,4 +1,7 @@
 package org.example.ils.core;
+
+import java.util.Objects;
+
 public class Experimento {
 
 	protected String nomeExperimento;
@@ -59,6 +62,9 @@ public class Experimento {
 			numeroExecucoes++;
 
 			if (fitness < melhorFitness) {
+				this.melhorFitness = fitness;
+				this.melhorSolucao = solucao;
+			} else if (melhorFitness == 0 && Objects.isNull(melhorSolucao)) {
 				this.melhorFitness = fitness;
 				this.melhorSolucao = solucao;
 			}
