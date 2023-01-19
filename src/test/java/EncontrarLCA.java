@@ -40,7 +40,7 @@ public class EncontrarLCA {
 
         System.out.println(entidade1);
         System.out.println(entidade2);
-        Modulo m = lca(entidade1, entidade2, hmdSolucao.getModulos());
+        Modulo m = lca(entidade1, entidade2, hmdSolucao.converterHMDParaModulosNaoHierrarquicos(hmdSolucao.getModulos()));
         System.out.println("LCA: "+ m.getNome());
 
     }

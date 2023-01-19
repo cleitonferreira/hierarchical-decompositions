@@ -58,7 +58,7 @@ public class CalculoFormulaComplexidade {
             }
         }
 
-        return valorRelativaProfundidade + formulaComplexidade.nPertenceCmUniaoMm(hmdSolucao.getModulos());
+        return valorRelativaProfundidade + formulaComplexidade.nPertenceCmUniaoMm();
     }
 
     /*Formula da complexidade*/

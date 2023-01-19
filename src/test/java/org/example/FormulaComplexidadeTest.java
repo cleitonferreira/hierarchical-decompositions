@@ -3,6 +3,7 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
@@ -37,6 +38,9 @@ class FormulaComplexidadeTest {
 
     double valor = formulaComplexidade.frequenciaN(entidade);
     assertEquals(5.0, valor);
+
+    double valor2 = formulaComplexidade.frequenciaN(entidade);
+    assertEquals(5.0, valor2);
   }
 
   @Test
@@ -72,19 +76,22 @@ class FormulaComplexidadeTest {
 
     Entidade entidade7 = new Entidade("7", null);
 
+    List<Modulo> modulos = hmdSolucao.converterHMDParaModulosNaoHierrarquicos(
+        hmdSolucao.getModulos());
+
     //7, 4 = A0
     Entidade entidade4 = new Entidade("4", null);
-    Modulo modulo1 = formulaComplexidade.lca(entidade7, entidade4, hmdSolucao.getModulos());
+    Modulo modulo1 = formulaComplexidade.lca(entidade7, entidade4, modulos);
     assertEquals("A0", modulo1.getNome());
 
     // 7, 10 = A3
     Entidade entidade10 = new Entidade("10", null);
-    Modulo modulo2 = formulaComplexidade.lca(entidade7, entidade10, hmdSolucao.getModulos());
+    Modulo modulo2 = formulaComplexidade.lca(entidade7, entidade10, modulos);
     assertEquals("A3", modulo2.getNome());
 
     // 7, 6 = A4
     Entidade entidade6 = new Entidade("6", null);
-    Modulo modulo3 = formulaComplexidade.lca(entidade7, entidade6, hmdSolucao.getModulos());
+    Modulo modulo3 = formulaComplexidade.lca(entidade7, entidade6, modulos);
     assertEquals("A4", modulo3.getNome());
 
   }

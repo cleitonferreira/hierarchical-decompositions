@@ -38,62 +38,19 @@ public class Calculador extends CalculadorAbstract {
 	protected double[] mf;
 	protected double mq;
 
+	private static HMD hmdSolucao;
+
 	/**
 	 * Inicializa o calculator com os dados do problema
 	 */
 	public Calculador(Problema problema) {
 		super(problema);
-	}
-	
-	/**
-	 * Calcula o coeficiente de modularidade do projeto
-	 */
-	public double calculateMQEgravaEstado2(int[] valores) {
-
-		int classCount = this.problema.getClassCount();
-		this.inboundEdges = new int[classCount];
-		this.outboundEdges = new int[classCount];
-		this.intraEdges = new int[classCount];
-		this.mf = new double[classCount];
-		
-		int[][]listaDependencias = this.problema.getListaDependenciasPara();
-		int[] qtdDependencias = this.problema.getQtdDependenciasPara();
-		
-		for (int i=0; i<classCount; i++) {
-			int sourcePackage = valores[i];
-			for (int j=0; j<qtdDependencias[i]; j++) {
-				int targetPackage = valores[listaDependencias[i][j]];
-				if (targetPackage != sourcePackage) {
-					outboundEdges[sourcePackage]++;
-					inboundEdges[targetPackage]++;
-				} else
-					intraEdges[sourcePackage]++;
-			}
-		}
-
-		double mq = 0.0;
-
-		//for (int i = 0; i < this.problema.getMaxPackages(); i++) {
-		for (int i = 0; i < classCount; i++) {
-			int inter = inboundEdges[i] + outboundEdges[i];
-			int intra = intraEdges[i];
-
-			//if (intra != 0 && inter != 0) {
-			if (intra != 0) {
-				this.mf[i] = intra / (intra + 0.5 * inter);
-				mq += this.mf[i];
-			}
-		}
-		
-		this.mq = mq;
-		
-		return -mq;
+		hmdSolucao = problema.getHMD();
 	}
 
-	public double calculateMQEgravaEstado(SolucaoAbstract s, int[] valores) {
+	public double calculateFormulaComplexidadeEgravaEstado(SolucaoAbstract s, int[] valores) {
 
 		HMD hmd = null;
-		//HMD hmd = converterProblemaParaHMD(s, problema, valores);
 
 		if(s instanceof SolucaoCNMLL) {
 			hmd = problema.getHMD();
@@ -139,49 +96,7 @@ public class Calculador extends CalculadorAbstract {
 		return valorFormulaComplexidade;
 	}
 
-	/**
-	 * Calcula o coeficiente de modularidade do projeto
-	 */
-	public double calculateMQ2(SolucaoAbstract s, int[] valores) {
-
-		int classCount = this.problema.getClassCount();
-		int[] inboundEdges = new int[classCount];
-		int[] outboundEdges = new int[classCount];
-		int[] intraEdges = new int[classCount];
-		
-		int[][]listaDependencias = this.problema.getListaDependenciasPara();
-		int[] qtdDependencias = this.problema.getQtdDependenciasPara();
-
-		for (int i=0; i<classCount; i++) {
-			int sourcePackage = valores[i];
-			for (int j=0; j<qtdDependencias[i]; j++) {
-				int targetPackage = valores[listaDependencias[i][j]];
-				if (targetPackage != sourcePackage) {
-					outboundEdges[sourcePackage]++;
-					inboundEdges[targetPackage]++;
-				} else
-					intraEdges[sourcePackage]++;
-			}
-		}
-
-		double mq = 0.0;
-
-		//for (int i = 0; i < this.problema.getMaxPackages(); i++) {
-		for (int i = 0; i < classCount; i++) {
-			int inter = inboundEdges[i] + outboundEdges[i];
-			int intra = intraEdges[i];
-
-			//if (intra != 0 && inter != 0) {
-			if (intra != 0) {
-				double mf = intra / (intra + 0.5 * inter);
-				mq += mf;
-			}
-		}
-		
-		return mq;
-	}
-
-	public double calculateMQ(SolucaoAbstract s, int[] valores) {
+	public double calculateFormulaComplexidade(SolucaoAbstract s, int[] valores) {
 
 		HMD hmd = null;
 
@@ -227,7 +142,11 @@ public class Calculador extends CalculadorAbstract {
 					if ((s.getGrupos()[position] == 1) && (s.getGrupos()[b] == 1)){
 						Modulo submoduloII = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
 								String.valueOf("submodulo-" + resultado[a]), null);
-						submodulo.setSubmodulos(Arrays.asList(submoduloII));
+
+						List<Modulo> listaModulos = hmdSolucao.converterHMDParaModulosNaoHierrarquicos(modulos);
+
+						int size = (listaModulos.size() - 1);
+						listaModulos.get(size).setSubmodulos(Arrays.asList(submoduloII));
 					} else {
 						submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
 								String.valueOf("submodulo-" + resultado[a]), null);
@@ -313,14 +232,14 @@ public class Calculador extends CalculadorAbstract {
 	 * Avalia a solução
 	 */
 	public double evaluate(SolucaoAbstract s, int[] valores) {
-		return calculateMQ(s, valores);
+		return calculateFormulaComplexidade(s, valores);
 	}
 
 	/**
 	 * Avalia a solução
 	 */
 	public double evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
-		return calculateMQEgravaEstado(s, valores);
+		return calculateFormulaComplexidadeEgravaEstado(s, valores);
 	}
 
 	/**

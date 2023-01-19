@@ -9,21 +9,23 @@ import org.example.model.Modulo;
 public class FormulaComplexidade {
 
   private static HMD hmdSolucao;
+
+  private static List<Modulo> listaModulosNaoHierarquico;
   private static Modulo moduloEntidade1;
   private static Modulo moduloEntidade2;
 
   public FormulaComplexidade(HMD hmdSolucao) {
     this.hmdSolucao = hmdSolucao;
+    final List<Modulo> copyList = List.copyOf(hmdSolucao.getModulos());
+    listaModulosNaoHierarquico = hmdSolucao.converterHMDParaModulosNaoHierrarquicos(copyList);
   }
 
   public static double executa() {
-
-    List<Modulo> listaModulos = hmdSolucao.getModulos();
     double formulaComplexidade = 0;
 
-    if (listaModulos != null) {
+    if (listaModulosNaoHierarquico != null) {
 
-      for (Modulo modulo : listaModulos) {
+      for (Modulo modulo : listaModulosNaoHierarquico) {
         double valor = 0;
         /*System.out.println(
             "Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());*/
@@ -37,7 +39,7 @@ public class FormulaComplexidade {
       }
     }
 
-    return formulaComplexidade + nPertenceCmUniaoMm(hmdSolucao.getModulos());
+    return formulaComplexidade + nPertenceCmUniaoMm();
   }
 
   /*Formula da complexidade*/
@@ -51,12 +53,12 @@ public class FormulaComplexidade {
   /* n pertence Cm uniao Mm
    * Log sem estar a base escrita é base igual a 10. Chamado também de logaritmo decimal.
    * BigDecimal.valueOf(int);*/
-  public static double nPertenceCmUniaoMm(List<Modulo> listaModulos) {
+  public static double nPertenceCmUniaoMm() {
     double valor = 0;
 
-    if (listaModulos != null) {
+    if (listaModulosNaoHierarquico != null) {
 
-      for (Modulo modulo : listaModulos) {
+      for (Modulo modulo : listaModulosNaoHierarquico) {
 
         double valorFrequenciaM = frequenciaM(modulo);
 
@@ -88,7 +90,7 @@ public class FormulaComplexidade {
     if (nEntidade.getLinks() != null) {
       for (Entidade link : nEntidade.getLinks()) {
 
-        Modulo m = lca(nEntidade, link, hmdSolucao.getModulos());
+        Modulo m = lca(nEntidade, link, listaModulosNaoHierarquico);
         int r = relativaProfundidade(nEntidade, m);
         result += l(r);
       }
@@ -127,34 +129,33 @@ public class FormulaComplexidade {
 
     Modulo moduloLCA = null;
 
-    for (Modulo modulo : modulos) {
+    for (Modulo modulo : modulos){
 
-      if (Objects.nonNull(modulo.getListaEntidades())) {
-        for (Entidade entidade : modulo.getListaEntidades()) {
-          if (entidade.getNome().equals(entidade1.getNome())) {
-            moduloEntidade1 = modulo;
-          }
+      for (Entidade entidade : modulo.getListaEntidades()){
+        if (entidade.getNome().equals(entidade1.getNome())){
+          moduloEntidade1 = modulo;
+        }
 
-          if (entidade.getNome().equals(entidade2.getNome())) {
-            moduloEntidade2 = modulo;
-          }
+        if (entidade.getNome().equals(entidade2.getNome())){
+          moduloEntidade2 = modulo;
         }
       }
 
-      if (Objects.nonNull(moduloEntidade1) && Objects.nonNull(moduloEntidade2)) {
+      if(Objects.nonNull(moduloEntidade1) && Objects.nonNull(moduloEntidade2)) {
 
-        if (moduloEntidade1.getNome().equals(moduloEntidade2.getNome())) {
+        if (moduloEntidade1.getNome().equals(moduloEntidade2.getNome())){
           moduloLCA = modulo;
           break;
         } else {
 
           /*valida pai e filho*/
-          if (Objects.nonNull(moduloEntidade1.getSubmodulos())) {
+          if(Objects.nonNull(moduloEntidade1.getSubmodulos())){
             moduloLCA = moduloEntidade1;
-          } else if (Objects.nonNull(moduloEntidade2.getSubmodulos())) {
+          }else if(Objects.nonNull(moduloEntidade2.getSubmodulos())) {
             moduloLCA = moduloEntidade2;
           } else {
-            moduloLCA = hmdSolucao.getModulos().get(0);
+            //moduloLCA = (Modulo) hmdSolucao.getModulos().get(0).getSubmodulos().toArray()[--i];
+            moduloLCA = listaModulosNaoHierarquico.get(0);
           }
         }
       }
@@ -216,13 +217,11 @@ public class FormulaComplexidade {
   /* n é uma Entidade Básica
    * f(n) = indegree(n) + 1 */
   public static double frequenciaN(Entidade nEntidade) {
-
-    List<Modulo> listaModulos = hmdSolucao.getModulos();
     double valorFrequenciaN = 0;
 
-    if (listaModulos != null) {
+    if (listaModulosNaoHierarquico != null) {
 
-      for (Modulo modulo : listaModulos) {
+      for (Modulo modulo : listaModulosNaoHierarquico) {
         if (modulo.getListaEntidades() != null) {
           for (Entidade entidade : modulo.getListaEntidades()) {
             if (entidade.getLinks() != null) {

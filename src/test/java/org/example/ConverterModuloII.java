@@ -1,5 +1,7 @@
 package org.example;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +13,13 @@ import org.example.model.Modulo;
 
 public class ConverterModuloII {
 
+  private static HMD hmdSolucao;
+
   public static void main(String[] args) {
     Problema problema = getProblemaFigura18();
     //Problema problema = getProblemaFigura21();
+
+    hmdSolucao = problema.getHMD();
 
     /*int[] originalPackages = {0, 0, 1, 1, 2, 2};*/
 
@@ -23,24 +29,36 @@ public class ConverterModuloII {
     //int[] valores = {0, 0, 2, 3, 3, 5, 2, 7, 5};
     //int[] valores = {0, 0, 1, 2, 2, 3, 1, 4, 3};
     //int[] valores = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    int[] valores = {1, 1, 1, 1, 1, 1, 1, 1, 0};
+    //int[] valores = {1, 1, 1, 1, 1, 1, 1, 1, 0};
+    //int[] valores = {2, 2, 2, 2, 2, 2, 2, 0, 1};
+    //int[] valores = {2, 2, 2, 2, 2, 1, 0, 2, 3};
+    //int[] valores = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    //int[] valores = {1, 3, 0, 1, 2, 2, 1, 3, 0};
+    int[] valores = {3, 2, 0, 3, 1, 1, 3, 2, 0};
 
     //0; add um módulo
     //1; add um submodulo no módulo anterior
 
     //int[] submodulos = {0, 1};
     //int[] submodulos = {0, 0};
-    //int[] submodulos = {0, 1, 1, 2, 3}; //TODO posicao em cada submodulo
+    //int[] submodulos = {0, 1, 1, 1, 0};
     //int[] submodulos = {0, 0, 0, 1};
     //int[] submodulos = {0, 0, 0, 0, 1};
     //int[] submodulos = {0, 1, 1, 0, 0};
     //int[] submodulos = {0};
-    int[] submodulos = {0, 1};
+    //int[] submodulos = {0, 1};
+    //int[] submodulos = {0, 1, 1};
+    //int[] submodulos = {0, 1, 1, 1};
+    //int[] submodulos = {0, 1, 1, 1, 1, 1, 1, 1, 0};
+    //int[] submodulos = {0, 0, 0, 0};
+    int[] submodulos = {0, 1, 1, 1};
 
-    HMD hmd = converterProblemaParaHMD(problema, valores, submodulos);
-    System.out.println(hmd);
+    hmdSolucao = converterProblemaParaHMD(problema, valores, submodulos);
+    //System.out.println(hmd);
 
-    FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
+    listarModulos(hmdSolucao.getModulos());
+
+    FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmdSolucao);
     double valorFormulaComplexidade = formulaComplexidade.executa();
     System.out.println("FormulaComplexidade: "+valorFormulaComplexidade);
   }
@@ -73,7 +91,31 @@ public class ConverterModuloII {
           if ((submodulos[position] == 1) && (submodulos[b] == 1)){
             Modulo submoduloII = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
                 String.valueOf("submodulo-" + resultado[a]), null);
-            submodulo.setSubmodulos(Arrays.asList(submoduloII));
+            //submodulo.setSubmodulos(Arrays.asList(submoduloII));
+
+            /*if (submodulo.getSubmodulos() == null) {
+              submodulo.setSubmodulos(Arrays.asList(submoduloII));
+            } else {*/
+              /*Collection<Modulo> collection = new ArrayList<Modulo>();
+              collection.add(submoduloII);
+              //Collections.addAll(new ArrayList<>((Collection) submoduloII));
+
+              //submodulo.getSubmodulos().stream()
+              modulos.stream()
+                  .map(Modulo::getSubmodulos)
+                  .flatMap(Collection::stream)
+                  .filter(Objects::nonNull)
+                  .peek(v -> v.setSubmodulos(collection));
+                  //.collect(toList());*/
+
+              List<Modulo> listaModulos = hmdSolucao.converterHMDParaModulosNaoHierrarquicos(modulos);
+
+              int size = (listaModulos.size() - 1);
+              listaModulos.get(size).setSubmodulos(Arrays.asList(submoduloII));
+            //}
+
+
+
           } else {
             submodulo = new Modulo(getListaEntidadesPorModulo(problema, valores, resultado[a]),
                 String.valueOf("submodulo-" + resultado[a]), null);
@@ -264,6 +306,33 @@ public class ConverterModuloII {
     );
 
     return problema;
+  }
+
+  private static void listarModulos(List<Modulo> modulos) {
+    if (modulos != null) {
+
+      for (Modulo modulo : modulos) {
+        System.out.println("Módulo: " + modulo.getNome() + " - submódulo: " + modulo.getSubmodulos());
+        listarEntidade(modulo);
+        if (modulo.getSubmodulos() != null) {
+          System.out.println();
+          listarModulos(modulo.getSubmodulos().stream().collect(toList()));
+        }
+      }
+    }
+  }
+
+  private static void listarEntidade(Modulo modulo) {
+    if (modulo.getListaEntidades() != null) {
+      for (Entidade entidade : modulo.getListaEntidades()) {
+        System.out.println("Entidade: " + entidade.getNome());
+        if (entidade.getLinks() != null) {
+          for (Entidade links : entidade.getLinks()) {
+            System.out.println("Links: " + links.getNome());
+          }
+        }
+      }
+    }
   }
 
 }
