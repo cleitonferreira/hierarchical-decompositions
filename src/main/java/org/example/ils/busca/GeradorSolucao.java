@@ -36,17 +36,16 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 			}
 		}
 
-		int min = 0;
-		int max = 2;
-		int soma = 0;
-		Random rand = new Random();
-		int[] subgrupos = new int[s.getTotalGrupos()];
+		/*Remover valores repetidos*/
+		int totalGrupos = Arrays.stream(valores).distinct().toArray().length;
 
-		for (int i = 0; i < s.getTotalGrupos(); i++) {
-			if (soma < s.getTotalGrupos() && i > 0) {
-				subgrupos[i] = rand.nextInt(max - min) + min;
+		Random rand = new Random();
+		int[] subgrupos = new int[totalGrupos];
+
+		for (int i = 0; i < totalGrupos; i++) {
+			if (i > 1) {
+				subgrupos[i] = rand.nextInt(i);
 			}
-			soma += subgrupos[i];
 		}
 		s.setGrupos(subgrupos);
 		

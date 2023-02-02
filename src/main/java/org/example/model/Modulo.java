@@ -1,5 +1,6 @@
 package org.example.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -16,4 +17,8 @@ public class Modulo {
     private Collection<Modulo> submodulos;
     //private Module parent;
 
+
+    public void preparandoSubmodulos() {
+        this.submodulos = new ArrayList<>();
+    }
 }

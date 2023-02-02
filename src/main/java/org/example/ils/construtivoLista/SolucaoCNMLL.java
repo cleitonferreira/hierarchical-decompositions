@@ -70,19 +70,17 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	@Override
 	public int[] getGrupos() {
 
-		int min = 0;
-		int max = 2;
-		int soma = 0;
+		/*Remover valores repetidos*/
+		int totalGrupos = Arrays.stream(valores).distinct().toArray().length;
+
 		Random rand = new Random();
-		int[] subgrupos = new int[getTotalGrupos()];
+		int[] subgrupos = new int[totalGrupos];
 
-		for (int i = 0; i < getTotalGrupos(); i++) {
-			if (soma < getTotalGrupos() && i > 0) {
-				subgrupos[i] = rand.nextInt(max - min) + min;
+		for (int i = 0; i < totalGrupos; i++) {
+			if (i > 1) {
+				subgrupos[i] = rand.nextInt(i);
 			}
-			soma += subgrupos[i];
 		}
-
 		return subgrupos;
 	}
 

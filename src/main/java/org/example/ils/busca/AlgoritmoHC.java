@@ -98,6 +98,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 
 		//double fitness = this.calculador.evaluate(solucaoMelhor);
 		solucaoMelhor.setSolucao(valores, qtdItens, totalGrupos, melhorFitness, evaluationSolucao, grupos);
+		//Todo verificar GeradorSolucao.normalizar (HC)
 		GeradorSolucao.normalizar(solucaoMelhor);
 		
 		return solucaoMelhor;
