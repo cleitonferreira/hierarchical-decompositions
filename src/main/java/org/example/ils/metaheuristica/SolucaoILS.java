@@ -12,178 +12,182 @@ import org.example.ils.core.SolucaoAbstract;
  */
 public class SolucaoILS implements SolucaoAbstract {
 
-	// representa o número da geração em que a solução foi encontrada
-	private int location;
+  // representa o número da geração em que a solução foi encontrada
+  private int location;
 
-	// valor de fitness da solução
-	private double fitness = 0.00;
+  private int[] grupos;
 
-	// parte básica da representação da solução
-	private int[] valores;
+  // valor de fitness da solução
+  private double fitness = 0.00;
 
-	private int[] grupos;
+  // parte básica da representação da solução
+  private int[] valores;
 
-	// quantidade dos grupos
-	private int totalGrupos;
+  // quantidade dos grupos
+  private int totalGrupos;
 
-	// quantidade de cada item nos grupos
-	private int[] qtdItens;
-	
-	public SolucaoILS(SolucaoILS s) {
-		int[] valores = s.getValores();
-		this.valores = Arrays.copyOf(valores, valores.length);
+  // quantidade de cada item nos grupos
+  private int[] qtdItens;
 
-		int[] qtdItens = s.getQtdItens();
-		this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
-		this.totalGrupos = s.getTotalGrupos();
-		this.fitness = s.getFitness();
-		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
-	}
+  public SolucaoILS(SolucaoILS s) {
+    int[] valores = s.getValores();
+    this.valores = Arrays.copyOf(valores, valores.length);
 
-	public SolucaoILS(SolucaoCNM s) {
-		int[] valores = s.getValores();
-		this.valores = Arrays.copyOf(valores, valores.length);
+    int[] qtdItens = s.getQtdItens();
+    this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
+    this.totalGrupos = s.getTotalGrupos();
+    this.fitness = s.getFitness();
+    this.location = s.getLocation();
+    this.grupos = s.getGrupos();
+  }
 
-		int[] qtdItens = s.getQtdItens();
-		this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
-		this.totalGrupos = s.getTotalGrupos();
-		this.fitness = s.getFitness();
-		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
-	}
+  public SolucaoILS(SolucaoCNM s) {
+    int[] valores = s.getValores();
+    this.valores = Arrays.copyOf(valores, valores.length);
 
-	public SolucaoILS(SolucaoCNMLL s) {
-		int[] valores = s.getValores();
-		this.valores = Arrays.copyOf(valores, valores.length);
-		
-		this.qtdItens = s.getQtdItens(); // já é alocada uma cópia na SolucaoCNM com linked list
-		this.totalGrupos = s.getTotalGrupos();
-		this.fitness = s.getFitness();
-		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
-	}
+    int[] qtdItens = s.getQtdItens();
+    this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
+    this.totalGrupos = s.getTotalGrupos();
+    this.fitness = s.getFitness();
+    this.location = s.getLocation();
+    this.grupos = s.getGrupos();
+  }
 
-	public SolucaoILS(SolucaoHC s) {
-		int[] valores = s.getValores();
-		this.valores = Arrays.copyOf(valores, valores.length);
+  public SolucaoILS(SolucaoCNMLL s) {
+    int[] valores = s.getValores();
+    this.valores = Arrays.copyOf(valores, valores.length);
 
-		int[] qtdItens = s.getQtdItens();
-		this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
-		this.totalGrupos = s.getTotalGrupos();
-		this.fitness = s.getFitness();
-		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
-	}
+    this.qtdItens = s.getQtdItens(); // já é alocada uma cópia na SolucaoCNM com linked list
+    this.totalGrupos = s.getTotalGrupos();
+    this.fitness = s.getFitness();
+    this.location = s.getLocation();
+    this.grupos = s.getGrupos();
+  }
 
-	public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos ) {
-		this.valores = valores;
-		this.qtdItens = qtdItens;
-		this.totalGrupos = totalGrupos;
-	}
+  public SolucaoILS(SolucaoHC s) {
+    int[] valores = s.getValores();
+    this.valores = Arrays.copyOf(valores, valores.length);
 
-	public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
-		this.valores = valores;
-		this.qtdItens = qtdItens;
-		this.totalGrupos = totalGrupos;
-		this.fitness = fitness;
-		this.location = location;
-		this.grupos = grupos;
-	}
+    int[] qtdItens = s.getQtdItens();
+    this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
+    this.totalGrupos = s.getTotalGrupos();
+    this.fitness = s.getFitness();
+    this.location = s.getLocation();
+    this.grupos = s.getGrupos();
+  }
 
-	public SolucaoILS(int tamanho) {
-		this.valores = new int[tamanho];
-		this.qtdItens = new int[2 * tamanho];
-		this.totalGrupos = 0;
-	}
-	
-	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
-		this.valores = valores;
-		this.qtdItens = qtdItens;
-		this.totalGrupos = totalGrupos;
-		this.fitness = fitness;
-		this.location = location;
-		this.grupos = grupos;
-	}
+  public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos) {
+    this.valores = valores;
+    this.qtdItens = qtdItens;
+    this.totalGrupos = totalGrupos;
+  }
 
-	public void setFitness(double fitness) {
-		this.fitness = fitness;
-	}
+  public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location,
+      int[] grupos) {
+    this.valores = valores;
+    this.qtdItens = qtdItens;
+    this.totalGrupos = totalGrupos;
+    this.fitness = fitness;
+    this.location = location;
+    this.grupos = grupos;
+  }
 
-	public double getFitness() {
-		return fitness;
-	}
+  public SolucaoILS(int tamanho) {
+    this.valores = new int[tamanho];
+    this.qtdItens = new int[2 * tamanho];
+    this.totalGrupos = 0;
+  }
 
-	public void setLocation(int location) {
-		this.location = location;
-	}
+  public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness,
+      int location, int[] grupos) {
+    this.valores = valores;
+    this.qtdItens = qtdItens;
+    this.totalGrupos = totalGrupos;
+    this.fitness = fitness;
+    this.location = location;
+    this.grupos = grupos;
+  }
 
-	public int getLocation() {
-		return location;
-	}
+  public void setFitness(double fitness) {
+    this.fitness = fitness;
+  }
 
-	public int[] getValores() {
-		return this.valores;
-	}
+  public double getFitness() {
+    return fitness;
+  }
 
-	public int getTotalItens() {
-		return this.valores.length;
-	}
+  public void setLocation(int location) {
+    this.location = location;
+  }
 
-	public void setValores(int[] valores) {
-		this.valores = valores;
-	}
+  public int getLocation() {
+    return location;
+  }
 
-	public void setTotalGrupos(int totalGrupos) {
-		this.totalGrupos = totalGrupos;
-	}
+  public int[] getValores() {
+    return this.valores;
+  }
 
-	public int getTotalGrupos() {
-		return totalGrupos;
-	}
+  public int getTotalItens() {
+    return this.valores.length;
+  }
 
-	public void setQtdItens(int[] qtdItens, int totalGrupos) {
-		this.totalGrupos = totalGrupos;
-		this.qtdItens = qtdItens;
-	}
+  public void setValores(int[] valores) {
+    this.valores = valores;
+  }
 
-	public int[] getQtdItens() {
-		return qtdItens;
-	}
+  public void setTotalGrupos(int totalGrupos) {
+    this.totalGrupos = totalGrupos;
+  }
 
-	public int[] getGrupos() {
-		return grupos;
-	}
+  public int getTotalGrupos() {
+    return totalGrupos;
+  }
 
-	public void setGrupos(int[] grupos) {
-		this.grupos = grupos;
-	}
-	
-	/**
-	 * Utilizado para exibição dos resultados
-	 */
-	public String getString() {
-		StringBuilder sb = new StringBuilder("");
-		if (this.valores.length > 0) {
-			sb.append(String.valueOf(this.valores[0]));
-		}
-		for (int i = 1; i < valores.length; i++) {
-			sb.append(",");
-			sb.append(String.valueOf(this.valores[i]));
-		}
-		return sb.toString();
-	}
+  public void setQtdItens(int[] qtdItens, int totalGrupos) {
+    this.totalGrupos = totalGrupos;
+    this.qtdItens = qtdItens;
+  }
 
-	public String getGruposString() {
-		StringBuilder sb = new StringBuilder("");
-		if (this.grupos.length > 0) {
-			sb.append(String.valueOf(this.grupos[0]));
-		}
-		for (int i = 1; i < grupos.length; i++) {
-			sb.append(",");
-			sb.append(String.valueOf(this.grupos[i]));
-		}
-		return sb.toString();
-	}
+  public int[] getQtdItens() {
+    return qtdItens;
+  }
+
+  @Override
+  public int[] getGrupos() {
+    return grupos;
+  }
+
+  @Override
+  public void setGrupos(int[] grupos) {
+    this.grupos = grupos;
+  }
+
+  /**
+   * Utilizado para exibição dos resultados
+   */
+  public String getString() {
+    StringBuilder sb = new StringBuilder("");
+    if (this.valores.length > 0) {
+      sb.append(String.valueOf(this.valores[0]));
+    }
+    for (int i = 1; i < valores.length; i++) {
+      sb.append(",");
+      sb.append(String.valueOf(this.valores[i]));
+    }
+    return sb.toString();
+  }
+
+  public String getGruposString() {
+    StringBuilder sb = new StringBuilder("");
+    if (this.grupos.length > 0) {
+      sb.append(String.valueOf(this.grupos[0]));
+    }
+    for (int i = 1; i < grupos.length; i++) {
+      sb.append(",");
+      sb.append(String.valueOf(this.grupos[i]));
+    }
+    return sb.toString();
+  }
 
 }

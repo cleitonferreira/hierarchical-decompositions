@@ -62,7 +62,7 @@ public class Calculador extends CalculadorAbstract {
     return subgrupos;
   }
 
-  public double calculateFormulaComplexidadeEgravaEstado(SolucaoAbstract s, int[] valores) {
+  public RetornoSolucao calculateFormulaComplexidadeEgravaEstado(SolucaoAbstract s, int[] valores) {
 
     HMD hmd = null;
 
@@ -108,15 +108,19 @@ public class Calculador extends CalculadorAbstract {
       }
     }
 
-    return valorFormulaComplexidade;
+    RetornoSolucao retornoSolucao = new RetornoSolucao(valorFormulaComplexidade, s.getGrupos());
+
+    return retornoSolucao;
   }
 
-  public double calculateFormulaComplexidade(SolucaoAbstract s, int[] valores) {
+  public RetornoSolucao calculateFormulaComplexidade(SolucaoAbstract s, int[] valores) {
 
     HMD hmd = null;
 
     if (s instanceof SolucaoCNMLL) {
       hmd = problema.getHMD();
+      int quantidadeGrupos = Arrays.stream(valores).distinct().toArray().length;
+      s.setGrupos(new int[quantidadeGrupos]);
     } else {
       hmd = converterProblemaParaHMD(s, problema, valores);
     }
@@ -127,7 +131,9 @@ public class Calculador extends CalculadorAbstract {
 
     //System.out.println("Valores: "+Arrays.toString(valores) + " - " + "Submódulos: "+Arrays.toString(s.getGrupos()) + " - " + valorFormulaComplexidade);
 
-    return valorFormulaComplexidade;
+    RetornoSolucao retornoSolucao = new RetornoSolucao(valorFormulaComplexidade, s.getGrupos());
+
+    return retornoSolucao;
   }
 
   private static HMD converterProblemaParaHMD(SolucaoAbstract s, Problema problema, int[] valores) {
@@ -160,7 +166,7 @@ public class Calculador extends CalculadorAbstract {
 
           Modulo moduloPosicao = buscarPosicaoModulo(listaModulosModulosNaoHierrarquicos,
               s.getGrupos()[b]);
-          if (Objects.isNull(moduloPosicao.getSubmodulos())){
+          if (Objects.isNull(moduloPosicao.getSubmodulos())) {
             moduloPosicao.preparandoSubmodulos();
           }
           moduloPosicao.getSubmodulos().add(submodulo);
@@ -172,7 +178,7 @@ public class Calculador extends CalculadorAbstract {
   }
 
   public static Modulo buscarPosicaoModulo(List<Modulo> modulos, int posicao) {
-    String nomeModulo = "modulo-"+posicao;
+    String nomeModulo = "modulo-" + posicao;
     for (int i = 0; i < modulos.size(); i++) {
       if (modulos.get(i).getNome().equals(nomeModulo)) {
         return modulos.get(i);
@@ -247,20 +253,21 @@ public class Calculador extends CalculadorAbstract {
    * Calcula o fitness
    */
   public double evaluate(SolucaoAbstract s) {
-    return evaluate(s, s.getValores());
+    RetornoSolucao retornoSolucao = evaluate(s, s.getValores());
+    return retornoSolucao.getValorFormulaComplexidade();
   }
 
   /**
    * Avalia a solução
    */
-  public double evaluate(SolucaoAbstract s, int[] valores) {
+  public RetornoSolucao evaluate(SolucaoAbstract s, int[] valores) {
     return calculateFormulaComplexidade(s, valores);
   }
 
   /**
    * Avalia a solução
    */
-  public double evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
+  public RetornoSolucao evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
     return calculateFormulaComplexidadeEgravaEstado(s, valores);
   }
 
