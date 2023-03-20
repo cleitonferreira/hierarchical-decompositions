@@ -108,7 +108,8 @@ public class ExperimentoFinalParte1 extends ExperimentoModel {
 	{		
 		List<Parametro> params = new ArrayList<Parametro>();
 		
-		int nCiclos = 30;
+		//int nCiclos = 30;
+		int nCiclos = 6;
 		
 		addParametros(params, nCiclos);
 

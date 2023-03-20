@@ -12,6 +12,8 @@ public interface SolucaoAbstract {
 	
 	public abstract void setFitness(double fitness);
 	
+	public abstract void setGrupos(int[] grupos);
+
 	public abstract void setLocation(int location);
 
 	// representação da solução onde cada item do vetor corresponde ao módulo e o conteúdo ao cluster que o modulo faz parte

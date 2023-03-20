@@ -27,7 +27,7 @@ public class ConverterModuloIII {
     //int[] valores = {0, 1, 1, 2, 3, 4, 5, 6, 0};
     //int[] valores = {0, 0, 0, 2, 1, 1, 1, 1, 2};
     //int[] valores = {0, 0, 0, 2, 0, 0, 3, 2, 0};
-    int[] valores = {0,0,0,1,2,0,1,3,1};
+    int[] valores = {0,0,0,1,3,0,1,2,1};
 
     //int[] submodulos = {0, 0, 0, 1, 1, 2, 4};
     //int[] submodulos = {0, 0, 1};

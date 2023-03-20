@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 import org.example.FormulaComplexidade;
-import org.example.ils.construtivoLista.SolucaoCNMLL;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
@@ -47,30 +45,13 @@ public class Calculador extends CalculadorAbstract {
     hmdSolucao = problema.getHMD();
   }
 
-  private static int[] geradorSubmodulos(int[] valores) {
-    /*Remover valores repetidos*/
-    int totalGrupos = Arrays.stream(valores).distinct().toArray().length;
-
-    Random rand = new Random();
-    int[] subgrupos = new int[totalGrupos];
-
-    for (int i = 0; i < totalGrupos; i++) {
-      if (i > 1) {
-        subgrupos[i] = rand.nextInt(i);
-      }
-    }
-    return subgrupos;
-  }
-
   public double calculateFormulaComplexidadeEgravaEstado(SolucaoAbstract s, int[] valores) {
 
     HMD hmd = null;
 
-    if (s instanceof SolucaoCNMLL) {
-      hmd = problema.getHMD();
-    } else {
-      hmd = converterProblemaParaHMD(s, problema, valores);
-    }
+    int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
+    s.setGrupos(subgrupos);
+    hmd = converterProblemaParaHMD(s, problema, valores);
 
     int classCount = this.problema.getClassCount();
     this.inboundEdges = new int[classCount];
@@ -115,11 +96,9 @@ public class Calculador extends CalculadorAbstract {
 
     HMD hmd = null;
 
-    if (s instanceof SolucaoCNMLL) {
-      hmd = problema.getHMD();
-    } else {
-      hmd = converterProblemaParaHMD(s, problema, valores);
-    }
+    int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
+    s.setGrupos(subgrupos);
+    hmd = converterProblemaParaHMD(s, problema, valores);
 
     FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
 

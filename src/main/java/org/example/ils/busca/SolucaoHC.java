@@ -36,7 +36,7 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
 	public SolucaoHC(SolucaoCNM s) {
@@ -48,7 +48,7 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
  	public SolucaoHC(SolucaoILS s) {
@@ -60,13 +60,14 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
-		this.grupos = s.getGrupos();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
-	public SolucaoHC(int[] valores, int[] qtdItens, int totalGrupos ) {
+	public SolucaoHC(int[] valores, int[] qtdItens, int totalGrupos, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
+		this.grupos = grupos;
 	}
 
 	public SolucaoHC(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
@@ -82,15 +83,16 @@ public class SolucaoHC implements SolucaoAbstract {
 		this.valores = new int[tamanho];
 		this.qtdItens = new int[2 * tamanho];
 		this.totalGrupos = 0;
+		this.grupos = new int[tamanho];
 	}
 	
-	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
+	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
 		this.fitness = fitness;
 		this.location = location;
-		this.grupos = grupos;
+		//this.grupos = grupos;
 	}
 
 	public void setFitness(double fitness) {

@@ -1,7 +1,6 @@
 package org.example.ils.metaheuristica;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class GeradorSolucao extends GeradorSolucaoAbstract {
 
@@ -34,19 +33,6 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 				}
 			}
 		}
-
-		/*Remover valores repetidos*/
-		int totalGrupos = Arrays.stream(valores).distinct().toArray().length;
-
-		Random rand = new Random();
-		int[] subgrupos = new int[totalGrupos];
-
-		for (int i = 0; i < totalGrupos; i++) {
-			if (i > 1) {
-				subgrupos[i] = rand.nextInt(i);
-			}
-		}
-		s.setGrupos(subgrupos);
 		
 		// libera a memoria
 		valoresOriginal = null;
@@ -66,8 +52,10 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 			}
 			qtdItens[valores[i]]++;
 		}
+
+		int[] subgrupos = new int[0];
 	
-		SolucaoILS solucao = new SolucaoILS(valores, qtdItens, totalGrupos);
+		SolucaoILS solucao = new SolucaoILS(valores, qtdItens, totalGrupos, subgrupos);
 	
 		normalizar(solucao);
 	

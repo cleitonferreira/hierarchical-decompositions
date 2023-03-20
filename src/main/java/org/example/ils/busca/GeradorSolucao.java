@@ -1,7 +1,6 @@
 package org.example.ils.busca;
 
 import java.util.Arrays;
-import java.util.Random;
 import org.example.ils.metaheuristica.GeradorSolucaoAbstract;
 
 public class GeradorSolucao extends GeradorSolucaoAbstract {
@@ -35,19 +34,6 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 				}
 			}
 		}
-
-		/*Remover valores repetidos*/
-		int totalGrupos = Arrays.stream(valores).distinct().toArray().length;
-
-		Random rand = new Random();
-		int[] subgrupos = new int[totalGrupos];
-
-		for (int i = 0; i < totalGrupos; i++) {
-			if (i > 1) {
-				subgrupos[i] = rand.nextInt(i);
-			}
-		}
-		s.setGrupos(subgrupos);
 		
 		// libera a memoria
 		valoresOriginal = null;
@@ -69,7 +55,9 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 			qtdItens[valores[i]]++;
 		}
 
-		SolucaoHC solucao = new SolucaoHC(valores, qtdItens, totalGrupos);
+		int[] subgrupos = new int[0];
+
+		SolucaoHC solucao = new SolucaoHC(valores, qtdItens, totalGrupos, subgrupos);
 
 		normalizar(solucao);
 

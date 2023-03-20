@@ -99,6 +99,7 @@ public class AlgoritmoCNM extends AlgoritmoAbstract {
 		if (!encontrouMelhor) return null;
 		
 		int[] valores = Arrays.copyOf(solucao.getValores(), solucao.getValores().length);
+		int[] grupos = Arrays.copyOf(solucao.getGrupos(), solucao.getGrupos().length);
 		int qtdMesclados = 0;
 		for (int k = 0; k < valores.length; k++) {
 			if (valores[k] == clusterDestino) {
@@ -111,7 +112,7 @@ public class AlgoritmoCNM extends AlgoritmoAbstract {
 		qtdItens[clusterOrigem] += qtdMesclados;
 		qtdItens[clusterDestino] = 0;
 		
-		SolucaoCNM solucaoMelhor = new SolucaoCNM(valores, qtdItens, totalGrupos-1, fitnessMelhor, location);
+		SolucaoCNM solucaoMelhor = new SolucaoCNM(valores, qtdItens, totalGrupos-1, fitnessMelhor, location, grupos);
 		GeradorSolucao.normalizar(solucaoMelhor);
 		
 		return solucaoMelhor;

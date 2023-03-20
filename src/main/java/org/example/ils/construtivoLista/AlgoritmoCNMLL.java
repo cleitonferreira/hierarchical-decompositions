@@ -117,6 +117,7 @@ public class AlgoritmoCNMLL extends AlgoritmoAbstract {
 		solucaoMelhor.join(clusterOrigem, clusterDestino);
 		solucaoMelhor.setFitness(fitnessMelhor);
 		solucaoMelhor.setLocation(location);
+		solucaoMelhor.setGrupos(solucao.getGrupos());
 		
 		clustersAtivos.remove((Integer)clusterDestino);
 		

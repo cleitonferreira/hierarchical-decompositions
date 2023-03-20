@@ -3,7 +3,6 @@ package org.example.ils.construtivoLista;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.Set;
 import org.example.ils.core.SolucaoAbstract;
 
@@ -22,21 +21,25 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	private HashMap<Integer,LinkedList<Integer>> mapa;
 	
 	private int[] valores;
-	
+
+	private int[] grupos;
+
 	public SolucaoCNMLL(SolucaoCNMLL s) {
 		this.mapa = cloneMapa(s.getMapa());
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
 		this.valores = Arrays.copyOf(s.getValores(), s.getValores().length);
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
-	
+
 	public SolucaoCNMLL(int tamanho) {
 		this.mapa = new HashMap<Integer, LinkedList<Integer>>();
 		this.fitness = 0.00;
 		this.location = 0;
 		this.valores = new int[tamanho];
+		this.grupos = new int[tamanho];
 	}
-	
+
 	@Override
 	public void setFitness(double fitness) {
 		this.fitness = fitness;
@@ -69,19 +72,12 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 
 	@Override
 	public int[] getGrupos() {
+		return grupos;
+	}
 
-		/*Remover valores repetidos*/
-		int totalGrupos = Arrays.stream(valores).distinct().toArray().length;
-
-		Random rand = new Random();
-		int[] subgrupos = new int[totalGrupos];
-
-		for (int i = 0; i < totalGrupos; i++) {
-			if (i > 1) {
-				subgrupos[i] = rand.nextInt(i);
-			}
-		}
-		return subgrupos;
+	@Override
+	public void setGrupos(int[] grupos) {
+		this.grupos = grupos;
 	}
 
 	public int getTotalGrupos() {

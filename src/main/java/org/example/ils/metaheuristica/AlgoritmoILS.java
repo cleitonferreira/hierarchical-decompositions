@@ -322,6 +322,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
     double fitness = this.calculador.evaluate(solucaoModificada);
     solucaoModificada.setFitness(fitness);
     solucaoModificada.setLocation(this.evaluation);
+    solucaoModificada.setGrupos(solucaoModificada.getGrupos());
 
     return solucaoModificada;
   }
@@ -379,6 +380,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
     this.evaluation++;
     solucaoEstrela.setFitness(fitnessInicial);
     solucaoEstrela.setLocation(this.evaluation);
+    solucaoEstrela.setGrupos(solucaoEstrela.getGrupos());
 
     SolucaoILS solucaoMelhor = new SolucaoILS(solucaoEstrela);
 
@@ -389,6 +391,7 @@ public class AlgoritmoILS extends AlgoritmoAbstract {
 
         SolucaoILS solucaoLinha = modificaSolucaoPorMetodosSimultaneos(solucaoEstrela);
 
+        //TODO está aqui o problema de grupos
         SolucaoILS solucaoEstrelaLinha = buscaLocal(solucaoLinha);
 
         // Criterio de aceitação

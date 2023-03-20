@@ -33,6 +33,7 @@ public class SolucaoCNM implements SolucaoAbstract {
 		this.qtdItens = Arrays.copyOf(qtdItens, qtdItens.length);
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
 	public SolucaoCNM(int[] valores, int[] qtdItens, int totalGrupos ) {
@@ -41,18 +42,20 @@ public class SolucaoCNM implements SolucaoAbstract {
 		this.totalGrupos = totalGrupos;
 	}
 
-	public SolucaoCNM(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location) {
+	public SolucaoCNM(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
 		this.fitness = fitness;
 		this.location = location;
+		this.grupos = grupos;
 	}
 
 	public SolucaoCNM(int tamanho) {
 		this.valores = new int[tamanho];
 		this.qtdItens = new int[2 * tamanho];
 		this.totalGrupos = 0;
+		this.grupos = new int[tamanho];
 	}
 	
 	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location) {
