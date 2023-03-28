@@ -26,6 +26,12 @@
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoElite.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoMutacao.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoSelection.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/LeitorProblema.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/Reader.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/Dependency.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/DependencyType.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/ElementType.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/ElementVisibility.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/AlgoritmoILS.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/GeradorNumero.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/GeradorSolucao.java" charset="UTF-8" />
