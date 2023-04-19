@@ -96,6 +96,9 @@ public class Problema {
 	public HMD getHMD() {
 		return hmd;
 	}
+	public void setHmd(HMD hmd) {
+		this.hmd = hmd;
+	}
 
 	public int calculaTotalDependencias() {
 		int total = 0;

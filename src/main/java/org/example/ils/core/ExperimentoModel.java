@@ -1,10 +1,24 @@
 package org.example.ils.core;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.example.ils.leitura.LeitorProblema;
 
 public abstract class ExperimentoModel {
 
+	public ArrayList<Problema> getProblemas() {
+		try {
+			return LeitorProblema.loadInstances(getInstancias());
+		}
+		catch (Exception e) {
+			System.out.println("ERRO NA LEITURA DAS INSTANCIAS. msg=" + e.getLocalizedMessage() + "]");
+			return null;
+		}
+	}
+
 	public abstract List<Parametro> getParametros();
+
+	public abstract String[] getInstancias();
 	
 	public abstract String getIdExperimento();
 	

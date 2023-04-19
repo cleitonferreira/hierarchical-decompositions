@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import org.example.Figura;
-import org.example.Figura18;
 import org.example.ils.core.Exibicao;
 import org.example.ils.core.ExperimentoFactory;
 import org.example.ils.core.ExperimentoModel;
@@ -33,10 +31,10 @@ public class MainILSLeituraArquivo {
     //Figura21
     //Figura figura = new Figura21();
     //Figura18
-    Figura figura = new Figura18();
+    //Figura figura = new Figura18();
 
-    classe = figura.getClass();
-    hmdSolucao = figura.hmd();
+    //classe = figura.getClass();
+    //hmdSolucao = figura.hmd();
 
     //Configura a exibição conforme algoritmo e problema
     TipoExibicao tipoExibicao = TipoExibicao.DEFAULT;
@@ -49,93 +47,42 @@ public class MainILSLeituraArquivo {
   public static final void executa(TipoExibicao tipoExibicao, ExperimentoModel experimento)
       throws Exception {
 
-    Problema problema = loadHMD(hmdSolucao);
-    //Problema problema = getProblema6Classes();
-    Exibicao[] exibicoes = experimento.iniciaExibicoes();
-    List<Parametro> params = experimento.getParametros();
+    List<Problema> problemas = experimento.getProblemas();
 
     // Executa o problema para todas as instâncias
-    int indice = 0;
-    for (Parametro param : params) {
-      int tamanho = problema.getTamanho();
+    for (Problema problema : problemas) {
+      //Problema problema = getProblema6Classes();
+      Exibicao[] exibicoes = experimento.iniciaExibicoes();
+      List<Parametro> params = experimento.getParametros();
 
-      param.setProbabilidadeMutacao(0.004 * Math.log(tamanho) / Math.log(2));
-      param.setTamanhoPopulacao(tamanho * 10);
+      // Executa o problema para todas as instâncias
+      int indice = 0;
+      for (Parametro param : params) {
+        int tamanho = problema.getTamanho();
 
-      // param.setProbabilidadeCrossover( (tamanho < 100) ? 0.8 : 1.0 );
-      if (param.getTamanhoPopulacao() < 100) {
-        param.setProbabilidadeCrossover(0.8);
-      } else {
-        param.setProbabilidadeCrossover(1.0);
-      }
+        param.setProbabilidadeMutacao(0.004 * Math.log(tamanho) / Math.log(2));
+        param.setTamanhoPopulacao(tamanho * 10);
 
-      param.setEvaluationMax(param.getMultiplicadorEvaluation() * tamanho * tamanho);
-      // Barros, 2012
-      // param.setEvaluationMax( 200 * tamanho * tamanho );
-      // Praditwong, 2011
-      // param.setEvaluationMax( 2000 * tamanho * tamanho );
+        // param.setProbabilidadeCrossover( (tamanho < 100) ? 0.8 : 1.0 );
+        if (param.getTamanhoPopulacao() < 100) {
+          param.setProbabilidadeCrossover(0.8);
+        } else {
+          param.setProbabilidadeCrossover(1.0);
+        }
 
-      exibicoes[indice].setTipoExibicaoCiclo(tipoExibicao);
-      exibicoes[indice].configuraDebug(indice, problema, param);
+        param.setEvaluationMax(param.getMultiplicadorEvaluation() * tamanho * tamanho);
+        // Barros, 2012
+        // param.setEvaluationMax( 200 * tamanho * tamanho );
+        // Praditwong, 2011
+        // param.setEvaluationMax( 2000 * tamanho * tamanho );
 
-      ExperimentoFactory.executa(problema, exibicoes[indice], param);
-      indice++;
-    }
-  }
+        exibicoes[indice].setTipoExibicaoCiclo(tipoExibicao);
+        exibicoes[indice].configuraDebug(indice, problema, param);
 
-  /**
-   * A partir do objeto modelo Project, carrega os dados do problema Adaptado do projeto de Marcio
-   * Barros
-   */
-  private static Problema loadHMD(HMD hmd) throws Exception {
-    int classCount = hmd.getCountEntidades();
-    int packageCount = hmd.getCountModulos();
-    int[][] listaDependenciasPara = new int[classCount][classCount];
-    int[] qtdDependenciasPara = new int[classCount];
-    int[][] listaDependenciasDe = new int[classCount][classCount];
-    int[] qtdDependenciasDe = new int[classCount];
-
-    originalPackage = new int[classCount];
-    originalClasses = new int[classCount];
-
-    dependenciasPara = new HashMap<Integer, List<Integer>>();
-    dependenciasDe = new HashMap<Integer, List<Integer>>();
-    load(hmd.getModulos());
-
-    for (Integer moduloOrigem : dependenciasPara.keySet()) {
-      List<Integer> depPARA = dependenciasPara.get(moduloOrigem);
-      qtdDependenciasPara[moduloOrigem] = depPARA.size();
-      for (int i = 0; i < depPARA.size(); i++) {
-        //System.out.println("PARA[" + moduloOrigem + "][" + i + "]=" + depPARA.get(i));
-        listaDependenciasPara[moduloOrigem][i] = depPARA.get(i);
+        ExperimentoFactory.executa(problema, exibicoes[indice], param);
+        indice++;
       }
     }
-    for (Integer moduloDestino : dependenciasDe.keySet()) {
-      List<Integer> depDE = dependenciasDe.get(moduloDestino);
-      qtdDependenciasDe[moduloDestino] = depDE.size();
-      for (int i = 0; i < depDE.size(); i++) {
-        //System.out.println("DE[" + moduloDestino + "][" + i + "]=" + depDE.get(i));
-        listaDependenciasDe[moduloDestino][i] = depDE.get(i);
-      }
-    }
-
-    String name = classe.getSimpleName();
-    String filename = classe.getPackageName();
-
-    Problema problema = new Problema(
-        filename,
-        name,
-        classCount,
-        packageCount,
-        originalClasses,
-        originalPackage,
-        listaDependenciasPara,
-        qtdDependenciasPara,
-        listaDependenciasDe,
-        qtdDependenciasDe,
-        hmd);
-
-    return problema;
   }
 
   public static int dependenciaDE(Entidade nEntidade) {

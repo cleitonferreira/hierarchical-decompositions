@@ -15,6 +15,28 @@ public class ExperimentoFinalParte1 extends ExperimentoModel {
     return "Final_Parte1_ILS";
   }
 
+  public String[] getInstancias()
+  {
+    return new String[] {
+        /*"mtunis",*/
+        "exemplo.odem"
+        /*"junit-3.8.1 100C.odem"*/
+        /*"jstl-1.0.6 18C.odem"*/
+/*			"jnanoxml 25C.odem",
+			"apache_zip 36C.odem",
+			"jscatterplot 74C.odem",
+			"junit-3.8.1 100C.odem",
+			"tinytim 134C.odem",
+			"gae_plugin_core 140C.odem",
+			"jdendogram 177C.odem",
+			"pdf_renderer 199C.odem",
+			"Jung-visualization 221C.odem",
+			"pfcda_swing 252C.odem",
+			"jml 270C.odem",
+			"notepad-full 299C.odem",*/
+    };
+  }
+
   public void addParametrosCombinacaoMetodos(List<Parametro> params, Double percentual, int nCiclos,
       int maxIteracoesSemMelhoria, boolean inicialConstrutivo,
       boolean metodosPerturbacaoSimultaneos) {
