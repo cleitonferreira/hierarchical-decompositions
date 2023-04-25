@@ -2,42 +2,86 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/ExperimentoFinalParte1.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/AlgoritmoHC.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/CalculadorHC.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/GeradorSolucao.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivo/AlgoritmoCNM.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivo/GeradorSolucao.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivoLista/AlgoritmoCNMLL.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivoLista/SolucaoCNMLL.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/AlgoritmoAbstract.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Calculador.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/CalculadorAbstract.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Diretorios.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Experimento.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/ExperimentoFactory.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/ExperimentoModel.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Problema.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/SolucaoAbstract.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/TipoAlgoritmo.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/TipoExibicao.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoCrossover.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoDescarte.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoElite.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoMutacao.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoSelection.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/ExperimentoFinalParte1.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/Principal.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/AlgoritmoHC.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/CalculadorHC.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/GeradorSolucao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/busca/SolucaoHC.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivo/AlgoritmoCNM.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivo/GeradorSolucao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivo/SolucaoCNM.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivoLista/AlgoritmoCNMLL.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivoLista/CalculadorCNM.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/construtivoLista/SolucaoCNMLL.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/AlgoritmoAbstract.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Calculador.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/CalculadorAbstract.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Diretorios.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Exibicao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Experimento.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/ExperimentoFactory.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/ExperimentoModel.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/LeitorProblema.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/LeitorProblemaODEM.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/LeitorProblemaTXT.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Parametro.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Problema.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/ProblemaFactory.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/SolucaoAbstract.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/TipoAlgoritmo.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/TipoExibicao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/Verificador.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/random/GeradorNumero.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/random/GeradorSolucaoAbstract.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/random/PseudoRandom.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/core/random/StringUtil.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/AlgoritmoGeneticoAbstract.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/Crossover.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/DebugUtil.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/Descarte.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/GeradorSolucaoGenetico.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/Mutation.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/Populacao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/Selection.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoCrossover.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoDescarte.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoElite.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoMutacao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/TipoSelection.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/classico/AlgoritmoGeneticoGA.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/classico/SolucaoGeneticoGA.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/falkenauer/AlgoritmoGeneticoGF.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/falkenauer/AlgoritmoGeneticoGFNormalizado.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/genetico/falkenauer/SolucaoGeneticoGF.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/LeitorProblema.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/Reader.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/Dependency.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/DependencyType.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/ElementType.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/ElementVisibility.java" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/AlgoritmoILS.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/Project.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/ProjectClass.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/leitura/model/ProjectPackage.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/AlgoritmoILS.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/CalculadorILS.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/GeradorNumero.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/GeradorSolucao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/GeradorSolucao.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/GeradorSolucaoAbstract.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/PseudoRandom.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/SolucaoILS.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/TipoPerturbacao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/SolucaoILS.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/metaheuristica/TipoPerturbacao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/DadosAlgoritmo.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/DadosDebug.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/DadosDebugCabecalho.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/DadosExecucao.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/DadosInstancia.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/DebugReader.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/GeradorCSV.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/GeradorScriptR.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/Reader.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/ResultsReader.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/TipoLinhaDebug.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/example/ils/statistics/TipoLinhaResultado.java" charset="ISO-8859-1" />
   </component>
 </project>
