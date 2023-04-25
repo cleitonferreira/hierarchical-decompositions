@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import org.example.ils.core.Problema;
 import org.example.model.Entidade;
 import org.example.model.HMD;
 import org.example.model.Modulo;
