@@ -39,7 +39,6 @@ public class LeitorProblemaODEM {
   public static Problema loadODEM(String filename) throws Exception {
     Project modelo = Reader.load(filename);
     Problema problema = loadProject(modelo);
-    //int[] subgrupos = new int[1];
     int[] subgrupos = GeradorGrupos.geradorSubmodulos(problema.getOriginalPackage());
     hmdSolucao = converterProblemaParaHMD(problema, problema.getOriginalPackage(), subgrupos);
     problema.setHmd(hmdSolucao);

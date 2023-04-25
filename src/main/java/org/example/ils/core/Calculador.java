@@ -2,6 +2,7 @@ package org.example.ils.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import org.example.FormulaComplexidade;
@@ -184,43 +185,29 @@ public class Calculador extends CalculadorAbstract {
 
   private static List<Entidade> getListaEntidadesPorModulo(Problema problema, int[] valores,
       int modulo) {
-    HMD hmd = problema.getHMD();
     List<Entidade> listaEntidades = new ArrayList<>();
+
     for (int a = 0; a < valores.length; a++) {
       if (Objects.nonNull(problema.getClassCount())) {
         for (int i = 0; i < problema.getClassCount(); i++) {
           if ((valores[i] == modulo) && modulo == a) {
 
-            if (Objects.nonNull(hmd.getModulos())) {
-              for (Modulo m : hmd.getModulos()) {
-                if (Objects.nonNull(m.getListaEntidades())) {
-                  for (Entidade em : m.getListaEntidades()) {
-                    if (em.getNome().equals(String.valueOf(i))) {
-                      listaEntidades.add(em);
-                    }
-                  }
-                }
-
-                if (Objects.nonNull(m.getSubmodulos())) {
-                  for (Modulo s : m.getSubmodulos()) {
-                    if (Objects.nonNull(s.getListaEntidades())) {
-                      for (Entidade es : s.getListaEntidades()) {
-                        if (es.getNome().equals(String.valueOf(i))) {
-                          listaEntidades.add(es);
-                        }
-                      }
-                    }
-                  }
-                }
+            Collection<Entidade> links = new ArrayList<>();
+            for (int l = 0; l < problema.getListaDependenciasPara()[i].length; l++) {
+              if (problema.getQtdDependenciasPara()[i] > l) {
+                int value = problema.getListaDependenciasPara()[i][l];
+                links.add(new Entidade(String.valueOf(value), null));
               }
             }
-
+            links = links.size() == 0 ? null : links;
+            listaEntidades.add(new Entidade(String.valueOf(i), links));
           }
         }
       }
     }
     return listaEntidades;
   }
+
 
   /**
    * Calcula o fitness
