@@ -14,12 +14,12 @@ public abstract class CalculadorAbstract {
 	/**
 	 * Avalia o fitness de uma solução
 	 */
-	public abstract double evaluate(SolucaoAbstract s);
+	public abstract double evaluate(SolucaoAbstract solucaoAbstract);
 	
 	/**
 	 * Avalia a solução
 	 */
-	public abstract double evaluate(int[] valores);
+	public abstract double evaluate(SolucaoAbstract solucaoAbstract, int[] valores);
 	
 	public Problema getProblema() {
 		return problema;

@@ -41,7 +41,7 @@ public class CalculadorCNM extends Calculador {
 		for (Integer item : itens2) {
 			valores[item] = cluster1;
 		}
-		double fitness = calculateMQ(valores);
+		double fitness = calculateFormulaComplexidade(s, valores);
 		// desfaz a modificação
 		for (Integer item : itens2) {
 			valores[item] = cluster2;

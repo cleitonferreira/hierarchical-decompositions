@@ -38,7 +38,7 @@ public class Calculador extends CalculadorAbstract {
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
 	 */
-	public double calculateMQEgravaEstado(int[] valores) {
+	public double calculateFormulaComplexidadeEgravaEstado(SolucaoAbstract s, int[] valores) {
 		
 		this.inboundEdges = new int[this.problema.getClassCount()];
 		this.outboundEdges = new int[this.problema.getClassCount()];
@@ -83,7 +83,7 @@ public class Calculador extends CalculadorAbstract {
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
 	 */
-	public double calculateMQ(int[] valores) {
+	public double calculateFormulaComplexidade(SolucaoAbstract s, int[] valores) {
 		
 		int[] inboundEdges = new int[this.problema.getClassCount()];
 		int[] outboundEdges = new int[this.problema.getClassCount()];
@@ -126,21 +126,21 @@ public class Calculador extends CalculadorAbstract {
 	 * Calcula o fitness
 	 */
 	public double evaluate(SolucaoAbstract s) {
-		return evaluate(s.getValores());
+		return evaluate(s, s.getValores());
 	}
 	
 	/**
 	 * Avalia a solução
 	 */
-	public double evaluate(int[] valores) {
-		return -calculateMQ(valores);
+	public double evaluate(SolucaoAbstract s, int[] valores) {
+		return -calculateFormulaComplexidade(s, valores);
 	}
 
 	/**
 	 * Avalia a solução
 	 */
-	public double evaluateEGravaEstado(int[] valores) {
-		return calculateMQEgravaEstado(valores);
+	public double evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
+		return calculateFormulaComplexidadeEgravaEstado(s, valores);
 	}
 
 	/**
