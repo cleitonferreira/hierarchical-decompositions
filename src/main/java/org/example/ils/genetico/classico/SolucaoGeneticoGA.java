@@ -34,6 +34,11 @@ public class SolucaoGeneticoGA implements SolucaoAbstract {
 		this.fitness = fitness;
 	}
 
+	@Override
+	public void setGrupos(int[] grupos) {
+
+	}
+
 	public double getFitness() {
 		return fitness;
 	}
@@ -54,6 +59,11 @@ public class SolucaoGeneticoGA implements SolucaoAbstract {
 		return this.valores.length;
 	}
 
+	@Override
+	public int[] getGrupos() {
+		return new int[0];
+	}
+
 	public void setValores(int[] valores) {
 		this.valores = valores;
 	}
@@ -72,7 +82,12 @@ public class SolucaoGeneticoGA implements SolucaoAbstract {
 		}
 		return sb.toString();
 	}
-	
+
+	@Override
+	public String getGruposString() {
+		return null;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		return ((SolucaoGeneticoGA)obj).getString().equals(this.getString());

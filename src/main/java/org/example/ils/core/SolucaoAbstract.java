@@ -5,10 +5,14 @@ public interface SolucaoAbstract {
 	public abstract double getFitness();
 	
 	public abstract String getString();
+
+	public abstract String getGruposString();
 	
 	public abstract int getLocation();
 	
 	public abstract void setFitness(double fitness);
+
+	public abstract void setGrupos(int[] grupos);
 	
 	public abstract void setLocation(int location);
 
@@ -16,5 +20,8 @@ public interface SolucaoAbstract {
 	public abstract int[] getValores();
 	
 	public abstract int getTotalItens();
+
+	// grupos e subgrupos
+	public abstract int[] getGrupos();
 
 }

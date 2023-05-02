@@ -76,6 +76,9 @@ public class Calculador extends CalculadorAbstract {
 		}
 		
 		this.mq = mq;
+
+		int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
+		s.setGrupos(subgrupos);
 		
 		return -mq;
 	}
@@ -118,6 +121,9 @@ public class Calculador extends CalculadorAbstract {
 				mq += mf;
 			}
 		}
+
+		int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
+		s.setGrupos(subgrupos);
 		
 		return mq;
 	}

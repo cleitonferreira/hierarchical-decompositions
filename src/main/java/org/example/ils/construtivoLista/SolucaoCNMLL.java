@@ -21,6 +21,8 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	private HashMap<Integer,LinkedList<Integer>> mapa;
 	
 	private int[] valores;
+
+	private int[] grupos;
 	
 	public SolucaoCNMLL(SolucaoCNMLL s) {
 		this.mapa = cloneMapa(s.getMapa());
@@ -68,6 +70,14 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 	
 	public int getTotalGrupos() {
 		return this.mapa.size();
+	}
+
+	public int[] getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(int[] grupos) {
+		this.grupos = grupos;
 	}
 
 	public HashMap<Integer,LinkedList<Integer>> getMapa() {
@@ -132,6 +142,10 @@ public class SolucaoCNMLL implements SolucaoAbstract {
 			sb.append(String.valueOf(this.valores[i]));
 		}
 		return sb.toString();
+	}
+
+	public String getGruposString() {
+		return "---";
 	}
 	
 	public void setValores(int[] valores, HashMap<Integer, LinkedList<Integer>> mapa) {

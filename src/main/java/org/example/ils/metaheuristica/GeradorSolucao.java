@@ -53,8 +53,9 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 			}
 			qtdItens[valores[i]]++;
 		}
-	
-		SolucaoILS solucao = new SolucaoILS(valores, qtdItens, totalGrupos);
+
+		int[] subgrupos = new int[0];
+		SolucaoILS solucao = new SolucaoILS(valores, qtdItens, totalGrupos, subgrupos);
 	
 		normalizar(solucao);
 	

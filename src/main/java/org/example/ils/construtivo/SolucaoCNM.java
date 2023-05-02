@@ -17,6 +17,8 @@ public class SolucaoCNM implements SolucaoAbstract {
 	// parte básica da representação da solução
 	private int[] valores;
 
+	private int[] grupos;
+
 	// quantidade dos grupos
 	private int totalGrupos;
 
@@ -105,6 +107,14 @@ public class SolucaoCNM implements SolucaoAbstract {
 	public int[] getQtdItens() {
 		return qtdItens;
 	}
+
+	public int[] getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(int[] grupos) {
+		this.grupos = grupos;
+	}
 	
 	/**
 	 * Utilizado para exibição dos resultados
@@ -139,6 +149,11 @@ public class SolucaoCNM implements SolucaoAbstract {
 		}
 		sb.append("]]");
 		return sb.toString();
+	}
+
+	@Override
+	public String getGruposString() {
+		return "---";
 	}
 
 

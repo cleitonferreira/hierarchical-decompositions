@@ -20,6 +20,8 @@ public class SolucaoILS implements SolucaoAbstract {
 	// parte básica da representação da solução
 	private int[] valores;
 
+	private int[] grupos;
+
 	// quantidade dos grupos
 	private int totalGrupos;
 
@@ -35,6 +37,7 @@ public class SolucaoILS implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
 	public SolucaoILS(SolucaoCNM s) {
@@ -46,6 +49,7 @@ public class SolucaoILS implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
 	public SolucaoILS(SolucaoCNMLL s) {
@@ -56,6 +60,7 @@ public class SolucaoILS implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
 	public SolucaoILS(SolucaoHC s) {
@@ -67,34 +72,39 @@ public class SolucaoILS implements SolucaoAbstract {
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
+		this.grupos = Arrays.copyOf(s.getGrupos(), s.getGrupos().length);
 	}
 
-	public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos ) {
+	public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
+		this.grupos = grupos;
 	}
 
-	public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location ) {
+	public SolucaoILS(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
 		this.fitness = fitness;
 		this.location = location;
+		this.grupos = grupos;
 	}
 
 	public SolucaoILS(int tamanho) {
 		this.valores = new int[tamanho];
 		this.qtdItens = new int[2 * tamanho];
 		this.totalGrupos = 0;
+		this.grupos = new int[tamanho];
 	}
 	
-	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location) {
+	public void setSolucao(int[] valores, int[] qtdItens, int totalGrupos, double fitness, int location, int[] grupos) {
 		this.valores = valores;
 		this.qtdItens = qtdItens;
 		this.totalGrupos = totalGrupos;
 		this.fitness = fitness;
 		this.location = location;
+		this.grupos = grupos;
 	}
 
 	public void setFitness(double fitness) {
@@ -141,6 +151,14 @@ public class SolucaoILS implements SolucaoAbstract {
 	public int[] getQtdItens() {
 		return qtdItens;
 	}
+
+	public int[] getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(int[] grupos) {
+		this.grupos = grupos;
+	}
 	
 	/**
 	 * Utilizado para exibição dos resultados
@@ -153,6 +171,18 @@ public class SolucaoILS implements SolucaoAbstract {
 		for (int i = 1; i < valores.length; i++) {
 			sb.append(",");
 			sb.append(String.valueOf(this.valores[i]));
+		}
+		return sb.toString();
+	}
+
+	public String getGruposString() {
+		StringBuilder sb = new StringBuilder("");
+		if (this.grupos.length > 0) {
+			sb.append(String.valueOf(this.grupos[0]));
+		}
+		for (int i = 1; i < grupos.length; i++) {
+			sb.append(",");
+			sb.append(String.valueOf(this.grupos[i]));
 		}
 		return sb.toString();
 	}

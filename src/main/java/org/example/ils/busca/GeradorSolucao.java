@@ -55,7 +55,8 @@ public class GeradorSolucao extends GeradorSolucaoAbstract {
 			qtdItens[valores[i]]++;
 		}
 
-		SolucaoHC solucao = new SolucaoHC(valores, qtdItens, totalGrupos);
+		int[] subgrupos = new int[0];
+		SolucaoHC solucao = new SolucaoHC(valores, qtdItens, totalGrupos, subgrupos);
 
 		normalizar(solucao);
 

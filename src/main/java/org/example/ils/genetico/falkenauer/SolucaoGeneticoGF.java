@@ -49,6 +49,11 @@ public class SolucaoGeneticoGF implements SolucaoAbstract {
 		this.fitness = fitness;
 	}
 
+	@Override
+	public void setGrupos(int[] grupos) {
+
+	}
+
 	public double getFitness() {
 		return fitness;
 	}
@@ -67,6 +72,11 @@ public class SolucaoGeneticoGF implements SolucaoAbstract {
 
 	public int getTotalItens() {
 		return this.valores.length;
+	}
+
+	@Override
+	public int[] getGrupos() {
+		return new int[0];
 	}
 
 	public void setValores(int[] valores) {
@@ -104,7 +114,12 @@ public class SolucaoGeneticoGF implements SolucaoAbstract {
 		}
 		return sb.toString();
 	}
-	
+
+	@Override
+	public String getGruposString() {
+		return null;
+	}
+
 	public int getNumeroDoMaiorGrupo() {
 		// pega o número do maior grupo a partir do vetor com os inteiros
 		int maiorGrupo = -1;
