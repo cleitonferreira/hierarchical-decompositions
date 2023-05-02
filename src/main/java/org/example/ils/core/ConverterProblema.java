@@ -53,6 +53,44 @@ public class ConverterProblema {
     return new HMD(modulos);
   }
 
+  public static HMD converterProblemaParaHMD(Problema problema, int[] valores, int[] submodulos) {
+    Modulo modulo = null;
+    List<Modulo> modulos = new ArrayList<Modulo>();
+    hmdSolucao = new HMD();
+
+    // Modulo A0
+    modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "modulo-0", null);
+    modulos.add(modulo);
+
+    /*Remover valores repetidos*/
+    int[] resultado = Arrays.stream(valores).distinct().toArray();
+    /*Ordenar*/
+    Arrays.sort(resultado);
+
+    for (int a = 0; a < resultado.length; a++) {
+      for (int b = 0; b < submodulos.length; b++) {
+
+        int verificaModulo = getVerificaModulo(modulos, resultado[a]);
+
+        if (verificaModulo == -1 && a == b) {
+
+          Modulo submodulo = new Modulo(
+              getListaEntidadesPorModulo(problema, valores, resultado[a]),
+              String.valueOf("modulo-" + b), null);
+
+          List<Modulo> listaModulosModulosNaoHierrarquicos = hmdSolucao.converterHMDParaModulosNaoHierrarquicos(modulos);
+
+          Modulo moduloPosicao = buscarPosicaoModulo(listaModulosModulosNaoHierrarquicos, submodulos[b]);
+          if (Objects.isNull(moduloPosicao.getSubmodulos())){
+            moduloPosicao.preparandoSubmodulos();
+          }
+          moduloPosicao.getSubmodulos().add(submodulo);
+        }
+      }
+    }
+    return new HMD(modulos);
+  }
+
   public static Modulo buscarPosicaoModulo(List<Modulo> modulos, int posicao) {
     String nomeModulo = "modulo-"+posicao;
     for (int i = 0; i < modulos.size(); i++) {

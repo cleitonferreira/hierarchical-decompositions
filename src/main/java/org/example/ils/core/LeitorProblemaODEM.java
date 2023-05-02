@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.example.ils.leitura.Reader;
 import org.example.ils.leitura.model.Project;
 import org.example.ils.leitura.model.ProjectClass;
+import org.example.model.HMD;
 
 public class LeitorProblemaODEM 
 {
@@ -29,6 +30,9 @@ public class LeitorProblemaODEM
 	{
 		Project modelo = Reader.load(filename);
 		Problema problema = loadProject(modelo);
+		int[] subgrupos = GeradorGrupos.geradorSubmodulos(problema.getOriginalPackage());
+		HMD hmdSolucao = ConverterProblema.converterProblemaParaHMD(problema, problema.getOriginalPackage(), subgrupos);
+		problema.setHmd(hmdSolucao);
 		return problema;
 	}
 
