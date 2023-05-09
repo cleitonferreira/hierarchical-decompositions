@@ -153,7 +153,7 @@ public class Calculador extends CalculadorAbstract {
 	 * Calcula o coeficiente de modularidade do projeto
 	 * Considera somente a diferença nos vetores intraEdges, inboundEdges, outboundEdges calculado na última iteração
 	 */
-	public double evaluateMove(int[] valores, int item, int grupo1, int grupo2) {
+	public double evaluateMove(SolucaoAbstract s, int[] valores, int item, int grupo1, int grupo2) {
 		
 		int[][]listaDependenciasPara = this.problema.getListaDependenciasPara();
 		int[] qtdDependenciasPara = this.problema.getQtdDependenciasPara();

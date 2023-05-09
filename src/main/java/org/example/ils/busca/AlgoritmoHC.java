@@ -61,7 +61,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 					int grupoDestino = j;
 					valores[i] = grupoDestino;
 					
-					double fitness = ((CalculadorHC)calculador).evaluateMove(valores, i, grupoOrigem, grupoDestino);
+					double fitness = ((CalculadorHC)calculador).evaluateMove(solucaoMelhor, valores, i, grupoOrigem, grupoDestino);
 					this.evaluation++;
 					
 					// verifica se este é o melhor vizinho

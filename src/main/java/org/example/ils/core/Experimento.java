@@ -62,6 +62,9 @@ public class Experimento {
 			if (fitness < melhorFitness) {
 				this.melhorFitness = fitness;
 				this.melhorSolucao = solucao;
+			} else if (melhorFitness == 0 && melhorSolucao == null) {
+				this.melhorFitness = fitness;
+				this.melhorSolucao = solucao;
 			}
 		}
 
