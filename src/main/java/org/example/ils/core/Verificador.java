@@ -5,9 +5,6 @@ import java.util.TreeSet;
 import org.example.ils.busca.SolucaoHC;
 import org.example.ils.construtivo.SolucaoCNM;
 import org.example.ils.construtivoLista.SolucaoCNMLL;
-import org.example.ils.genetico.classico.AlgoritmoGeneticoGA;
-import org.example.ils.genetico.classico.SolucaoGeneticoGA;
-import org.example.ils.genetico.falkenauer.SolucaoGeneticoGF;
 import org.example.ils.metaheuristica.SolucaoILS;
 
 public class Verificador {
@@ -30,11 +27,6 @@ public class Verificador {
 			int totalItensOk = problema.getTamanho();
 			if (solucao.getTotalItens() != totalItensOk) {
 				throw new Exception("ERRO: Quantidade de módulos da solução está incorreto.");
-			}
-			if (solucao instanceof SolucaoGeneticoGF) {
-				if (((SolucaoGeneticoGF)solucao).getTotalGrupos() > totalItensOk || ((SolucaoGeneticoGF)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
-				}
 			}
 			if (solucao instanceof SolucaoHC) {
 				if (((SolucaoHC)solucao).getTotalGrupos() > totalItensOk || ((SolucaoHC)solucao).getTotalGrupos() < 1) {
@@ -74,17 +66,9 @@ public class Verificador {
 			}
 		}
 		
-		if (algoritmo!=null && algoritmo instanceof AlgoritmoGeneticoGA) {
-			return true;
-		}
-		
 		int[] qtdItens;
 		int totalGrupos;
-		if (solucao instanceof SolucaoGeneticoGF) {
-			qtdItens = ((SolucaoGeneticoGF)solucao).getQtdItens();
-			totalGrupos = ((SolucaoGeneticoGF)solucao).getTotalGrupos();
-		}
-		else if (solucao instanceof SolucaoHC) {
+		if (solucao instanceof SolucaoHC) {
 			qtdItens = ((SolucaoHC)solucao).getQtdItens();
 			totalGrupos = ((SolucaoHC)solucao).getTotalGrupos();
 		}
@@ -99,10 +83,6 @@ public class Verificador {
 		else if (solucao instanceof SolucaoILS) {
 			qtdItens = ((SolucaoILS)solucao).getQtdItens();
 			totalGrupos = ((SolucaoILS)solucao).getTotalGrupos();
-		}
-		else if (solucao instanceof SolucaoGeneticoGA) {
-			qtdItens = null;
-			totalGrupos = 0;
 		}
 		else {
 			qtdItens = null;

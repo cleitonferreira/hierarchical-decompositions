@@ -1,11 +1,5 @@
 package org.example.ils.core;
 
-import org.example.ils.busca.AlgoritmoHC;
-import org.example.ils.construtivo.AlgoritmoCNM;
-import org.example.ils.construtivoLista.AlgoritmoCNMLL;
-import org.example.ils.genetico.classico.AlgoritmoGeneticoGA;
-import org.example.ils.genetico.falkenauer.AlgoritmoGeneticoGF;
-import org.example.ils.genetico.falkenauer.AlgoritmoGeneticoGFNormalizado;
 import org.example.ils.metaheuristica.AlgoritmoILS;
 
 public class ExperimentoFactory {
@@ -16,98 +10,18 @@ public class ExperimentoFactory {
 		Parametro param) 
 	throws Exception
 	{
-		int tamanho = problema.getTamanho();
 		
 		if (param.getEvaluationMax()==null)
 			throw new Exception("Quantidade de avaliações não definida.");
 				
 		TipoAlgoritmo tipoAlgoritmo = param.getTipoAlgoritmo();
 
-		AlgoritmoAbstract algoritmo = null;
-		switch (tipoAlgoritmo) {
-			case GENETICO_GNE:
-			case GENETICO_FALKENAUER_NORMALIZADO:
-			case GENETICO_FALKENAUER:
-				if (param.getMaxProporcaoGrupos()==null)
-					// deprecated: param.setMaxProporcaoGrupos( 2 );
-					throw new Exception("Quantidade de proporção de grupos não definida.");
-				
-				boolean bCrossoverPadrao = false;
-				if (param.getProbabilidadeCrossover() == null){
-					// ERRO: param.setProbabilidadeCrossover( (tamanho < 100) ? 0.8 : 1.0 );
-					param.setProbabilidadeCrossover( ( ( 10 * tamanho ) < 100) ? 0.8 : 1.0 );
-					bCrossoverPadrao = true;
-				}
-				boolean bMutacaoPadrao = false;
-				if (param.getProbabilidadeMutacao() == null) {
-					param.setProbabilidadeMutacao( 0.004 * Math.log(tamanho) / Math.log(2) );
-					bMutacaoPadrao = true;
-				}
-				boolean bPopulacaoPadrao = false;
-				if (param.getTamanhoPopulacao() == null){
-					param.setTamanhoPopulacao( tamanho * 10 );
-					bPopulacaoPadrao = true;
-				}
-				
-				if (param.getTipoCrossover().isFalkenauer()) {
-					if (param.getTipoAlgoritmo() == null | param.getTipoAlgoritmo() == TipoAlgoritmo.GENETICO_FALKENAUER) {
-						algoritmo = new AlgoritmoGeneticoGF(
-							problema,
-							exibicao,
-							param
-						);
-					} else {
-						algoritmo = new AlgoritmoGeneticoGFNormalizado(
-							problema,
-							exibicao,
-							param
-						);
-					}
-				}
-				else {
-					algoritmo = new AlgoritmoGeneticoGA(
-						problema,
-						exibicao,
-						param
-					);
-				}
-				if (bCrossoverPadrao)
-					param.setProbabilidadeCrossover(null);
-				if (bMutacaoPadrao)
-					param.setProbabilidadeMutacao(null);
-				if (bPopulacaoPadrao)
-					param.setTamanhoPopulacao(null);
-				break;
-			case GULOSO_VETOR:
-				algoritmo = new AlgoritmoCNM(
-						problema,
-						exibicao,
-						param);
-				break;
-			case GULOSO_HASHMAP:
-				algoritmo = new AlgoritmoCNMLL(
-						problema,
-						exibicao,
-						param);
-				break;
-			case HILL_CLIMBING:
-				algoritmo = new AlgoritmoHC(
-						problema,
-						exibicao,
-						param
-					);
-				break;
-			case ITERATED_LOCAL_SEARCH:
-				algoritmo = new AlgoritmoILS(
-						problema,
-						exibicao,
-						param
-					);
-				break;
-			default:
-				break;
-			
-		}
+		AlgoritmoAbstract algoritmo = new AlgoritmoILS(
+			problema,
+			exibicao,
+			param
+		);
+
 		if(algoritmo==null) {
 			System.out.println("Algoritmo não encontrado=" + tipoAlgoritmo);
 			return null;
