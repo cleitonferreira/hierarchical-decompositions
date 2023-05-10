@@ -1,7 +1,7 @@
 package org.example.ils.leitura.model;
 
 /**
- * Tipo de dependência entre duas classes
+ * Tipo de dependÃªncia entre duas classes
  * 
  * @author Marcio Barros
  */
@@ -12,21 +12,21 @@ public enum DependencyType {
 	private final String identifier;
 
 	/**
-	 * Inicializa um tipo de dependência
+	 * Inicializa um tipo de dependÃªncia
 	 */
 	DependencyType(String id) {
 		this.identifier = id;
 	}
 
 	/**
-	 * Retorna o identificador do tipo de dependência
+	 * Retorna o identificador do tipo de dependÃªncia
 	 */
 	public String getIdentifier() {
 		return identifier;
 	}
 
 	/**
-	 * Retorna um tipo de dependência, dado um identificado
+	 * Retorna um tipo de dependÃªncia, dado um identificado
 	 */
 	public static DependencyType fromIdentifier(String id) {
 		for (DependencyType type : DependencyType.values())

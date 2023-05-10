@@ -16,7 +16,7 @@ public interface SolucaoAbstract {
 	
 	public abstract void setLocation(int location);
 
-	// representação da solução onde cada item do vetor corresponde ao módulo e o conteúdo ao cluster que o modulo faz parte
+	// representaÃ§Ã£o da soluÃ§Ã£o onde cada item do vetor corresponde ao mÃ³dulo e o conteÃºdo ao cluster que o modulo faz parte
 	public abstract int[] getValores();
 	
 	public abstract int getTotalItens();

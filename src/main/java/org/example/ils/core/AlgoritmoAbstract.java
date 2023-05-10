@@ -1,23 +1,23 @@
 package org.example.ils.core;
 
 /**
- * Principais métodos e parâmetros a serem implementados nos algoritmos
+ * Principais mÃ©todos e parÃ¢metros a serem implementados nos algoritmos
  */
 public abstract class AlgoritmoAbstract {
 
-	// Número de gerações de soluções, contado individualmente por cada solução na população
+	// NÃºmero de geraÃ§Ãµes de soluÃ§Ãµes, contado individualmente por cada soluÃ§Ã£o na populaÃ§Ã£o
 	protected int evaluation = 0;
-	// Número máximo de gerações de soluções
+	// NÃºmero mÃ¡ximo de geraÃ§Ãµes de soluÃ§Ãµes
 	protected int evaluationMax = 0;
 	// Iteracao atual do algoritmo, sem contar individuos gerados individualmente
 	protected int iteracao = 0;
-	// Tempo de execução considerado para execução do algoritmo
+	// Tempo de execuÃ§Ã£o considerado para execuÃ§Ã£o do algoritmo
 	protected long tempoExecucao = 0;
-	// Variável auxiliar que retornará a solução gerada pelo algoritmo
+	// VariÃ¡vel auxiliar que retornarÃ¡ a soluÃ§Ã£o gerada pelo algoritmo
 	protected SolucaoAbstract solucao = null;
 	// Dados de entrada do problema utilizado
 	protected Problema problema = null;
-	// Classe que efetua o cálculo de fitness das soluções
+	// Classe que efetua o cÃ¡lculo de fitness das soluÃ§Ãµes
 	protected CalculadorAbstract calculador = null;
 	// Publicador
 	protected Exibicao exibicao = null;
@@ -25,7 +25,7 @@ public abstract class AlgoritmoAbstract {
 	protected int maxProporcaoGrupos = 1;
 
 	/**
-	 * Número máximo de evaluations a ser executado no algoritmo
+	 * NÃºmero mÃ¡ximo de evaluations a ser executado no algoritmo
 	 */
 	public void setEvaluationMax(int evaluationMax) 
 	{
@@ -33,7 +33,7 @@ public abstract class AlgoritmoAbstract {
 	}
 	
 	/**
-	 * Número máximo de avaliações a ser executado no algoritmo
+	 * NÃºmero mÃ¡ximo de avaliaÃ§Ãµes a ser executado no algoritmo
 	 */
 	public void setEvaluation(int evaluation)
 	{
@@ -41,7 +41,7 @@ public abstract class AlgoritmoAbstract {
 	}
 
 	/**
-	 * Reset nas variáveis do algoritmo
+	 * Reset nas variÃ¡veis do algoritmo
 	 */
 	public void reset() 
 	{
@@ -52,7 +52,7 @@ public abstract class AlgoritmoAbstract {
 	}
 	
 	/**
-	 * Informa o número de avaliações de solução
+	 * Informa o nÃºmero de avaliaÃ§Ãµes de soluÃ§Ã£o
 	 */
 	public int getEvaluation()
 	{
@@ -60,7 +60,7 @@ public abstract class AlgoritmoAbstract {
 	}
 	
 	/**
-	 * Seta a posição de iteração atual
+	 * Seta a posiÃ§Ã£o de iteraÃ§Ã£o atual
 	 */
 	public void setIteracao(int iteracao) 
 	{
@@ -76,7 +76,7 @@ public abstract class AlgoritmoAbstract {
 	}
 
 	/**
-	 * Informa o tempo de execução da última execução
+	 * Informa o tempo de execuÃ§Ã£o da Ãºltima execuÃ§Ã£o
 	 */
 	public long getTempoExecucao() 
 	{
@@ -84,7 +84,7 @@ public abstract class AlgoritmoAbstract {
 	}
 
 	/**
-	 * Informa a solução da última execução
+	 * Informa a soluÃ§Ã£o da Ãºltima execuÃ§Ã£o
 	 */
 	public SolucaoAbstract getSolucao() 
 	{
@@ -126,12 +126,12 @@ public abstract class AlgoritmoAbstract {
 	public abstract void executa(String... args);
 	
 	/**
-	 * Informaçãoes dos parametros utilizados
+	 * InformaÃ§Ã£oes dos parametros utilizados
 	 */
 	public abstract String getInfoParametros();
 	
 	/**
-	 * Configurações do parametro de entrada do algoritmo
+	 * ConfiguraÃ§Ãµes do parametro de entrada do algoritmo
 	 */
 	public abstract void setConfiguracoes(Parametro param) throws Exception;
 	

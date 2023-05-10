@@ -19,7 +19,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * Concatena os elementos passados por par‚metros
+	 * Concatena os elementos passados por par√¢metros
 	 */
 	static String concatena(String separador, String... itens) {
 		StringBuilder sb = new StringBuilder();
@@ -31,7 +31,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * Concatena os elementos passados por par‚metros
+	 * Concatena os elementos passados por par√¢metros
 	 */
 	public static String concatenaLabelsEItens(String separador,
 			String... labelEItens) {

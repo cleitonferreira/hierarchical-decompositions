@@ -68,7 +68,7 @@ public class DadosDebug
 		StringBuffer sb = new StringBuffer();
 		if (this.cabecalhoDebug == null)
 		{
-			throw new IOException("CabeÁalho do Debug n„o foi impresso");
+			throw new IOException("Cabe√ßalho do Debug n√£o foi impresso");
 			// return ";;;;;;;;";
 		}
 		//sb.append(this.cabecalhoDebug.getNomeAlgoritmo());

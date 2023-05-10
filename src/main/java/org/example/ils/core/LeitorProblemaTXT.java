@@ -11,7 +11,7 @@ import java.util.List;
 public class LeitorProblemaTXT 
 {
 	/**
-	 * A partir do arquivo da inst‚ncia, carrega um objeto Problema
+	 * A partir do arquivo da inst√¢ncia, carrega um objeto Problema
 	 */
 	public static Problema loadTXT(String filename)
 	{
@@ -23,7 +23,7 @@ public class LeitorProblemaTXT
 			leituraModulos(filename, modulos, dependenciasDe, dependenciasPara);
 			
 			int classCount = modulos.size();
-			int packageCount = 0; // sem informaÁ„o da quantidade de pacotes original
+			int packageCount = 0; // sem informa√ß√£o da quantidade de pacotes original
 			
 			/// System.out.println("qtd_modulos=[" + modulos.size() + "]");
 			
@@ -115,10 +115,10 @@ public class LeitorProblemaTXT
 
 			entrada.close();
 		} catch (FileNotFoundException e1) {
-			System.out.println("Arquivo n„o localizado: [" + filename +"]");
+			System.out.println("Arquivo n√£o localizado: [" + filename +"]");
 			System.exit(1);
 		} catch (IOException e2) {
-			System.out.println("Erro ao abrir o arquivo de saÌda: [" + filename + "]");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + filename + "]");
 			System.exit(1);
 		}
 	}

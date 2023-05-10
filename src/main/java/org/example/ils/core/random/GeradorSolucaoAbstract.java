@@ -3,7 +3,7 @@ package org.example.ils.core.random;
 public abstract class GeradorSolucaoAbstract {
 
 	//****************************************************************************
-	// MÉTODOS GENÉRICOS  
+	// MÃ‰TODOS GENÃ‰RICOS  
 	//****************************************************************************
 
 	// private static GeradorNumero random = null;

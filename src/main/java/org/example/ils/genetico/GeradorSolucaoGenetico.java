@@ -9,7 +9,7 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 	
 	/**
 	 * @Deprecated
-	 * Faz com que os grupos tenham numeraÁ„o sequencial
+	 * Faz com que os grupos tenham numera√ß√£o sequencial
 	 * Complexidade n*n
 	 */
 	public static void normalizar(SolucaoGeneticoGF s)
@@ -18,16 +18,16 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 		int[] qtdItens = s.getQtdItens();
 		// int qtdGrupos = s.getTotalGrupos();
 
-		// cÛpia do vetor que ser· normalizada
+		// c√≥pia do vetor que ser√° normalizada
 		int[] valoresOriginal = Arrays.copyOf(valores, valores.length);
 		int[] qtdItensOriginal = Arrays.copyOf(qtdItens, qtdItens.length);
 
 		// percorre o vetor com os grupos marcados como setados no vetor de valores
 		for (int i = 0; i < qtdItensOriginal.length; i++) {
 		// for (int i = 0; i < qtdGrupos; i++) {
-			// se n„o existir ocorrencia do grupo i na express„o
+			// se n√£o existir ocorrencia do grupo i na express√£o
 			if (qtdItensOriginal[i] == 0) {
-				// percorre os valores diminuindo em 1 os grupos para preencher a ausÍncia do grupo
+				// percorre os valores diminuindo em 1 os grupos para preencher a aus√™ncia do grupo
 				for (int j = 0; j < valores.length; j++) {
 					if (valoresOriginal[j] > i) {
 						qtdItens[valores[j]]--;
@@ -45,17 +45,17 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 	
 	/**
 	 * @Deprecated
-	 * Faz com que os grupos tenham numeraÁ„o sequencial
+	 * Faz com que os grupos tenham numera√ß√£o sequencial
 	 * Complexidade n*n
 	 */
 	public static void normalizar(SolucaoGeneticoGA s)
 	{
 		int[] valores = s.getValores();
 
-		// cÛpia do vetor que ser· normalizada
+		// c√≥pia do vetor que ser√° normalizada
 		int[] valoresOriginal = Arrays.copyOf(valores, valores.length);
 		
-		// identifica os grupos com mÛdulos
+		// identifica os grupos com m√≥dulos
 		boolean[] grupos = new boolean[valoresOriginal.length];
 		for (int i = 0; i < valores.length; i++) {
 			grupos[valoresOriginal[i]] = true;
@@ -63,9 +63,9 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 
 		// percorre o vetor com os grupos marcados como setados no vetor de valores
 		for (int i = 0; i < grupos.length; i++) {
-			// se n„o existir ocorrencia do grupo i na express„o
+			// se n√£o existir ocorrencia do grupo i na express√£o
 			if (!grupos[i]) {
-				// percorre os valores diminuindo em 1 os grupos para preencher a ausÍncia do grupo
+				// percorre os valores diminuindo em 1 os grupos para preencher a aus√™ncia do grupo
 				for (int j = 0; j < valores.length; j++) {
 					if (valoresOriginal[j] > i) {
 						valores[j]--;
@@ -79,8 +79,8 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 	}
 
 	/**
-	 * Encontra o prÛximo Ìndice do grupo com elementos
-	 * Se n„o encontrar retorna o Ìnicio
+	 * Encontra o pr√≥ximo √≠ndice do grupo com elementos
+	 * Se n√£o encontrar retorna o √≠nicio
 	 */
 	private static int proximoGrupoComItens(int[] qtdItens, int inicio, int fim) 
 	{
@@ -93,8 +93,8 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 	}	
 
 	/**
-	 * Encontra o prÛximo Ìndice do grupo com elementos
-	 * Se n„o encontrar retorna o Ìnicio
+	 * Encontra o pr√≥ximo √≠ndice do grupo com elementos
+	 * Se n√£o encontrar retorna o √≠nicio
 	 */
 	private static int anteriorGrupoComItens(int[] grupos, int fim) 
 	{
@@ -106,7 +106,7 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 	}
 	
 	/**
-	 * N„o deixa elementos dos grupos sozinhos
+	 * N√£o deixa elementos dos grupos sozinhos
 	 * Complexidade n*n
 	 */
 	public static void otimizarRetirandoElementosUnitarios(SolucaoGeneticoGF s) 
@@ -117,12 +117,12 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 		int maiorGrupo = s.getNumeroDoMaiorGrupo();
 
 		for (int i = 0; i < valores.length; i++) {
-			// se a quantidade de elementos for igual a 1 passa o item para o prÛximo grupo
+			// se a quantidade de elementos for igual a 1 passa o item para o pr√≥ximo grupo
 			if (qtdItens[valores[i]] == 1) {
 				// se for o maior grupo passa para o grupo anterior
 				if (valores[i]==maiorGrupo) {
-					// if (i>0) { // verifica se existe um ˙nico grupo com um elemento
-						// passa o item para o grupo anterior v·lido
+					// if (i>0) { // verifica se existe um √∫nico grupo com um elemento
+						// passa o item para o grupo anterior v√°lido
 						int iGrupo = anteriorGrupoComItens(qtdItens, maiorGrupo);
 						qtdItens[valores[i]]--;
 						valores[i]=iGrupo;
@@ -130,7 +130,7 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 					// }
 				}
 				else {
-					// passa o item para o prÛximo grupo v·lido
+					// passa o item para o pr√≥ximo grupo v√°lido
 					int iGrupo = proximoGrupoComItens(qtdItens, valores[i], maiorGrupo);
 					qtdItens[valores[i]]--;
 					valores[i]=iGrupo;
@@ -140,7 +140,7 @@ public class GeradorSolucaoGenetico extends GeradorSolucaoAbstract {
 		}
 		
 		// talvez possa recalcular no passo anterior
-		// como houve normalizacao o maior grupo setado È o ˙ltimo grupo com elementos
+		// como houve normalizacao o maior grupo setado √© o √∫ltimo grupo com elementos
 		// int maiorGrupoAux = 0;
 		int totalGruposAux = 0;
 		for (int i=0; i<qtdItens.length; i++) {

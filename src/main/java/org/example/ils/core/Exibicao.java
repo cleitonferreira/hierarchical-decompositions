@@ -23,7 +23,7 @@ public class Exibicao {
 	}
 
 	/**
-	 * Construtor abrindo uma saÌda
+	 * Construtor abrindo uma sa√≠da
 	 */
 	public Exibicao(PrintStream pw, String nomeArquivo) {
 		this.saida = new PrintStream[1];
@@ -33,7 +33,7 @@ public class Exibicao {
 	}
 
 	/**
-	 * Inicializa o publicador com um arquivo de saÌda
+	 * Inicializa o publicador com um arquivo de sa√≠da
 	 */
 	public Exibicao(String nomeArquivo) {
 		saida = new PrintStream[1];
@@ -43,7 +43,7 @@ public class Exibicao {
 	}
 
 	/**
-	 * Inicializa o publicador com v·rios arquivos de saÌda
+	 * Inicializa o publicador com v√°rios arquivos de sa√≠da
 	 */
 	public Exibicao(String[] nomeArquivos) {
 		for (String nomeArquivo : nomeArquivos) {
@@ -53,21 +53,21 @@ public class Exibicao {
 	}
 
 	/**
-	 * Adiciona um arquivo de saÌda no publicador
+	 * Adiciona um arquivo de sa√≠da no publicador
 	 */
 	public void addListener(PrintStream ps, String nomeArquivo) {
 		resizeSaida(ps,nomeArquivo);
 	}
 
 	/**
-	 * Adiciona um arquivo de saÌda no publicador
+	 * Adiciona um arquivo de sa√≠da no publicador
 	 */
 	public void addListener(String nomeArquivo) {
 		resizeSaida(abreArquivo(nomeArquivo), nomeArquivo);
 	}
 
 	/**
-	 * Acrescenta um elemento na saÌda
+	 * Acrescenta um elemento na sa√≠da
 	 */
 	private void resizeSaida(PrintStream ps, String nomeArquivo) {
 		if (this.saida == null) {
@@ -97,7 +97,7 @@ public class Exibicao {
 			PrintStream ps = new PrintStream(arquivo);
 			return ps;
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo n„o localizado: [" + nomeArquivo);
+			System.out.println("Arquivo n√£o localizado: [" + nomeArquivo);
 			System.exit(1);
 		}
 		return null;
@@ -146,19 +146,19 @@ public class Exibicao {
 	}
 
 	/**
-	 * InÌcio da execuÁ„o do experimento
+	 * In√≠cio da execu√ß√£o do experimento
 	 */
 	public void printDadosExperimento(Experimento experimento, AlgoritmoAbstract algoritmo)
 	{
-		// se a exibicaÁ„o est· no modo simplificado
+		// se a exibica√ß√£o est√° no modo simplificado
 		if (this.tipoExibicao.isSimplificado()) {
-			printx("\nINST¬NCIA=" + algoritmo.getProblema().getName());
+			printx("\nINST√ÇNCIA=" + algoritmo.getProblema().getName());
 			printx("; ALGORITMO=" + experimento.getNomeExperimento());
 			printlnx("; PARAMETROS=" + algoritmo.getInfoParametros());
 			return;
 		}
 		
-		printlnx("INST¬NCIA=" + algoritmo.getProblema().getName());
+		printlnx("INST√ÇNCIA=" + algoritmo.getProblema().getName());
 		printlnx("ALGORITMO=" + experimento.getNomeExperimento());
 		printlnx("PARAMETROS=" + algoritmo.getInfoParametros());
 	}
@@ -170,7 +170,7 @@ public class Exibicao {
 		
 		DecimalFormat dc = new DecimalFormat("0.####");
 		
-		// se a exibicaÁ„o est· no modo simplificado
+		// se a exibica√ß√£o est√° no modo simplificado
 		if (this.tipoExibicao.isSimplificado()) {
 			printx(dc.format(solucao.getFitness())+ "; ");
 			printx(formataTempo(executionTime)+ "; ");
@@ -178,7 +178,7 @@ public class Exibicao {
 		}
 		
 		if (solucao == null) {
-			printlnx("Cycle #" + cycleNumber + "; soluÁ„o n„o encontrada.");
+			printlnx("Cycle #" + cycleNumber + "; solu√ß√£o n√£o encontrada.");
 			return;
 		}
 
@@ -187,10 +187,10 @@ public class Exibicao {
 		// Objetivos
 		printx("; " + dc.format(solucao.getFitness()));
 
-		// localizaÁ„o
+		// localiza√ß√£o
 		printx("; " + solucao.getLocation() + "; ");
 
-		// soluÁ„o
+		// solu√ß√£o
 		printx(solucao.getString() + "; ");
 
 		// grupos
@@ -203,7 +203,7 @@ public class Exibicao {
 	 */
 	public void printFitness(SolucaoAbstract solucao) {
 		if (solucao == null) {
-			printlnx("SoluÁ„o n„o encontrada.");
+			printlnx("Solu√ß√£o n√£o encontrada.");
 			return;
 		}
 
@@ -234,7 +234,7 @@ public class Exibicao {
 		printlnx("Resultado Algoritmo: " + a.getNomeAlgoritmo());
 		printlnx("Problema: " + a.getProblema().getName()); // + " solucaoInicial=" + a.getSolucaoInicial().getString() );
 		if (e.getMelhorSolucao() == null) {
-			printlnx("SoluÁ„o: ---");
+			printlnx("Solu√ß√£o: ---");
 		}
 		else {
 			printlnx("Solucao: [" + e.getMelhorSolucao().getString() + "]");

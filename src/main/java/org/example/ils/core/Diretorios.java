@@ -19,7 +19,7 @@ public class Diretorios {
 	// resultados do experimento condensados em um arquivo csv
 	public static String PREFIXO_DEBUG_CSV = "resultados_debug_";
 	
-	// coleta os nomes de arquivos de saÌda, dentro da faixa de parametros, o primeiro parametro È 1
+	// coleta os nomes de arquivos de sa√≠da, dentro da faixa de parametros, o primeiro parametro √© 1
 	public static List<String> getNomesArquivosSaida(List<Parametro> params, int parametroInicial,int parametroFinal)
 	{
 		List<String> arquivos = new ArrayList<String>();
@@ -32,7 +32,7 @@ public class Diretorios {
 		return arquivos;
 	}
 	
-	// coleta os nomes de arquivos de saÌda para todos os par‚metros
+	// coleta os nomes de arquivos de sa√≠da para todos os par√¢metros
 	public static List<String> getNomesArquivosSaida(List<Parametro> params)
 	{
 		return getNomesArquivosSaida(params, 1, params.size());
@@ -50,7 +50,7 @@ public class Diretorios {
 		List<String> arquivos = new ArrayList<String>();
 		for (Problema problema : problemas) {
 			int indice = 0;
-			// loop necess·rio para pegar a configuraÁ„o, modificar criando entidade <Problema,Parametro>
+			// loop necess√°rio para pegar a configura√ß√£o, modificar criando entidade <Problema,Parametro>
 			for (Parametro param : params) {
 				arquivos.add(getNomeArquivoDebug(indice, problema.getName()));
 				indice++;

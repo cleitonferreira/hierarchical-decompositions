@@ -87,7 +87,7 @@ public class ProjectClass
 	}
 
 	/**
-	 * Verifica se a classe é abstrata
+	 * Verifica se a classe Ã© abstrata
 	 */
 	public boolean isAbstract()
 	{
@@ -95,7 +95,7 @@ public class ProjectClass
 	}
 
 	/**
-	 * Retorna o número de dependências da classe
+	 * Retorna o nÃºmero de dependÃªncias da classe
 	 */
 	public int getDependencyCount()
 	{
@@ -103,7 +103,7 @@ public class ProjectClass
 	}
 	
 	/**
-	 * Retorna uma dependência, dado seu índice
+	 * Retorna uma dependÃªncia, dado seu Ã­ndice
 	 */
 	public Dependency getDependencyIndex(int index)
 	{
@@ -111,7 +111,7 @@ public class ProjectClass
 	}
 	
 	/**
-	 * Adiciona uma dependência na classe
+	 * Adiciona uma dependÃªncia na classe
 	 */
 	public void addDependency(String elementName, DependencyType type)
 	{
@@ -120,7 +120,7 @@ public class ProjectClass
 	}
 	
 	/**
-	 * Adiciona uma dependência na classe
+	 * Adiciona uma dependÃªncia na classe
 	 */
 	public void addDependency(String elementName)
 	{
@@ -129,7 +129,7 @@ public class ProjectClass
 	}
 	
 	/**
-	 * Retorna uma enumeração das dependências da classe
+	 * Retorna uma enumeraÃ§Ã£o das dependÃªncias da classe
 	 */
 	public Iterable<Dependency> getDependencies()
 	{

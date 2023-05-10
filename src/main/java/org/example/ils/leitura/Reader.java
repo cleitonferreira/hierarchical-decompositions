@@ -19,13 +19,13 @@ import org.xml.sax.SAXException;
 
 
 /**
- * Objetivos: Ler instâncias no formato odem e gerar um objeto Project com os dados
+ * Objetivos: Ler instÃ¢ncias no formato odem e gerar um objeto Project com os dados
  * @author Marcio Barros
  */
 public class Reader
 {
 	/**
-	 * Carrega um arquivo XML para a memória
+	 * Carrega um arquivo XML para a memÃ³ria
 	 */
 	private static Document loadDocument(String filename) throws XMLParseException
 	{
@@ -67,7 +67,7 @@ public class Reader
 	}
 
 	/**
-	 * Retorna o valor de um atributo de um elemento, usando um valor default em sua ausência
+	 * Retorna o valor de um atributo de um elemento, usando um valor default em sua ausÃªncia
 	 */
 	private static String getElementAttribute(Element element, String name, String defvalue)
 	{
@@ -93,7 +93,7 @@ public class Reader
 	}
 	
 	/**
-	 * Carrega as dependëncias de uma classe
+	 * Carrega as dependÃ«ncias de uma classe
 	 */
 	private static void loadDependencies(ProjectClass aClass, Element element) throws XMLParseException
 	{
@@ -148,7 +148,7 @@ public class Reader
 	}
 
 	/**
-	 * Carrega os pacotes da aplicação
+	 * Carrega os pacotes da aplicaÃ§Ã£o
 	 */
 	private static void loadNamespaces(Project project, Element element) throws XMLParseException
 	{
@@ -165,7 +165,7 @@ public class Reader
 	}
 
 	/**
-	 * Carrega os containers da aplicação
+	 * Carrega os containers da aplicaÃ§Ã£o
 	 */
 	private static void loadContainers(Project project, Element element) throws XMLParseException
 	{
@@ -176,7 +176,7 @@ public class Reader
 	}
 
 	/**
-	 * Carrega uma aplicação a partir do elemento raiz do arquivo
+	 * Carrega uma aplicaÃ§Ã£o a partir do elemento raiz do arquivo
 	 */
 	private static Project loadApplication(String filename, Element root) throws XMLParseException
 	{
@@ -188,7 +188,7 @@ public class Reader
 	}
 
 	/**
-	 * Carrega uma aplicação a partir de um arquivo no formato XML ODEM
+	 * Carrega uma aplicaÃ§Ã£o a partir de um arquivo no formato XML ODEM
 	 */
 	public static Project execute(String filename) throws XMLParseException
 	{

@@ -21,7 +21,7 @@ public class AlgoritmoGeneticoGFNormalizado extends AlgoritmoGeneticoAbstract {
 	};
 
 	/**
-	 * Inicializa a populaÁ„o randomicamente
+	 * Inicializa a popula√ß√£o randomicamente
 	 */
 	@Override
 	public void iniciaPopulacao(Populacao populacao, int tamPopulacao)
@@ -37,7 +37,7 @@ public class AlgoritmoGeneticoGFNormalizado extends AlgoritmoGeneticoAbstract {
 			try {
 				Verificador.validaSolucao(this, novaSolucao);
 			}catch (Exception e) {
-				System.out.println("ERRO na geraÁ„o da populaÁ„o.");
+				System.out.println("ERRO na gera√ß√£o da popula√ß√£o.");
 			}
 			*/
 			
@@ -46,7 +46,7 @@ public class AlgoritmoGeneticoGFNormalizado extends AlgoritmoGeneticoAbstract {
 	}
 
 	/**
-	 * Seleciona os elementos da populaÁ„o para reproduÁ„o
+	 * Seleciona os elementos da popula√ß√£o para reprodu√ß√£o
 	 */
 	@Override
 	protected void selecaoElite(Populacao populacao, Populacao populacaoFilha) 
@@ -55,7 +55,7 @@ public class AlgoritmoGeneticoGFNormalizado extends AlgoritmoGeneticoAbstract {
 	}
 	
 	/**
-	 * Substitui os piores elementos da populaÁ„o
+	 * Substitui os piores elementos da popula√ß√£o
 	 */
 	protected void substituiPioresAleatorio(Populacao populacao, Populacao populacaoFilha) 
 	{	
@@ -70,7 +70,7 @@ public class AlgoritmoGeneticoGFNormalizado extends AlgoritmoGeneticoAbstract {
 	}
 	
 	/**
-	 * Substitui os piores elementos da populaÁ„o
+	 * Substitui os piores elementos da popula√ß√£o
 	 */
 	@Override
 	protected void substituiPioresMutacao(Populacao populacao, Populacao populacaoFilha) 
@@ -100,11 +100,11 @@ public class AlgoritmoGeneticoGFNormalizado extends AlgoritmoGeneticoAbstract {
 	@Override
 	public String getNomeAlgoritmo() 
 	{
-		return "Algoritmo GenÈtico GF Normalizado";
+		return "Algoritmo Gen√©tico GF Normalizado";
 	}	
 	
 	/**
-	 * Executa o c·lculo de fitness
+	 * Executa o c√°lculo de fitness
 	 */
 	protected void novaGeracao(Populacao populacaoFilha, SolucaoAbstract[] filhos) 
 	{

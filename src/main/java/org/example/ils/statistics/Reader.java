@@ -26,7 +26,7 @@ public abstract class Reader {
 			//fw.write("Resultados gerados em " + dataAtual + ".\r\n");
 			fw.close();
 		} catch (IOException e) {
-			System.out.println("Erro ao abrir o arquivo de saÌda.");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da.");
 			System.exit(1);
 		}
 	}
@@ -36,7 +36,7 @@ public abstract class Reader {
 			FileWriter fw = new FileWriter(diretorioSaida + nomeArquivoSaida,append);
 			return fw;
 		} catch (IOException e) {
-			System.out.println("Erro ao abrir o arquivo de saÌda: [" + diretorioSaida + nomeArquivoSaida +"]");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + diretorioSaida + nomeArquivoSaida +"]");
 			System.exit(1);
 		}
 		return null;
@@ -48,7 +48,7 @@ public abstract class Reader {
 			BufferedReader bf = new BufferedReader(arquivo);
 			return bf;
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo n„o localizado: [" + diretorioEntrada + nomeArquivoEntrada +"]");
+			System.out.println("Arquivo n√£o localizado: [" + diretorioEntrada + nomeArquivoEntrada +"]");
 			System.exit(1);
 		}
 		return null;

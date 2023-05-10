@@ -1,27 +1,30 @@
 package org.example.ils.core;
 
+import org.example.orientacao.builders.BuilderFigureEighteen;
+import org.example.orientacao.model.Decomposition;
+
 /**
- * DEFINICÕES:
+ * DEFINICÃ•ES:
  * 
- * - acoplamento = número de dependências que as classes de um pacote possuem
+ * - acoplamento = nÃºmero de dependÃªncias que as classes de um pacote possuem
  * com classes de fora do pacote. Deve ser minimizado.
  * 
- * - coesão = número de dependências que as classes de um pacote possuem com
+ * - coesÃ£o = nÃºmero de dependÃªncias que as classes de um pacote possuem com
  * outras classes do mesmo pacote. Deve ser maximizado (ou seja, minimizamos seu
  * valor com sinal invertido)
  * 
  * - spread = partindo de zero e percorrendo cada pacote, acumula o quadrado da
- * diferença entre o número de classes do pacote e o número de classes do menor
+ * diferenÃ§a entre o nÃºmero de classes do pacote e o nÃºmero de classes do menor
  * pacote
  * 
- * - diferenca = diferença entre o número máximo de classes em um pacote e o
- * número mínimo de classes em um pacote
+ * - diferenca = diferenÃ§a entre o nÃºmero mÃ¡ximo de classes em um pacote e o
+ * nÃºmero mÃ­nimo de classes em um pacote
  * 
  * @author Marcio Barros
  */
 public class Calculador extends CalculadorAbstract {
 
-	//Limite do vetor é o limite superior informado para o problema
+	//Limite do vetor Ã© o limite superior informado para o problema
 	protected int[] inboundEdges;
 	protected int[] outboundEdges;
 	protected int[] intraEdges;
@@ -136,14 +139,14 @@ public class Calculador extends CalculadorAbstract {
 	}
 	
 	/**
-	 * Avalia a solução
+	 * Avalia a soluÃ§Ã£o
 	 */
 	public double evaluate(SolucaoAbstract s, int[] valores) {
 		return -calculateFormulaComplexidade(s, valores);
 	}
 
 	/**
-	 * Avalia a solução
+	 * Avalia a soluÃ§Ã£o
 	 */
 	public double evaluateEGravaEstado(SolucaoAbstract s, int[] valores) {
 		return calculateFormulaComplexidadeEgravaEstado(s, valores);
@@ -151,7 +154,7 @@ public class Calculador extends CalculadorAbstract {
 
 	/**
 	 * Calcula o coeficiente de modularidade do projeto
-	 * Considera somente a diferença nos vetores intraEdges, inboundEdges, outboundEdges calculado na última iteração
+	 * Considera somente a diferenÃ§a nos vetores intraEdges, inboundEdges, outboundEdges calculado na Ãºltima iteraÃ§Ã£o
 	 */
 	public double evaluateMove(SolucaoAbstract s, int[] valores, int item, int grupo1, int grupo2) {
 		
@@ -174,7 +177,7 @@ public class Calculador extends CalculadorAbstract {
 				this.outboundEdges[grupo1]--;
 				this.intraEdges[grupo2]++;
 			}
-			// se o dependente não for nenhum dos dois grupos
+			// se o dependente nÃ£o for nenhum dos dois grupos
 			else {
 				this.outboundEdges[grupo1]--;
 				this.outboundEdges[grupo2]++;
@@ -195,7 +198,7 @@ public class Calculador extends CalculadorAbstract {
 				this.outboundEdges[grupo2]--;
 				this.intraEdges[grupo2]++;
 			}
-			// se o dependente não for nenhum dos dois grupos
+			// se o dependente nÃ£o for nenhum dos dois grupos
 			else {
 				this.inboundEdges[grupo1]--;
 				this.inboundEdges[grupo2]++;

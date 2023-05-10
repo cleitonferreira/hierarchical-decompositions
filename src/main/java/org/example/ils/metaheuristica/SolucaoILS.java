@@ -7,17 +7,17 @@ import org.example.ils.construtivoLista.SolucaoCNMLL;
 import org.example.ils.core.SolucaoAbstract;
 
 /**
- * RepresentaÁ„o de uma soluÁ„o com inteiros
+ * Representa√ß√£o de uma solu√ß√£o com inteiros
  */
 public class SolucaoILS implements SolucaoAbstract {
 
-	// representa o n˙mero da geraÁ„o em que a soluÁ„o foi encontrada
+	// representa o n√∫mero da gera√ß√£o em que a solu√ß√£o foi encontrada
 	private int location;
 
-	// valor de fitness da soluÁ„o
+	// valor de fitness da solu√ß√£o
 	private double fitness = 0.00;
 
-	// parte b·sica da representaÁ„o da soluÁ„o
+	// parte b√°sica da representa√ß√£o da solu√ß√£o
 	private int[] valores;
 
 	private int[] grupos;
@@ -56,7 +56,7 @@ public class SolucaoILS implements SolucaoAbstract {
 		int[] valores = s.getValores();
 		this.valores = Arrays.copyOf(valores, valores.length);
 		
-		this.qtdItens = s.getQtdItens(); // j· È alocada uma cÛpia na SolucaoCNM com linked list
+		this.qtdItens = s.getQtdItens(); // j√° √© alocada uma c√≥pia na SolucaoCNM com linked list
 		this.totalGrupos = s.getTotalGrupos();
 		this.fitness = s.getFitness();
 		this.location = s.getLocation();
@@ -161,7 +161,7 @@ public class SolucaoILS implements SolucaoAbstract {
 	}
 	
 	/**
-	 * Utilizado para exibiÁ„o dos resultados
+	 * Utilizado para exibi√ß√£o dos resultados
 	 */
 	public String getString() {
 		StringBuilder sb = new StringBuilder("");

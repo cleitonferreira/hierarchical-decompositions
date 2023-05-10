@@ -31,7 +31,7 @@ public class DebugUtil {
 			PrintStream ps = new PrintStream(arquivo);
 			return ps;
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo n„o localizado: [" + nomeArquivo);
+			System.out.println("Arquivo n√£o localizado: [" + nomeArquivo);
 			System.exit(1);
 		}
 		return null;
@@ -62,7 +62,7 @@ public class DebugUtil {
 			this.saida.print(",");
 		}
 		this.saida.println("");
-		this.saida.println("mÈdia=" + populacao.getMediaFitness());
+		this.saida.println("m√©dia=" + populacao.getMediaFitness());
 		this.saida.println("menorFitness=" + populacao.getPrimeiro().getFitness());
 		this.saida.println("maiorFitness=" + populacao.getUltimo().getFitness());
 		this.saida.println("\n");
@@ -74,7 +74,7 @@ public class DebugUtil {
 		this.saida.print("fitness=");
 		
 		this.saida.println("");
-		this.saida.println("mÈdia=" + populacao.getMediaFitness());
+		this.saida.println("m√©dia=" + populacao.getMediaFitness());
 		this.saida.println("menorFitness=" + populacao.getPrimeiro().getFitness());
 		this.saida.println("menorFitness=" + populacao.getSegundo().getFitness());
 		this.saida.println("maiorFitness=" + populacao.getUltimo().getFitness());

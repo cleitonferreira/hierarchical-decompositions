@@ -42,15 +42,15 @@ public class AlgoritmoCNMLL extends AlgoritmoAbstract {
 		
 		this.solucao = null;
 		
-		// soluÁ„o corrente
+		// solu√ß√£o corrente
 		SolucaoCNMLL solucaoAtual = new SolucaoCNMLL(this.problema.getTamanho());
 		// guarda os clusters ativos
 		ArrayList<Integer> clustersAtivos = new ArrayList<Integer>();
-		// inicializa a soluÁ„o com um mÛdulo por cluster
+		// inicializa a solu√ß√£o com um m√≥dulo por cluster
 		iniciaSolucao(clustersAtivos, solucaoAtual, this.problema.getTamanho());
 
 		// Debug
-		// se n„o houver debug, pode comentar este bloco para otimizaÁ„o
+		// se n√£o houver debug, pode comentar este bloco para otimiza√ß√£o
 		boolean imprimeCabecalhoDebug = true;
 		if (args.length > 0) {
 			if (args[0].indexOf("imprimeCabecalhoDebug=false")>=0) {
@@ -71,7 +71,7 @@ public class AlgoritmoCNMLL extends AlgoritmoAbstract {
 			this.iteracao++;
 
 			// Debug
-			// se n„o houver debug, comentar a linha para otimizaÁ„o
+			// se n√£o houver debug, comentar a linha para otimiza√ß√£o
 			this.exibicao.printDebugGeracao(solucaoAtual, this.iteracao, this.evaluation);
 			// fim Debug
 		};
@@ -87,7 +87,7 @@ public class AlgoritmoCNMLL extends AlgoritmoAbstract {
 		int clusterDestino = -1;
 		int location = -1;
 
-		// salva o status do c·lculo para otimizar o c·lculo dos diversos joins.
+		// salva o status do c√°lculo para otimizar o c√°lculo dos diversos joins.
 		// double fitnessMelhor = solucao.getFitness();
 		double fitnessMelhor = ((CalculadorCNM)this.calculador).calculateFormulaComplexidadeEgravaEstado(solucao, solucao.getValores());
 

@@ -5,16 +5,16 @@ public enum TipoLinhaResultado {
 	SEPARADOR("----------------",16),
 	CICLO("Cycle",5),
 	BRANCO("",0),
-	SOLUCAO("Solução fitness",15),
+	SOLUCAO("SoluÃ§Ã£o fitness",15),
 	MEDIA_FITNESS("Media fitness",13),
 	MEDIA_EXECUCAO("Media execucao",14),
 	MELHOR_FITNESS("Melhor fitness",14),
-	INSTANCIA("INSTÂNCIA",9),
+	INSTANCIA("INSTÃ‚NCIA",9),
 	ALGORITMO("ALGORITMO",9),
 	PARAMETROS("PARAMETROS",10),
 	PROBLEMA("Problema",8),
 	RESULTADO("Resultado",9),
-	SOLUCAO_MELHOR("Solução",7);
+	SOLUCAO_MELHOR("SoluÃ§Ã£o",7);
 	
 	private String prefixo;
 	private int tamanho;

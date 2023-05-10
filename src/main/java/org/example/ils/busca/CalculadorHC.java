@@ -5,21 +5,21 @@ import org.example.ils.core.Calculador;
 import org.example.ils.core.Problema;
 
 /**
- * DEFINICÕES:
+ * DEFINIC?ES:
  * 
- * - acoplamento = número de dependências que as classes de um pacote possuem
+ * - acoplamento = n?mero de depend?ncias que as classes de um pacote possuem
  * com classes de fora do pacote. Deve ser minimizado.
  * 
- * - coesão = número de dependências que as classes de um pacote possuem com
+ * - coes?o = n?mero de depend?ncias que as classes de um pacote possuem com
  * outras classes do mesmo pacote. Deve ser maximizado (ou seja, minimizamos seu
  * valor com sinal invertido)
  * 
  * - spread = partindo de zero e percorrendo cada pacote, acumula o quadrado da
- * diferença entre o número de classes do pacote e o número de classes do menor
+ * diferen?a entre o n?mero de classes do pacote e o n?mero de classes do menor
  * pacote
  * 
- * - diferenca = diferença entre o número máximo de classes em um pacote e o
- * número mínimo de classes em um pacote
+ * - diferenca = diferen?a entre o n?mero m?ximo de classes em um pacote e o
+ * n?mero m?nimo de classes em um pacote
  * 
  */
 public class CalculadorHC extends Calculador {

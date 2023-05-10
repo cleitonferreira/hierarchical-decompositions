@@ -24,36 +24,36 @@ public class Verificador {
 			/*if (opcoes.indexOf("sem_fitness")<0) {
 				double fitnessOk = calculador.evaluate(solucao, solucao.getValores());
 				if (Math.abs(solucao.getFitness() - fitnessOk) > 0.0000000001) {
-					throw new Exception("ERRO: Fitness da solução está incorreto. Obtido=" + solucao.getFitness() + ". Esperado=" + fitnessOk);
+					throw new Exception("ERRO: Fitness da soluÃ§Ã£o estÃ¡ incorreto. Obtido=" + solucao.getFitness() + ". Esperado=" + fitnessOk);
 				}
 			}*/
 			int totalItensOk = problema.getTamanho();
 			if (solucao.getTotalItens() != totalItensOk) {
-				throw new Exception("ERRO: Quantidade de módulos da solução está incorreto.");
+				throw new Exception("ERRO: Quantidade de mÃ³dulos da soluÃ§Ã£o estÃ¡ incorreto.");
 			}
 			if (solucao instanceof SolucaoGeneticoGF) {
 				if (((SolucaoGeneticoGF)solucao).getTotalGrupos() > totalItensOk || ((SolucaoGeneticoGF)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
+					throw new Exception("ERRO: Quantidade de clusters da soluÃ§Ã£o estÃ¡ incorreto.");
 				}
 			}
 			if (solucao instanceof SolucaoHC) {
 				if (((SolucaoHC)solucao).getTotalGrupos() > totalItensOk || ((SolucaoHC)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
+					throw new Exception("ERRO: Quantidade de clusters da soluÃ§Ã£o estÃ¡ incorreto.");
 				}
 			}
 			if (solucao instanceof SolucaoCNM) {
 				if (((SolucaoCNM)solucao).getTotalGrupos() > totalItensOk || ((SolucaoCNM)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
+					throw new Exception("ERRO: Quantidade de clusters da soluÃ§Ã£o estÃ¡ incorreto.");
 				}
 			}
 			if (solucao instanceof SolucaoCNMLL) {
 				if (((SolucaoCNMLL)solucao).getTotalGrupos() > totalItensOk || ((SolucaoCNMLL)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
+					throw new Exception("ERRO: Quantidade de clusters da soluÃ§Ã£o estÃ¡ incorreto.");
 				}
 			}
 			if (solucao instanceof SolucaoILS) {
 				if (((SolucaoILS)solucao).getTotalGrupos() > totalItensOk || ((SolucaoILS)solucao).getTotalGrupos() < 1) {
-					throw new Exception("ERRO: Quantidade de clusters da solução está incorreto.");
+					throw new Exception("ERRO: Quantidade de clusters da soluÃ§Ã£o estÃ¡ incorreto.");
 				}
 			}
 		}
@@ -70,7 +70,7 @@ public class Verificador {
 			if (qtd==null) qtd = 0;
 			qtdModulos.put(cluster, qtd+1);
 			if (valores[i] > valores.length) {
-				throw new Exception("ERRO: Solução contém cluster maior do que " + valores.length);
+				throw new Exception("ERRO: SoluÃ§Ã£o contÃ©m cluster maior do que " + valores.length);
 			}
 		}
 		
@@ -112,12 +112,12 @@ public class Verificador {
 			for (Integer cluster : clusters) {
 				int qtd = qtdModulos.get(cluster);
 				if (qtd != qtdItens[cluster]) {
-					throw new Exception("ERRO: Solução contém número de módulos diferente da variável qtdItens[" + cluster + "]=" + qtdItens[cluster] + " <> " + qtd);
+					throw new Exception("ERRO: SoluÃ§Ã£o contÃ©m nÃºmero de mÃ³dulos diferente da variÃ¡vel qtdItens[" + cluster + "]=" + qtdItens[cluster] + " <> " + qtd);
 				}
 			}
 		
 			if (clusters.size() != totalGrupos) {
-				throw new Exception("ERRO: " + nomeAlgoritmo + " - Solução contém número de clusters diferente da variável totalGrupos");
+				throw new Exception("ERRO: " + nomeAlgoritmo + " - SoluÃ§Ã£o contÃ©m nÃºmero de clusters diferente da variÃ¡vel totalGrupos");
 			}
 		}
 		

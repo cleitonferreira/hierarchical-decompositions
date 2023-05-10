@@ -80,7 +80,7 @@ public class ResultsReader extends Reader {
 			if (linha==null || linha.trim().length()==0)
 				continue;
 
-			if (linha.indexOf("INSTÂNCIA")>=0) {
+			if (linha.indexOf("INSTÃ‚NCIA")>=0) {
 				parseCabecalhoSimplificado(dadosExecucao, linha);
 			}
 			else {
@@ -138,7 +138,7 @@ public class ResultsReader extends Reader {
 			
 			
 		}
-		System.out.println("fim gravação no CVS. Arquivo entrada=" + nomeArquivo);
+		System.out.println("fim gravaÃ§Ã£o no CVS. Arquivo entrada=" + nomeArquivo);
 	}
 	
 	public ArrayList<DadosAlgoritmo> getAlgoritmos() {

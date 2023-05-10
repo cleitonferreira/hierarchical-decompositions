@@ -57,7 +57,7 @@ public class Crossover
 			otimizarRetirandoElementosUnitarios(solucoes);
 		}
 		else {
-			// filhos s„o iguais aos pais caso n„o tenha havido a probabilidade de crossover
+			// filhos s√£o iguais aos pais caso n√£o tenha havido a probabilidade de crossover
 			solucoes = new SolucaoGeneticoGF[] { 
 				new SolucaoGeneticoGF((SolucaoGeneticoGF)pais[0]), 
 				new SolucaoGeneticoGF((SolucaoGeneticoGF)pais[1]) 
@@ -73,14 +73,14 @@ public class Crossover
 
 		if (PseudoRandom.randDouble() < this.probabilidadeCrossover) {
 			
-			// seleciona um ponto entre 0 e totalGrupos (sem seleÁ„o)
+			// seleciona um ponto entre 0 e totalGrupos (sem sele√ß√£o)
 			int i1 = PseudoRandom.randInt(0, ((SolucaoGeneticoGF)pais[0]).getTotalGrupos());
 			int i2 = i1 + PseudoRandom.randInt(0, this.maxGruposPorCrossover);
 			if (i2 > ((SolucaoGeneticoGF)pais[0]).getTotalGrupos()) {
 				i2 = ((SolucaoGeneticoGF)pais[0]).getTotalGrupos();
 			}
 			
-			// seleciona um ponto entre 0 e totalGrupos (sem seleÁ„o)
+			// seleciona um ponto entre 0 e totalGrupos (sem sele√ß√£o)
 			int j1 = PseudoRandom.randInt(0, ((SolucaoGeneticoGF)pais[1]).getTotalGrupos());
 			int j2 = j1 + PseudoRandom.randInt(0, this.maxGruposPorCrossover);
 			if (j2 > ((SolucaoGeneticoGF)pais[1]).getTotalGrupos()) {
@@ -93,7 +93,7 @@ public class Crossover
 			otimizarRetirandoElementosUnitarios(solucoes);
 		}
 		else {
-			// filhos s„o iguais aos pais caso n„o tenha havido a probabilidade de crossover
+			// filhos s√£o iguais aos pais caso n√£o tenha havido a probabilidade de crossover
 			solucoes = new SolucaoGeneticoGF[] { 
 				new SolucaoGeneticoGF((SolucaoGeneticoGF)pais[0]), 
 				new SolucaoGeneticoGF((SolucaoGeneticoGF)pais[1]) 
@@ -104,15 +104,15 @@ public class Crossover
 	}
 
 	/**
-	 * Normaliza os grupos, n„o deixando elementos unit·rios
+	 * Normaliza os grupos, n√£o deixando elementos unit√°rios
 	 */
 	public static void otimizarRetirandoElementosUnitarios(SolucaoGeneticoGF[] solucoes) 
 	{
-		// Retira elementos unit·rios nos grupos
+		// Retira elementos unit√°rios nos grupos
 		GeradorSolucaoGenetico.otimizarRetirandoElementosUnitarios(solucoes[0]);
 		GeradorSolucaoGenetico.otimizarRetirandoElementosUnitarios(solucoes[1]);		
 
-		// Normaliza a representaÁ„o para que os n˙meros dos grupos sejam sequenciais
+		// Normaliza a representa√ß√£o para que os n√∫meros dos grupos sejam sequenciais
 		GeradorSolucaoGenetico.normalizar(solucoes[0]);
 		GeradorSolucaoGenetico.normalizar(solucoes[1]);
 		
@@ -173,7 +173,7 @@ public class Crossover
 				}
 			}
 
-			// Copia os elementos de B que n„o foram marcados, realizando o
+			// Copia os elementos de B que n√£o foram marcados, realizando o
 			// deslocamento
 			for (int j = 0; j < valoresOriginalB.length; j++) {
 				if (!marcadosB[j]) {
@@ -218,7 +218,7 @@ public class Crossover
 				}
 			}
 
-			// Copia os elementos de A que n„o foram marcados, realizando o
+			// Copia os elementos de A que n√£o foram marcados, realizando o
 			// deslocamento
 			for (int j = 0; j < valoresOriginalA.length; j++) {
 				if (!marcadosA[j]) {
@@ -250,9 +250,9 @@ public class Crossover
 	/**
 	 * Realiza um crossover simples somente sobre a representacao em forma de inteiros
 	 * @param probabilidade
-	 * @param sA soluÁ„o 1 de entrada
-	 * @param sB soluÁ„o 2 de entrada
-	 * @return um vetor com as soluÁıes geradas apÛs o crossover
+	 * @param sA solu√ß√£o 1 de entrada
+	 * @param sB solu√ß√£o 2 de entrada
+	 * @return um vetor com as solu√ß√µes geradas ap√≥s o crossover
 	 */
 	public SolucaoAbstract[] singlePointCrossover(SolucaoAbstract[] pais)
 	{
@@ -272,9 +272,9 @@ public class Crossover
 	/**
 	 * Realiza um crossover simples somente sobre a representacao em forma de inteiros
 	 * @param probabilidade
-	 * @param sA soluÁ„o 1 de entrada
-	 * @param sB soluÁ„o 2 de entrada
-	 * @return um vetor com as soluÁıes geradas apÛs o crossover
+	 * @param sA solu√ß√£o 1 de entrada
+	 * @param sB solu√ß√£o 2 de entrada
+	 * @return um vetor com as solu√ß√µes geradas ap√≥s o crossover
 	 */
 	public SolucaoAbstract[] twoPointsCrossover(SolucaoAbstract[] pais)
 	{

@@ -5,21 +5,21 @@ import org.example.ils.core.Calculador;
 import org.example.ils.core.Problema;
 
 /**
- * DEFINICÕES:
+ * DEFINICÃ•ES:
  * 
- * - acoplamento = número de dependências que as classes de um pacote possuem
+ * - acoplamento = nÃºmero de dependÃªncias que as classes de um pacote possuem
  * com classes de fora do pacote. Deve ser minimizado.
  * 
- * - coesão = número de dependências que as classes de um pacote possuem com
+ * - coesÃ£o = nÃºmero de dependÃªncias que as classes de um pacote possuem com
  * outras classes do mesmo pacote. Deve ser maximizado (ou seja, minimizamos seu
  * valor com sinal invertido)
  * 
  * - spread = partindo de zero e percorrendo cada pacote, acumula o quadrado da
- * diferença entre o número de classes do pacote e o número de classes do menor
+ * diferenÃ§a entre o nÃºmero de classes do pacote e o nÃºmero de classes do menor
  * pacote
  * 
- * - diferenca = diferença entre o número máximo de classes em um pacote e o
- * número mínimo de classes em um pacote
+ * - diferenca = diferenÃ§a entre o nÃºmero mÃ¡ximo de classes em um pacote e o
+ * nÃºmero mÃ­nimo de classes em um pacote
  * 
  * @author Marcio Barros
  */
@@ -33,7 +33,7 @@ public class CalculadorCNM extends Calculador {
 	}	
 
 	/**
-	 * Calcula o fitness que resultado do join de dois clusters, sem modificar a solução
+	 * Calcula o fitness que resultado do join de dois clusters, sem modificar a soluÃ§Ã£o
 	 */
 	public double evaluateJoin(SolucaoCNMLL s, int cluster1, int cluster2) {
 		LinkedList<Integer> itens2 = s.getMapa().get(cluster2);
@@ -42,7 +42,7 @@ public class CalculadorCNM extends Calculador {
 			valores[item] = cluster1;
 		}
 		double fitness = calculateFormulaComplexidade(s, valores);
-		// desfaz a modificação
+		// desfaz a modificaÃ§Ã£o
 		for (Integer item : itens2) {
 			valores[item] = cluster2;
 		}
@@ -116,7 +116,7 @@ public class CalculadorCNM extends Calculador {
 		}
 		mq += mfJoin;
 
-		// desfaz a modificação do join dos clusters
+		// desfaz a modificaÃ§Ã£o do join dos clusters
 		for (Integer item : itens2) {
 			valores[item] = cluster2;
 		}

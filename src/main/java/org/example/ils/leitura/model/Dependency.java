@@ -1,7 +1,7 @@
 package org.example.ils.leitura.model;
 
 /**
- * Classe que representa uma dependência entre duas classes
+ * Classe que representa uma dependÃªncia entre duas classes
  * 
  * @author Marcio Barros
  */
@@ -11,7 +11,7 @@ public class Dependency {
 	private DependencyType type;
 
 	/**
-	 * Inicializa uma dependência de uma classe para outra
+	 * Inicializa uma dependÃªncia de uma classe para outra
 	 */
 	public Dependency(String name, DependencyType type) {
 		this.elementName = name;
@@ -26,7 +26,7 @@ public class Dependency {
 	}
 
 	/**
-	 * Retorna o tipo da dependência
+	 * Retorna o tipo da dependÃªncia
 	 */
 	public DependencyType getType() {
 		return type;

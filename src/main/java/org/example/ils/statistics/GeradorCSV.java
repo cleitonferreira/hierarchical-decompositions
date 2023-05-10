@@ -28,7 +28,7 @@ public class GeradorCSV {
 	private static final int INDICE_MEDIA_COM_DV = 99;
 	private static final int INDICE_MEDIA_COM_DV_4_CASAS = 100;
 
-	// executa o condensador dos resultados em um unico arquivo csv, para todos os par‚metros
+	// executa o condensador dos resultados em um unico arquivo csv, para todos os par√¢metros
 	public static void executa(TipoExibicao tipoExibicao, ExperimentoModel experimento)
 	{
 		int parametroInicial = 1;
@@ -36,7 +36,7 @@ public class GeradorCSV {
 		executa(tipoExibicao, experimento, parametroInicial, parametroFinal, null, true);
 	}
 
-	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par‚metros
+	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par√¢metros
 	public static List<DadosInstancia> executa(TipoExibicao tipoExibicao, ExperimentoModel experimento, int parametroInicial, int parametroFinal, String combinacoesWilcox, boolean geraBoxPlot) 
 	{
 		String diretorioResultados = Diretorios.diretorioResultados;
@@ -88,7 +88,7 @@ public class GeradorCSV {
 		List<Problema> problemas = experimento.getProblemas();
 		// List<Parametro> params = experimento.getParametros();
 		for (Problema problema : problemas) {
-			// indice est· representando atualmente a execuÁ„o <Problema,Parametro> e est· vinculado ao arquivo de saÌda
+			// indice est√° representando atualmente a execu√ß√£o <Problema,Parametro> e est√° vinculado ao arquivo de sa√≠da
 			//for (Parametro param : params) {
 			for (int indice = parametroInicial; indice <= parametroFinal; indice++) {
 				String nomeArquivoDebug = Diretorios.getNomeArquivoDebug(indice, problema.getName());
@@ -137,7 +137,7 @@ public class GeradorCSV {
 	}
 	*/
 
-	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par‚metros
+	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par√¢metros
 	public static void executaConversaoCSVEmColunas(ExperimentoModel experimento, int parametroInicial, int parametroFinal, String[] instancias) 
 	{
 		int indiceColuna;
@@ -176,7 +176,7 @@ public class GeradorCSV {
 		executaConversaoCSVEmColunas(experimento, parametroInicial, parametroFinal, instancias, indiceColuna, nomeColuna);
 		
 		indiceColuna = INDICE_MEDIA_4_CASAS;
-		nomeColuna = "MÈdia4Casas";
+		nomeColuna = "M√©dia4Casas";
 		executaConversaoCSVEmColunas(experimento, parametroInicial, parametroFinal, instancias, indiceColuna, nomeColuna);
 		
 		indiceColuna = INDICE_DV_4_CASAS;
@@ -192,7 +192,7 @@ public class GeradorCSV {
 		executaConversaoCSVEmColunas(experimento, parametroInicial, parametroFinal, instancias, indiceColuna, nomeColuna);
 	}
 
-	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par‚metros
+	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par√¢metros
 	private static void executaConversaoCSVEmColunas(ExperimentoModel experimento, int parametroInicial, int parametroFinal, String[] instancias, int indiceColuna, String nomeColuna) 
 	{
 		String diretorioEstatisticas = Diretorios.diretorioStatistics;
@@ -203,16 +203,16 @@ public class GeradorCSV {
 		try {			
 			FileWriter saida = new FileWriter(diretorioEstatisticas + nomeArquivoEstatisticasColuna, append);
 			
-			// Imprime primeira linha com os cabeÁalhos para todos os parametros
+			// Imprime primeira linha com os cabe√ßalhos para todos os parametros
 			for (int i = parametroInicial; i <= parametroFinal; i++) {
-				// o arquivo de entrada È gerado a partir do R, executando o scriptR_resultados_NOME_EXPERIMENTO
+				// o arquivo de entrada √© gerado a partir do R, executando o scriptR_resultados_NOME_EXPERIMENTO
 				saida.write("CONF " + i + ";");
 			}
 			saida.write("\r\n");
 			
 			int INDICE_INSTANCIA = 3;
 			
-			// Cada linha ter· todos os resultados das configuracoes para a instancia
+			// Cada linha ter√° todos os resultados das configuracoes para a instancia
 			for (String instancia :instancias) {
 				FileReader arquivoEntrada = new FileReader(diretorioEstatisticas + nomeArquivoEstatisticas);
 				BufferedReader entrada = new BufferedReader(arquivoEntrada);
@@ -268,10 +268,10 @@ public class GeradorCSV {
 			}
 			saida.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo n„o localizado: [" + diretorioEstatisticas + nomeArquivoEstatisticas +"]");
+			System.out.println("Arquivo n√£o localizado: [" + diretorioEstatisticas + nomeArquivoEstatisticas +"]");
 			System.exit(1);
 		} catch (IOException e) {
-			System.out.println("Erro ao abrir o arquivo de saÌda: [" + diretorioEstatisticas + nomeArquivoEstatisticasColuna + "]");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + diretorioEstatisticas + nomeArquivoEstatisticasColuna + "]");
 			System.exit(1);
 		}
 	}
@@ -289,7 +289,7 @@ public class GeradorCSV {
 		executaConcatenacaoWilcoxEffectSize(experimento, combinacoesWilcox, instancias, indiceColuna, nomeColuna);
 	}
 	
-	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par‚metros
+	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par√¢metros
 	private static void executaConcatenacaoWilcoxEffectSize(ExperimentoModel experimento, String combinacoesWilcox, String[] instancias, int INDICE_COLUNA, String nomeColuna) {
 		
 		String diretorioEstatisticas = Diretorios.diretorioStatistics;
@@ -316,7 +316,7 @@ public class GeradorCSV {
 			}
 			saida.write("\r\n");
 
-			// Cada linha ter· todos os resultados das configuracoes para a instancia
+			// Cada linha ter√° todos os resultados das configuracoes para a instancia
 			for (String instancia :instancias) {
 				concatenaArquivosWilcox(saida, instancia, combinacoesWilcox, INDICE_COLUNA);
 				saida.write("\r\n");
@@ -325,10 +325,10 @@ public class GeradorCSV {
 			saida.write("\r\n");
 			saida.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo n„o localizado: [" + diretorioEstatisticas + nomeArquivoEstatisticas +"]");
+			System.out.println("Arquivo n√£o localizado: [" + diretorioEstatisticas + nomeArquivoEstatisticas +"]");
 			System.exit(1);
 		} catch (IOException e) {
-			System.out.println("Erro ao abrir o arquivo de saÌda: [" + diretorioEstatisticas + nomeArquivoEstatisticas + "]");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + diretorioEstatisticas + nomeArquivoEstatisticas + "]");
 			System.exit(1);
 		}
 	}
@@ -366,17 +366,17 @@ public class GeradorCSV {
 				}
 				entrada.close();
 			} catch (FileNotFoundException e) {
-				System.out.println("Arquivo n„o localizado: [" + nomeArquivoWilcox +"]");
+				System.out.println("Arquivo n√£o localizado: [" + nomeArquivoWilcox +"]");
 				System.exit(1);
 			} catch (IOException e) {
-				System.out.println("Erro ao abrir o arquivo de saÌda: [" + nomeArquivoWilcox + "]");
+				System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + nomeArquivoWilcox + "]");
 				System.exit(1);
 			}
 		}
 	}
 	
 	/*
-	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par‚metros
+	// executa o condensador dos resultados em um unico arquivo csv, para uma faixa de par√¢metros
 	public static void executaConcatenacaoWilcoxEffectSize(ExperimentoModel experimento, String combinacoesWilcox, String[] instancias) {
 		
 		String diretorioEstatisticas = Diretorios.diretorioStatistics;
@@ -403,7 +403,7 @@ public class GeradorCSV {
 			}
 			saida.write("\r\n");
 
-			// Cada linha ter· todos os resultados das configuracoes para a instancia
+			// Cada linha ter√° todos os resultados das configuracoes para a instancia
 			for (String instancia :instancias) {
 				concatenaArquivosWilcox(saida, instancia, combinacoesWilcox);
 				saida.write("\r\n");
@@ -412,10 +412,10 @@ public class GeradorCSV {
 			saida.write("\r\n");
 			saida.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Arquivo n„o localizado: [" + diretorioEstatisticas + nomeArquivoEstatisticas +"]");
+			System.out.println("Arquivo n√£o localizado: [" + diretorioEstatisticas + nomeArquivoEstatisticas +"]");
 			System.exit(1);
 		} catch (IOException e) {
-			System.out.println("Erro ao abrir o arquivo de saÌda: [" + diretorioEstatisticas + nomeArquivoEstatisticas + "]");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + diretorioEstatisticas + nomeArquivoEstatisticas + "]");
 			System.exit(1);
 		}
 	}
@@ -450,10 +450,10 @@ public class GeradorCSV {
 							}
 							entrada.close();
 						} catch (FileNotFoundException e) {
-							System.out.println("Arquivo n„o localizado: [" + nomeArquivoWilcox +"]");
+							System.out.println("Arquivo n√£o localizado: [" + nomeArquivoWilcox +"]");
 							System.exit(1);
 						} catch (IOException e) {
-							System.out.println("Erro ao abrir o arquivo de saÌda: [" + nomeArquivoWilcox + "]");
+							System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + nomeArquivoWilcox + "]");
 							System.exit(1);
 						}
 					}

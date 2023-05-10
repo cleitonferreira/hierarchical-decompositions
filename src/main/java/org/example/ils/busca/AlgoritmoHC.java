@@ -30,11 +30,11 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 	}
 	
 	/**
-	 * A nova soluÁ„o para o algoritmo randomico È calculada aleatoriamente
+	 * A nova solu√ß√£o para o algoritmo randomico √© calculada aleatoriamente
 	 */
 	private SolucaoHC buscaMelhorVizinho(SolucaoHC solucao) {
 		
-		// cria uma cÛpia da soluÁ„o original por seguranÁa
+		// cria uma c√≥pia da solu√ß√£o original por seguran√ßa
 		SolucaoHC solucaoMelhor = new SolucaoHC(solucao);
 		
 		int[] valores = solucaoMelhor.getValores();
@@ -54,7 +54,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 			((CalculadorHC)calculador).evaluateEGravaEstado(solucaoMelhor, valores);
 			this.evaluation++;
 			
-			//alÈm de todos os grupos permite movimentar para um novo grupo
+			//al√©m de todos os grupos permite movimentar para um novo grupo
 			for(int j = 0; j < totalGrupos; j++) {
 				if(iGrupoAtual!=j) {
 					int grupoOrigem = valores[i];
@@ -64,7 +64,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 					double fitness = ((CalculadorHC)calculador).evaluateMove(solucaoMelhor, valores, i, grupoOrigem, grupoDestino);
 					this.evaluation++;
 					
-					// verifica se este È o melhor vizinho
+					// verifica se este √© o melhor vizinho
 					if (fitness < melhorFitness) {
 						melhorFitness = fitness;
 						melhorItem  = i;
@@ -73,11 +73,11 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 					}
 				}
 			}
-			// desfaz a modificaÁ„o do vizinho
+			// desfaz a modifica√ß√£o do vizinho
 			valores[i] = iGrupoAtual;
 		}
 		
-		// sen„o achou melhor retorna a soluÁ„o inicial
+		// sen√£o achou melhor retorna a solu√ß√£o inicial
 		if (melhorItem==-1) {
 			return solucaoMelhor;
 		}
@@ -114,7 +114,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 		int limiteSuperior = (tamanhoSolucao/maxProporcaoGrupos) - 1;
 		
 		// Debug
-		// se n„o houver debug, comentar o bloco para otimizaÁ„o
+		// se n√£o houver debug, comentar o bloco para otimiza√ß√£o
 		this.exibicao.printDebugGeracaoCabecalho(this,seed);
 		// fim Debug
 		
@@ -129,18 +129,18 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 			
 			SolucaoHC solucaoNova = buscaMelhorVizinho(solucao);
 			
-			// verifica se a nova soluÁ„o È melhor que a anterior
+			// verifica se a nova solu√ß√£o √© melhor que a anterior
 			if (solucaoNova.getFitness() < solucao.getFitness()) {
 				solucao = solucaoNova;
 			}
 			else
 			{
-				// verifica se È uma soluÁ„o Ûtima global
+				// verifica se √© uma solu√ß√£o √≥tima global
 				if (solucao.getFitness() < solucaoMelhor.getFitness()) {
 					solucaoMelhor = new SolucaoHC(solucao);
 				}
 
-				// se n„o houver restart multiplo sai do loop
+				// se n√£o houver restart multiplo sai do loop
 				if (!this.restartMultiple)
 					break;
 				
@@ -154,12 +154,12 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 			this.iteracao++;
 			
 			// Debug
-			// se n„o houver debug, comentar o bloco para otimizaÁ„o
+			// se n√£o houver debug, comentar o bloco para otimiza√ß√£o
 			this.exibicao.printDebugGeracao(solucaoNova, this.iteracao, this.evaluation);
 			// fim Debug
 		}
 		
-		// pode ser saÌdo devido ter atingido o n˙mero de avaliaÁıes
+		// pode ser sa√≠do devido ter atingido o n√∫mero de avalia√ß√µes
 		if (solucao.getFitness() < solucaoMelhor.getFitness())
 			solucaoMelhor = new SolucaoHC(solucao);
 		
@@ -168,7 +168,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 	}
 	
 	/**
-	 * Loop utilizado pelo ILS, sem verificaÁ„o de m˙ltiplo restart
+	 * Loop utilizado pelo ILS, sem verifica√ß√£o de m√∫ltiplo restart
 	 */
 	public SolucaoHC executa(SolucaoHC solucaoAtual) 
 	{
@@ -178,7 +178,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 			
 			SolucaoHC solucaoNova = buscaMelhorVizinho(solucaoMelhor);
 
-			 // verifica se a nova soluÁ„o È melhor que a anterior
+			 // verifica se a nova solu√ß√£o √© melhor que a anterior
 			if (solucaoNova == null || solucaoNova.getFitness() >= solucaoMelhor.getFitness()) {
 				break;
 			}
@@ -187,7 +187,7 @@ public class AlgoritmoHC extends AlgoritmoAbstract {
 			this.iteracao++;
 			
 			// Debug
-			// se n„o houver debug, comentar o bloco para otimizaÁ„o
+			// se n√£o houver debug, comentar o bloco para otimiza√ß√£o
 			this.exibicao.printDebugGeracao(solucaoMelhor, this.iteracao, this.evaluation);
 			// fim Debug
 		}

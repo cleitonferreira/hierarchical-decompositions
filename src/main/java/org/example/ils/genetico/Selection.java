@@ -4,9 +4,9 @@ import org.example.ils.core.SolucaoAbstract;
 import org.example.ils.core.random.PseudoRandom;
 
 /**
- * Métodos de seleção de indivíduos
+ * MÃ©todos de seleÃ§Ã£o de indivÃ­duos
  *
- * Método: getBinaryTournament
+ * MÃ©todo: getBinaryTournament
  * foi adaptado para este projeto a partir do JMetal (http://jmetal.sourceforge.net/)
  * @author Juan J. Durillo
  */

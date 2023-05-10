@@ -17,7 +17,7 @@ public class GeradorScriptR {
 			FileWriter fw = new FileWriter(diretorioSaida + nomeArquivoSaida,append);
 			return fw;
 		} catch (IOException e) {
-			System.out.println("Erro ao abrir o arquivo de saÌda: [" + diretorioSaida + nomeArquivoSaida +"]");
+			System.out.println("Erro ao abrir o arquivo de sa√≠da: [" + diretorioSaida + nomeArquivoSaida +"]");
 			System.exit(1);
 		}
 		return null;
@@ -43,7 +43,7 @@ public class GeradorScriptR {
 		saida.write("tabelaMQ<-read.table(\"" + nomeArquivoEntrada + "\",h=T,sep=\";\",dec=\",\") \r\n");
 		
 		saida.write("################################# \r\n");
-		saida.write("# Calcula min, max e desvio padr„o para MQ \r\n");
+		saida.write("# Calcula min, max e desvio padr√£o para MQ \r\n");
 		saida.write("################################# \r\n");
 		saida.write("minimos      <- NULL \r\n");
 		saida.write("maximos      <- NULL \r\n");
@@ -103,7 +103,7 @@ public class GeradorScriptR {
 		saida.write("		tabelaAux<-subset(tabelaMQ,tabelaMQ$INSTANCIA==proj & tabelaMQ$CONFIGURACAO==conf) \r\n");
 				
 		saida.write("		algoritmo <- tabelaAux[1,2] \r\n");
-		//N„o est· atulizando as informaÁıes sobre os parametros corretamente para cada projeto
+		//N√£o est√° atulizando as informa√ß√µes sobre os parametros corretamente para cada projeto
 		saida.write("		parametros<- tabelaAux[1,4] \r\n");
 
 		saida.write("		tamanho<-nrow(tabelaAux) \r\n");
@@ -210,7 +210,7 @@ public class GeradorScriptR {
 	}
 	
 	private static boolean contemMultiplasSolucoesPorIteracao(DadosDebugCabecalho debug) {
-		if (debug.getNomeAlgoritmo().indexOf("Genetico")>=0 || debug.getNomeAlgoritmo().indexOf("GenÈtico")>=0) {
+		if (debug.getNomeAlgoritmo().indexOf("Genetico")>=0 || debug.getNomeAlgoritmo().indexOf("Gen√©tico")>=0) {
 			return true;
 		}
 		return false;
@@ -251,7 +251,7 @@ public class GeradorScriptR {
 			//}
 		
 			saida.write("#################################\r\n");
-			saida.write("# Gr·ficos\r\n");
+			saida.write("# Gr√°ficos\r\n");
 			saida.write("#################################\r\n");
 			saida.write("tabelaEvolutionMQ<-read.table(\"" + nomeArquivoDebug + "\",h=T,sep=\";\",dec=\"" + DECIMAL + "\") \r\n");
 			saida.write("conf<-" + debug.getConfiguracao() + " \r\n");
@@ -331,10 +331,10 @@ public class GeradorScriptR {
 		String nomeArquivoDebug = Diretorios.getNomeArquivoResumoCSVDebug(experimento);
 		
 		String campoEixoX = "GERACAO";
-		String nomeEixoX = "IteraÁıes";
+		String nomeEixoX = "Itera√ß√µes";
 		if (eixoXPorAvaliacao) {
 			campoEixoX = "EVALUATION";
-			nomeEixoX = "AvaliaÁıes";
+			nomeEixoX = "Avalia√ß√µes";
 		}
 
 		for (DadosDebugCabecalho debug : debugs) {
@@ -346,7 +346,7 @@ public class GeradorScriptR {
 			//}
 		
 			saida.write("#################################\r\n");
-			saida.write("# Gr·ficos\r\n");
+			saida.write("# Gr√°ficos\r\n");
 			saida.write("#################################\r\n");
 			saida.write("tabelaEvolutionMQ<-read.table(\"" + nomeArquivoDebug + "\",h=T,sep=\";\",dec=\"" + DECIMAL + "\") \r\n");
 			saida.write("conf<-" + debug.getConfiguracao() + " \r\n");

@@ -6,9 +6,9 @@ import org.example.ils.genetico.classico.SolucaoGeneticoGA;
 import org.example.ils.genetico.falkenauer.SolucaoGeneticoGF;
 
 /**
- * MÈtodos de mutaÁ„o
+ * M√©todos de muta√ß√£o
  *
- * MÈtodos: uniformMutation, nonUniformMutation e delta
+ * M√©todos: uniformMutation, nonUniformMutation e delta
  * foram adaptados para este projeto a partir do JMetal (http://jmetal.sourceforge.net/)
  * @author Juan J. Durillo
  */
@@ -87,7 +87,7 @@ public class Mutation {
 	}
 	
 	/**
-	 * Realiza uma mutaÁ„o na soluÁ„o
+	 * Realiza uma muta√ß√£o na solu√ß√£o
 	 */
 	public void uniformMutation( SolucaoAbstract solucao )
 	{
@@ -113,7 +113,7 @@ public class Mutation {
 	}
 
 	/**
-	 * Realiza uma mutaÁ„o na soluÁ„o
+	 * Realiza uma muta√ß√£o na solu√ß√£o
 	 */
 	public void nonUniformMutation(SolucaoAbstract solucao, int iteracaoAtual)
 	{
@@ -327,7 +327,7 @@ public class Mutation {
 		qtdItens[totalGrupos-1] = 0;
 		totalGrupos--;
 		
-		// shift dos grupos para os valores, pois os cÛdigos v„o reduzir em um
+		// shift dos grupos para os valores, pois os c√≥digos v√£o reduzir em um
 		for (int i = 0; i < totalItens; i++) {
 			if (valores[i]>=maiorGrupo)
 				valores[i]--;

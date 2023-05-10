@@ -45,7 +45,7 @@ public class AlgoritmoCNM extends AlgoritmoAbstract {
 		this.tempoExecucao = System.currentTimeMillis() - tempoInicial;
 	}
 	
-	// cada módulo pertencerá a um único cluster
+	// cada mÃ³dulo pertencerÃ¡ a um Ãºnico cluster
 	protected void iniciaSolucao(SolucaoCNM solucao) 
 	{
 		int totalItens = this.problema.getClassCount();
@@ -77,7 +77,7 @@ public class AlgoritmoCNM extends AlgoritmoAbstract {
 				
 				int[] valores = Arrays.copyOf(solucao.getValores(), solucao.getValores().length);
 				
-				// junta os dois clusters e faz o recálculo
+				// junta os dois clusters e faz o recÃ¡lculo
 				for (int k = 0; k < valores.length; k++) {
 					if (valores[k] == j)
 						valores[k] = i;

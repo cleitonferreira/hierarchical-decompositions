@@ -8,9 +8,9 @@ import org.example.ils.genetico.TipoMutacao;
 import org.example.ils.genetico.TipoSelection;
 
 /**
- * Parâmetros utilizados em todos os algoritmos, 
- * esta classe é utilizada para facilitar a execução de experimentos 
- * com algoritmos utilizando diferentes parâmetros
+ * ParÃ¢metros utilizados em todos os algoritmos, 
+ * esta classe Ã© utilizada para facilitar a execuÃ§Ã£o de experimentos 
+ * com algoritmos utilizando diferentes parÃ¢metros
  */
 public class Parametro {
 	
@@ -25,7 +25,7 @@ public class Parametro {
 	private Integer nCiclos = 1;
 	private Boolean comSemente = true;
 	private TipoAlgoritmo tipoAlgoritmo = null;
-	private Integer evaluationMax = null; // quantidade máxima de avaliações
+	private Integer evaluationMax = null; // quantidade mÃ¡xima de avaliaÃ§Ãµes
 	private Integer multiplicadorEvaluation = 200; // evaluationMax = multiplicador * N * N
 	private Integer maxIteracoesSemMelhoria = null;
 	
@@ -43,26 +43,26 @@ public class Parametro {
 
 	// parametros do genetico
 	private Double probabilidadeMutacao = null;     
-	// probabilidade de ocorrer mutação no GA
+	// probabilidade de ocorrer mutaÃ§Ã£o no GA
 	private Double probabilidadeCrossover = null;          // probabilidade de ocorrer crossover
-	private Integer tamanhoPopulacao = null;               // tamanho da população
+	private Integer tamanhoPopulacao = null;               // tamanho da populaÃ§Ã£o
 	private TipoElite tipoElite = null;                    // se a elite funciona como percentual ou inteiro
-	private Double valorElite = null;                 	   // percentual da população elite
+	private Double valorElite = null;                 	   // percentual da populaÃ§Ã£o elite
 	private TipoDescarte tipoDescarte = null;              // tipo de descarte
-	private Double percentualDescarte = null;              // percentual da população para descarte
-	private Double percentualDescarteSelecao = null;       // percentual da população a ser escolhida para substituir o descarte
-	private Double percentualDescarteMovimentacoes = null; // movimentacoes para diviersificar para gerar novas soluções do descarte
-	private TipoSelection tipoSelecao = null;              // tipo de seleção de pais utilizados no crossover
-	private TipoMutacao tipoMutacao = null;                // tipo de mutação utilizada
+	private Double percentualDescarte = null;              // percentual da populaÃ§Ã£o para descarte
+	private Double percentualDescarteSelecao = null;       // percentual da populaÃ§Ã£o a ser escolhida para substituir o descarte
+	private Double percentualDescarteMovimentacoes = null; // movimentacoes para diviersificar para gerar novas soluÃ§Ãµes do descarte
+	private TipoSelection tipoSelecao = null;              // tipo de seleÃ§Ã£o de pais utilizados no crossover
+	private TipoMutacao tipoMutacao = null;                // tipo de mutaÃ§Ã£o utilizada
 	private TipoCrossover tipoCrossover = null;            // tipo de crossover utilizado
 	private Double percentualGrupoA = null;                // percentual do grupo A no crossover que utiliza pais de grupos diferentes
 	private Double percentualGrupoB = null;                // percentual do grupo B no crossover que utiliza pais de grupos diferentes
-	private Integer maxProporcaoGrupos = null;             // número máximo de grupos para geração de soluções aleatórias (número 2 equivale a 50%)
-	private Double percentualSolucoesIguaisMaxima = null;  // quantidade máxima de soluções iguais usadas no crossover, se superada aplicada mutação no GF Com Mutação
+	private Integer maxProporcaoGrupos = null;             // nÃºmero mÃ¡ximo de grupos para geraÃ§Ã£o de soluÃ§Ãµes aleatÃ³rias (nÃºmero 2 equivale a 50%)
+	private Double percentualSolucoesIguaisMaxima = null;  // quantidade mÃ¡xima de soluÃ§Ãµes iguais usadas no crossover, se superada aplicada mutaÃ§Ã£o no GF Com MutaÃ§Ã£o
 	private Double percentualMovimentacoesMutacao = null;  // movimentacoes para diversificacao da populacao
 	
-	//private Integer maxGruposPorCrossover = null;          // número máximo de grupos que podem ser selecionados para o crossover de grupos
-	private Double percentualGruposPorCrossover = null;    // percentual de grupos máximo a ser obtido sobre o tamanho total de itens
+	//private Integer maxGruposPorCrossover = null;          // nÃºmero mÃ¡ximo de grupos que podem ser selecionados para o crossover de grupos
+	private Double percentualGruposPorCrossover = null;    // percentual de grupos mÃ¡ximo a ser obtido sobre o tamanho total de itens
 	
 	public Parametro(Parametro param)
 	{

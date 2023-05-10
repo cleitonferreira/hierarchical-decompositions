@@ -12,12 +12,12 @@ public abstract class CalculadorAbstract {
 	}
 
 	/**
-	 * Avalia o fitness de uma solução
+	 * Avalia o fitness de uma soluÃ§Ã£o
 	 */
 	public abstract double evaluate(SolucaoAbstract solucaoAbstract);
 	
 	/**
-	 * Avalia a solução
+	 * Avalia a soluÃ§Ã£o
 	 */
 	public abstract double evaluate(SolucaoAbstract solucaoAbstract, int[] valores);
 	

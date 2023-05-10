@@ -15,7 +15,7 @@ public class Project
 	private Vector<ProjectClass> classes;
 
 	/**
-	 * Inicializa uma aplicação
+	 * Inicializa uma aplicaÃ§Ã£o
 	 */
 	public Project(String filename, String name)
 	{
@@ -33,7 +33,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna o nome da aplicação
+	 * Retorna o nome da aplicaÃ§Ã£o
 	 */
 	public String getName()
 	{
@@ -41,7 +41,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna o número de pacotes da aplicação
+	 * Retorna o nÃºmero de pacotes da aplicaÃ§Ã£o
 	 */
 	public int getPackageCount()
 	{
@@ -49,7 +49,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna um pacote da aplicação, dado seu índice
+	 * Retorna um pacote da aplicaÃ§Ã£o, dado seu Ã­ndice
 	 */
 	public ProjectPackage getPackageIndex(int index)
 	{
@@ -57,7 +57,7 @@ public class Project
 	}
 
 	/**
-	 * Retorna o índice de um pacote no projeto
+	 * Retorna o Ã­ndice de um pacote no projeto
 	 */
 	public int getIndexForPackage(ProjectPackage _package)
 	{
@@ -65,7 +65,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna um pacote da aplicação, dado seu nome
+	 * Retorna um pacote da aplicaÃ§Ã£o, dado seu nome
 	 */
 	public ProjectPackage getPackageName(String name)
 	{
@@ -77,7 +77,7 @@ public class Project
 	}
 	
 	/**
-	 * Adiciona um pacote na aplicação
+	 * Adiciona um pacote na aplicaÃ§Ã£o
 	 */
 	public ProjectPackage addPackage(String name)
 	{
@@ -87,7 +87,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna uma enumeração dos pacotes da aplicação
+	 * Retorna uma enumeraÃ§Ã£o dos pacotes da aplicaÃ§Ã£o
 	 */
 	public Iterable<ProjectPackage> getPackages()
 	{
@@ -95,7 +95,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna o número de classes do projeto
+	 * Retorna o nÃºmero de classes do projeto
 	 */
 	public int getClassCount()
 	{
@@ -103,7 +103,7 @@ public class Project
 	}
 
 	/**
-	 * Retorna uma classe, dado seu índice no projeto
+	 * Retorna uma classe, dado seu Ã­ndice no projeto
 	 */
 	public ProjectClass getClassIndex(int index)
 	{
@@ -123,7 +123,7 @@ public class Project
 	}
 
 	/**
-	 * Retorna o índice de uma classe, dado seu nome
+	 * Retorna o Ã­ndice de uma classe, dado seu nome
 	 */
 	public int getClassIndex(String name)
 	{
@@ -139,7 +139,7 @@ public class Project
 	}
 
 	/**
-	 * Retorna o índice de uma classe no projeto
+	 * Retorna o Ã­ndice de uma classe no projeto
 	 */
 	public int getIndexForClass(ProjectClass _class)
 	{
@@ -155,7 +155,7 @@ public class Project
 	}
 	
 	/**
-	 * Remove uma classe do projeto, dado seu índice
+	 * Remove uma classe do projeto, dado seu Ã­ndice
 	 */
 	public void removeClass(int index)
 	{
@@ -163,7 +163,7 @@ public class Project
 	}
 
 	/**
-	 * Adiciona uma dependência entre duas classes no projeto
+	 * Adiciona uma dependÃªncia entre duas classes no projeto
 	 */
 	public void addDependency(String sourceClass, String targetClass)
 	{
@@ -174,7 +174,7 @@ public class Project
 	}
 	
 	/**
-	 * Retorna o número de dependências do projeto 
+	 * Retorna o nÃºmero de dependÃªncias do projeto 
 	 */
 	public int getDependencyCount()
 	{

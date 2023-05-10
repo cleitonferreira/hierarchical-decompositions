@@ -117,7 +117,7 @@ public class Populacao implements Serializable {
 			return;
 		}
 
-		// Coleta a primeira e segunda solução da população
+		// Coleta a primeira e segunda soluÃ§Ã£o da populaÃ§Ã£o
 		Solucao s1 = this.solucoes.get(0);
 		Solucao s2 = this.solucoes.get(1);
 		if (s2.getFitness() < s1.getFitness()) {
@@ -150,7 +150,7 @@ public class Populacao implements Serializable {
 		if (this.solucoes.size() < 1)
 			return null;
 
-		// Coleta a primeira e segunda solução da população
+		// Coleta a primeira e segunda soluÃ§Ã£o da populaÃ§Ã£o
 		SolucaoAbstract s1 = this.solucoes.get(0);
 		for (int i = 1; i < solucoes.size(); i++) {
 			if (solucoes.get(i).getFitness() < s1.getFitness()) {
@@ -190,7 +190,7 @@ public class Populacao implements Serializable {
 	*/
 
 	/**
-	 * Coleta as duas primeiras soluções
+	 * Coleta as duas primeiras soluÃ§Ãµes
 	 */
 	public void setDoisPrimeiros(SolucaoAbstract[] retorno) {
 		
@@ -204,7 +204,7 @@ public class Populacao implements Serializable {
 	}
 	
 	/**
-	 * Coleta as primeiras soluções
+	 * Coleta as primeiras soluÃ§Ãµes
 	 */
 	public void setSolucoesElite(SolucaoAbstract[] retorno, int quantidade) 
 	{
@@ -226,7 +226,7 @@ public class Populacao implements Serializable {
 	}
 	
 	/**
-	 * Compara se duas populações tem mesma média e elementos homogeneos
+	 * Compara se duas populaÃ§Ãµes tem mesma mÃ©dia e elementos homogeneos
 	 */
 	public int compara(Populacao populacao, int contadorAtual) {
 		double fitnessInicial1 = this.getPrimeiro().getFitness();
@@ -235,18 +235,18 @@ public class Populacao implements Serializable {
 		double fitnessInicial2 = populacao.getPrimeiro().getFitness();
 		double fitnessFinal2   = populacao.getUltimo().getFitness();
 		
-		// População não está totalmente homogênea
+		// PopulaÃ§Ã£o nÃ£o estÃ¡ totalmente homogÃªnea
 		if (fitnessInicial1-fitnessFinal1>0.0001)   return 0;
-		// Primeiros elementos diferentes nas populações
+		// Primeiros elementos diferentes nas populaÃ§Ãµes
 		if (fitnessInicial1-fitnessInicial2>0.0001) return 0;
-		// Últimos elementos diferentes nas populações
+		// Ãšltimos elementos diferentes nas populaÃ§Ãµes
 		if (fitnessFinal1-fitnessFinal2>0.0001)     return 0;
 		
 		return contadorAtual+1;
 	}
 	
 	/**
-	 * Compara se os elementos das populações são identicos
+	 * Compara se os elementos das populaÃ§Ãµes sÃ£o identicos
 	 * Usado para testes
 	 */
 	public boolean equals(Populacao populacao) 
@@ -263,7 +263,7 @@ public class Populacao implements Serializable {
 	}
 	
 	/**
-	 * Compara, considerando que um percentual da população será sempre descartado
+	 * Compara, considerando que um percentual da populaÃ§Ã£o serÃ¡ sempre descartado
 	 */
 	public int comparaConsirandoInsercaoRandomica(Populacao populacao, int contadorAtual, int posicaoLimite) {
 
@@ -273,9 +273,9 @@ public class Populacao implements Serializable {
 		double fitnessProxima = populacao.getSolucao(0).getFitness();
 		//double mediaProxima   = populacao.getMediaFitness();
 		
-		// Não houve variação relevante de fitness
+		// NÃ£o houve variaÃ§Ã£o relevante de fitness
 		if (fitnessAtual-fitnessProxima>0.0001)   return 0;
-		// Não houve variação da média da população
+		// NÃ£o houve variaÃ§Ã£o da mÃ©dia da populaÃ§Ã£o
 		//if (Math.abs(mediaAtual-mediaProxima)>0.0001) return 0;
 		
 		return contadorAtual+1;

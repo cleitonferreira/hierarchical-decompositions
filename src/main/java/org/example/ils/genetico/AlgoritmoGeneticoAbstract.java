@@ -9,25 +9,25 @@ import org.example.ils.core.SolucaoAbstract;
 
 public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 
-	// Tamanho da populaÁ„o
+	// Tamanho da popula√ß√£o
 	protected int tamanhoPopulacao = 0;
 	// Tamanho da elite
 	protected int tamanhoElite = 2;
-	// Tipo de substituiÁ„o dos piores elementos
+	// Tipo de substitui√ß√£o dos piores elementos
 	protected TipoDescarte tipoDescarte = null;
-	// Tamanho de opÁıes aleatÛrias inseridas na populaÁ„o
+	// Tamanho de op√ß√µes aleat√≥rias inseridas na popula√ß√£o
 	protected int tamanhoDescarte = 0;
-	// Tamanho para seleÁ„o das soluÁıes boas que ser„o modificadas para substituir o descarte
+	// Tamanho para sele√ß√£o das solu√ß√µes boas que ser√£o modificadas para substituir o descarte
 	protected int tamanhoDescarteSelecao = 0;
 	// Operador de selecao
 	protected Selection operadorSelecao = null;
-	// Operador de mutaÁ„o
+	// Operador de muta√ß√£o
 	protected Mutation operadorMutacao = null;
 	// Operador de crossover
 	protected Crossover operadorCrossover = null;
-	// N˙mero de geraÁıes para parada
+	// N√∫mero de gera√ß√µes para parada
 	protected int tamanhoGeracoesIguaisParada = 0;
-	// Par‚metro m·ximo de soluÁıes iguais antes de aplicar mutaÁ„o 
+	// Par√¢metro m√°ximo de solu√ß√µes iguais antes de aplicar muta√ß√£o 
 	protected int tamanhoSolucoesIguaisMaxima = -1;
 
 	public AlgoritmoGeneticoAbstract( 
@@ -44,12 +44,12 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 	}
 
 	/**
-	 * Inicializa a populaÁ„o randomicamente
+	 * Inicializa a popula√ß√£o randomicamente
 	 */
 	public abstract void iniciaPopulacao(Populacao populacao, int tamPopulacao); 
 
 	/**
-	 * Inicializa a populaÁ„o randomicamente
+	 * Inicializa a popula√ß√£o randomicamente
 	 */
 	/*
 	@Deprecated
@@ -57,22 +57,22 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 	*/ 
 
 	/**
-	 * Seleciona os elementos da populaÁ„o para reproduÁ„o
+	 * Seleciona os elementos da popula√ß√£o para reprodu√ß√£o
 	 */
 	protected abstract void selecaoElite(Populacao populacao,Populacao populacaoFilha); 
 
 	/**
-	 * Substitui os piores elementos da populaÁ„o
+	 * Substitui os piores elementos da popula√ß√£o
 	 */
 	protected abstract void substituiPioresAleatorio(Populacao populacao, Populacao populacaoFilha); 
 
 	/**
-	 * Substitui os piores elementos da populaÁ„o
+	 * Substitui os piores elementos da popula√ß√£o
 	 */
 	protected abstract void substituiPioresMutacao(Populacao populacao, Populacao populacaoFilha); 
 
 	/**
-	 * Substitui os piores elementos da populaÁ„o
+	 * Substitui os piores elementos da popula√ß√£o
 	 */
 	protected void substituiPiores(Populacao populacao, Populacao populacaoFilha) 
 	{
@@ -96,12 +96,12 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 	}
 
 	/**
-	 * OtimizaÁ„o
+	 * Otimiza√ß√£o
 	 */
 	protected abstract void otimizacao(SolucaoAbstract[] filhos); 
 
 	/**
-	 * Adiciona na nova geraÁ„o
+	 * Adiciona na nova gera√ß√£o
 	 */
 	protected abstract void novaGeracao(Populacao populacaoFilha, SolucaoAbstract[] filhos);
 
@@ -119,14 +119,14 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 	}
 	
 	/**
-	 * Executa a mutaÁ„o de acordo com a seleÁ„o
+	 * Executa a muta√ß√£o de acordo com a sele√ß√£o
 	 */
 	protected void mutacao(SolucaoAbstract[] filhos) {
 		this.operadorMutacao.executa(filhos, this.evaluation);
 	}
 	
 	/**
-	 * Realiza um crossover e mutaÁ„o
+	 * Realiza um crossover e muta√ß√£o
 	 */
 	public void reproduzPais(
 		Populacao populacao,
@@ -183,7 +183,7 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 	}	
 
 	/**
-	 * Inicializa a populaÁ„o randomicamente
+	 * Inicializa a popula√ß√£o randomicamente
 	 */
 	public void reproduzPopulacao(
 		Populacao populacao,
@@ -214,7 +214,7 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 			seed = Double.valueOf(args[0]);
 
 		// Debug
-		// se n„o houver debug, comentar a linha para otimizaÁ„o
+		// se n√£o houver debug, comentar a linha para otimiza√ß√£o
 		this.exibicao.printDebugGeracaoCabecalho(this,seed);
 		// fim Debug
 
@@ -240,16 +240,16 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 			//debug.printPopulacaoResumo(this.iteracao, populacao);
 			//debug.printPopulacao(this.iteracao, populacao);
 
-			// Seleciona as melhores soluÁıes para manter na nova geraÁ„o
+			// Seleciona as melhores solu√ß√µes para manter na nova gera√ß√£o
 			selecaoElite(populacao, populacaoFilha);
 
-			// GeraÁ„o da nova populaÁ„o
+			// Gera√ß√£o da nova popula√ß√£o
 			reproduzPopulacao(populacao, populacaoFilha);
 
-			// Substitui um percentual das piores soluÁıes
+			// Substitui um percentual das piores solu√ß√µes
 			substituiPiores(populacao, populacaoFilha);
 
-			// Verifica se a populaÁ„o est· homogenea (otimo local?)
+			// Verifica se a popula√ß√£o est√° homogenea (otimo local?)
 			//contadorGeracoesIguais = populacao.compara(populacaoFilha, contadorGeracoesIguais);
 			if (this.tamanhoGeracoesIguaisParada>0) {
 				contadorGeracoesIguais = populacao.comparaConsirandoInsercaoRandomica(populacaoFilha, contadorGeracoesIguais, this.operadorSelecao.getFimB());
@@ -258,7 +258,7 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 			}
 			
 			// Debug
-			// se n„o houver debug, comentar o bloco para otimizaÁ„o
+			// se n√£o houver debug, comentar o bloco para otimiza√ß√£o
 			this.exibicao.printDebugGeracao(populacaoFilha, this.iteracao, this.evaluation);
 			// fim Debug
 
@@ -308,10 +308,10 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 				throw new Exception("Operador de Descarte configurado mas tamanho de descarte menor ou igual a zero.");	
 			}
 			if (this.tamanhoDescarteSelecao <= 0) {
-				throw new Exception("Operador de Descarte configurado mas tamanho de descarte da seleÁ„o menor ou igual a zero.");	
+				throw new Exception("Operador de Descarte configurado mas tamanho de descarte da sele√ß√£o menor ou igual a zero.");	
 			}
 			if (this.tipoDescarte == TipoDescarte.MUTACAO_MELHORES && tamanhoDescarteMovimentacoes <= 0) {
-				throw new Exception("Operador de Descarte configurado mas tamanho de descarte das movimentaÁıes menor ou igual a zero.");	
+				throw new Exception("Operador de Descarte configurado mas tamanho de descarte das movimenta√ß√µes menor ou igual a zero.");	
 			}
 		}
 		
@@ -324,7 +324,7 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 		if (this.tamanhoSolucoesIguaisMaxima<0)
 			this.tamanhoSolucoesIguaisMaxima = 0;
 		
-		// Se o percentual est· definido estabelece o n˙mero de 1 para diversificaÁ„o
+		// Se o percentual est√° definido estabelece o n√∫mero de 1 para diversifica√ß√£o
 		if (param.getPercentualSolucoesIguaisMaxima() != null && param.getPercentualSolucoesIguaisMaxima() > 0.00) {
 			if (this.tamanhoSolucoesIguaisMaxima == 0)
 				this.tamanhoSolucoesIguaisMaxima = 1;
@@ -345,10 +345,10 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 				this.operadorSelecao = new Selection(param.getTipoSelecao(), tamanhoGrupoA, tamanhoGrupoB);
 				break;
 			default:
-				throw new Exception("Operador de SeleÁ„o n„o foi configurado corretamente.");
+				throw new Exception("Operador de Sele√ß√£o n√£o foi configurado corretamente.");
 		}
 		
-		if (param.getTipoMutacao()==null) throw new Exception("Operador de MutaÁ„o n„o foi configurado corretamente.");
+		if (param.getTipoMutacao()==null) throw new Exception("Operador de Muta√ß√£o n√£o foi configurado corretamente.");
 		
 		this.operadorMutacao = new Mutation(
 			param.getTipoMutacao(), 
@@ -361,9 +361,9 @@ public abstract class AlgoritmoGeneticoAbstract extends AlgoritmoAbstract {
 			problema.getTamanho()
 		);
 		
-		if (param.getTipoCrossover()==null) throw new Exception("Operador de Crossover n„o foi configurado corretamente.");
+		if (param.getTipoCrossover()==null) throw new Exception("Operador de Crossover n√£o foi configurado corretamente.");
 		
-		if (param.getPercentualGruposPorCrossover()==null) throw new Exception("Operador de Crossover, parametro de maximo grupos para o crossover de grupos n„o foi configurado corretamente.");
+		if (param.getPercentualGruposPorCrossover()==null) throw new Exception("Operador de Crossover, parametro de maximo grupos para o crossover de grupos n√£o foi configurado corretamente.");
 		
 		// em vez de parametro por divisor passa a ser percentual
 		//int maxGruposPorCrossover = Double.valueOf(problema.getTamanho() / param.getPercentualGruposPorCrossover()).intValue();

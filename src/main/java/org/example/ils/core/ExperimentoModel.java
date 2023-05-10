@@ -21,7 +21,7 @@ public abstract class ExperimentoModel {
 	
 	public abstract String getIdExperimento();
 	
-	// abre os arquivos de saÌda para todos os par‚metros do experimento
+	// abre os arquivos de sa√≠da para todos os par√¢metros do experimento
 	public Exibicao[] iniciaExibicoes()
 	{
 		List<String> arquivos = Diretorios.getNomesArquivosSaida(getParametros());
