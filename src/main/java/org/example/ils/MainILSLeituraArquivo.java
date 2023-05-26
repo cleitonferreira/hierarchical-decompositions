@@ -28,6 +28,8 @@ public class MainILSLeituraArquivo {
 
   public static void main(String[] args) throws Exception {
 
+    long startTimestamp = System.currentTimeMillis();
+
     //Figura21
     //Figura figura = new Figura21();
     //Figura18
@@ -42,6 +44,14 @@ public class MainILSLeituraArquivo {
 
     ExperimentoModel experimento = new ExperimentoFinalParte1();
     executa(tipoExibicao, experimento);
+
+    long totalTime = System.currentTimeMillis() - startTimestamp;
+    double seconds = (totalTime / 1000D);
+    long memory = Runtime.getRuntime().freeMemory() / (1024 * 1024);
+
+    System.out.println("Tempo de execução do arquivo");
+    System.out.println(padLeft(experimento.getProblemas().get(0).getName(), 20) + " " + padRight("" + experimento.getProblemas().get(0).getClassCount(), 10) /*+ " " + padRight(df4.format(fitness), 10)*/ + " " + padRight("" + seconds, 10) + "s " + padRight("" + memory, 10) + " MB \n"
+        + "----------------------------------------------------- \n");
   }
 
   public static final void executa(TipoExibicao tipoExibicao, ExperimentoModel experimento)
@@ -452,5 +462,27 @@ public class MainILSLeituraArquivo {
     );
 
     return problema;
+  }
+
+  public static String padLeft(String s, int length)
+  {
+    StringBuilder sb = new StringBuilder();
+    sb.append(s);
+
+    while (sb.length() < length)
+      sb.append(' ');
+
+    return sb.toString();
+  }
+
+  public static String padRight(String s, int length)
+  {
+    StringBuilder sb = new StringBuilder();
+
+    while (sb.length() < length - s.length())
+      sb.append(' ');
+
+    sb.append(s);
+    return sb.toString();
   }
 }
