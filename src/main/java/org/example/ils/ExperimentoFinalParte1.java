@@ -18,24 +18,64 @@ public class ExperimentoFinalParte1 extends ExperimentoModel {
   public String[] getInstancias()
   {
     return new String[] {
-        /*"mtunis",*/
         "exemplo.odem"
-        /*"junit-3.8.1 100C.odem"*/
-        /*"jstl-1.0.6 18C.odem"*/
-/*			"jnanoxml 25C.odem",
-			"apache_zip 36C.odem",
-			"jscatterplot 74C.odem",
-			"junit-3.8.1 100C.odem",
-			"tinytim 134C.odem",
-			"gae_plugin_core 140C.odem",
-			"jdendogram 177C.odem",
-			"pdf_renderer 199C.odem",
-			"Jung-visualization 221C.odem",
-			"pfcda_swing 252C.odem",
-			"jml 270C.odem",
-			"notepad-full 299C.odem",*/
+        //"jstl-1.0.6 18C.odem"
+        //"jnanoxml 25C.odem"
+        //"joda-money 26C.odem"
+        //"jxls-reader 27C.odem"
+        //"seemp 31C.odem"
+        //"junit-3.8.1 100C.odem"
     };
   }
+
+/*  public String[] getInstancias()
+  {
+    return new String[] {
+        "apache_zip 36C.odem",
+        "dom4j-1.5.2 195C.odem",
+        "exemplo.odem",
+        "forms-1.3.0 68C.odem",
+        "gae_plugin_core 140C.odem",
+        "jace 340C.odem",
+        "javacc 154C.odem",
+        "JavaGeom 172C.odem",
+        "javaocr 59C.odem",
+        "javaws 378C.odem",
+        "javaws-7 378C.odem",
+        "jconsole-1.7.0 220C.odem",
+        "jdendogram 177C.odem",
+        "jfluid-1.7.0 82C.odem",
+        "jkaryoscope 136C.odem",
+        "JMetal 190C.odem",
+        "jml 270C.odem",
+        "jnanoxml 25C.odem",
+        "joda-money 26C.odem",
+        "JPassword 96C.odem",
+        "jpassword 269C.odem",
+        "jscatterplot 74C.odem",
+        "jstl-1.0.6 18C.odem",
+        "jtreeview 329C.odem",
+        "Jung-graph 207C.odem",
+        "Jung-visualization 221C.odem",
+        "junit-3.8.1 100C.odem",
+        "jxls-core 83C.odem",
+        "jxls-reader 27C.odem",
+        "log4j-1.2.16 308C.odem",
+        "notepad-full 299C.odem",
+        "notepad-model 46C.odem",
+        "pdf_renderer 199C.odem",
+        "pfcda_base 67C.odem",
+        "pfcda_swing 252C.odem",
+        "poormans_2.3 304C.odem",
+        "res_cobol 483C.odem",
+        "seemp 31C.odem",
+        "servletapi-2.3 63C.odem",
+        "tinytim 134C.odem",
+        "udt-java 56C.odem",
+        "xmlapi 184C.odem",
+        "xmldom 119C.odem"
+    };
+  }*/
 
   public void addParametrosCombinacaoMetodos(List<Parametro> params, Double percentual, int nCiclos,
       int maxIteracoesSemMelhoria, boolean inicialConstrutivo,
