@@ -1,14 +1,7 @@
 package org.example.ils.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 import org.example.FormulaComplexidade;
-import org.example.model.Entidade;
 import org.example.model.HMD;
-import org.example.model.Modulo;
 
 /**
  * DEFINICÕES:
@@ -36,23 +29,14 @@ public class Calculador extends CalculadorAbstract {
   protected double[] mf;
   protected double mq;
 
-  private static HMD hmdSolucao;
-
   /**
    * Inicializa o calculator com os dados do problema
    */
   public Calculador(Problema problema) {
     super(problema);
-    hmdSolucao = problema.getHMD();
   }
 
   public double calculateFormulaComplexidadeEgravaEstado(SolucaoAbstract s, int[] valores) {
-
-    HMD hmd = null;
-
-    int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
-    s.setGrupos(subgrupos);
-    hmd = converterProblemaParaHMD(s, problema, valores);
 
     int classCount = this.problema.getClassCount();
     this.inboundEdges = new int[classCount];
@@ -76,8 +60,15 @@ public class Calculador extends CalculadorAbstract {
       }
     }
 
+    int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
+    s.setGrupos(subgrupos);
+
+    HMD hmd = ConverterProblema.converterProblemaParaHMD(s, problema, valores);
     FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
     double valorFormulaComplexidade = formulaComplexidade.executa();
+
+    /*Decomposition decomposition = ConverterProblemaOrientacao.converterProblemaParaDecomposition(problema, valores, subgrupos);
+    decomposition.psi();*/
 
     this.mq = valorFormulaComplexidade;
 
@@ -95,119 +86,20 @@ public class Calculador extends CalculadorAbstract {
 
   public double calculateFormulaComplexidade(SolucaoAbstract s, int[] valores) {
 
-    HMD hmd = null;
-
     int[] subgrupos = GeradorGrupos.geradorSubmodulos(valores);
     s.setGrupos(subgrupos);
-    hmd = converterProblemaParaHMD(s, problema, valores);
 
+    HMD hmd = ConverterProblema.converterProblemaParaHMD(s, problema, valores);
     FormulaComplexidade formulaComplexidade = new FormulaComplexidade(hmd);
-
     double valorFormulaComplexidade = formulaComplexidade.executa();
+
+    /*Decomposition decomposition = ConverterProblemaOrientacao.converterProblemaParaDecomposition(problema, valores, subgrupos);
+    decomposition.psi();*/
 
     //System.out.println("Valores: "+Arrays.toString(valores) + " - " + "Submódulos: "+Arrays.toString(s.getGrupos()) + " - " + valorFormulaComplexidade);
 
     return valorFormulaComplexidade;
   }
-
-  private static HMD converterProblemaParaHMD(SolucaoAbstract s, Problema problema, int[] valores) {
-
-    Modulo modulo = null;
-    List<Modulo> modulos = new ArrayList<Modulo>();
-
-    // Modulo A0
-    modulo = new Modulo(getListaEntidadesPorModulo(problema, valores, 0), "modulo-0", null);
-    modulos.add(modulo);
-
-    /*Remover valores repetidos*/
-    int[] resultado = Arrays.stream(valores).distinct().toArray();
-    /*Ordenar*/
-    Arrays.sort(resultado);
-
-    for (int a = 0; a < resultado.length; a++) {
-      for (int b = 0; b < s.getGrupos().length; b++) {
-
-        int verificaModulo = getVerificaModulo(modulos, resultado[a]);
-
-        if (verificaModulo == -1 && a == b) {
-
-          Modulo submodulo = new Modulo(
-              getListaEntidadesPorModulo(problema, valores, resultado[a]),
-              String.valueOf("modulo-" + b), null);
-
-          List<Modulo> listaModulosModulosNaoHierrarquicos = hmdSolucao.converterHMDParaModulosNaoHierrarquicos(
-              modulos);
-
-          Modulo moduloPosicao = buscarPosicaoModulo(listaModulosModulosNaoHierrarquicos,
-              s.getGrupos()[b]);
-          if (Objects.isNull(moduloPosicao.getSubmodulos())){
-            moduloPosicao.preparandoSubmodulos();
-          }
-          moduloPosicao.getSubmodulos().add(submodulo);
-        }
-      }
-    }
-
-    return new HMD(modulos);
-  }
-
-  public static Modulo buscarPosicaoModulo(List<Modulo> modulos, int posicao) {
-    String nomeModulo = "modulo-"+posicao;
-    for (int i = 0; i < modulos.size(); i++) {
-      if (modulos.get(i).getNome().equals(nomeModulo)) {
-        return modulos.get(i);
-      }
-    }
-    return null;
-  }
-
-  public static int getVerificaModulo(List<Modulo> modulos, int valor) {
-
-    int retorno = -1;
-
-    for (Modulo modulo : modulos) {
-      if (Objects.nonNull(modulo)) {
-        if (modulo.getNome().equals("modulo-" + valor)) {
-          retorno = 0;
-        }
-      }
-      if (Objects.nonNull(modulo.getSubmodulos())) {
-        for (Modulo submodulo : modulo.getSubmodulos()) {
-          if (submodulo.getNome().equals("modulo-" + valor)) {
-            retorno = 1;
-          }
-        }
-      }
-    }
-
-    return retorno;
-  }
-
-  private static List<Entidade> getListaEntidadesPorModulo(Problema problema, int[] valores,
-      int modulo) {
-    List<Entidade> listaEntidades = new ArrayList<>();
-
-    for (int a = 0; a < valores.length; a++) {
-      if (Objects.nonNull(problema.getClassCount())) {
-        for (int i = 0; i < problema.getClassCount(); i++) {
-          if ((valores[i] == modulo) && modulo == a) {
-
-            Collection<Entidade> links = new ArrayList<>();
-            for (int l = 0; l < problema.getListaDependenciasPara()[i].length; l++) {
-              if (problema.getQtdDependenciasPara()[i] > l) {
-                int value = problema.getListaDependenciasPara()[i][l];
-                links.add(new Entidade(String.valueOf(value), null));
-              }
-            }
-            links = links.size() == 0 ? null : links;
-            listaEntidades.add(new Entidade(String.valueOf(i), links));
-          }
-        }
-      }
-    }
-    return listaEntidades;
-  }
-
 
   /**
    * Calcula o fitness
