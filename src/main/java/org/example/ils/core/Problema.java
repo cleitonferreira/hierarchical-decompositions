@@ -1,6 +1,7 @@
 package org.example.ils.core;
 
 import org.example.model.HMD;
+import org.example.orientacao.model.Decomposition;
 
 public class Problema {
 	
@@ -20,6 +21,7 @@ public class Problema {
 	private int[] qtdDependenciasDe;
 
 	private HMD hmd;
+	private Decomposition decomposition;
 
 	public Problema(
 		String filename,
@@ -98,6 +100,13 @@ public class Problema {
 	}
 	public void setHmd(HMD hmd) {
 		this.hmd = hmd;
+	}
+
+	public Decomposition getDecomposition() {
+		return decomposition;
+	}
+	public void setDecomposition(Decomposition decomposition) {
+		this.decomposition = decomposition;
 	}
 
 	public int calculaTotalDependencias() {
